@@ -1,0 +1,302 @@
+body
+{
+  background-color: #edf6f6;
+}
+
+.modal-wide90 
+{
+  width: 90%;
+}
+.modal-wide80 
+{
+  width: 80%;
+}
+.modal-wide70 
+{
+  width: 70%;
+}
+.modal-wide60 
+{
+  width: 60%;
+}
+.modal-wid50 
+{
+  width: 50%;
+}
+
+#main
+{
+  padding-left: 0px;
+  padding-right: 0px;
+}
+
+#closestEvents
+{
+  margin-top: 15px;
+}
+
+.addElement
+{
+  text-decoration: underline;
+  cursor: pointer;
+  color: black;
+}
+
+.modal-content
+{
+  background-color: #edf6f6;
+}
+
+#about hr
+{
+  background-color: #82b1ea;
+  border-color: #82b1ea;
+  color: #82b1ea;
+}
+
+.menuTabs
+{
+  text-align:center;
+  margin:0 auto; 
+  background-color: #c9def6;
+  color: #7d9ec8;
+}
+
+.menuTabs ul
+{
+  display:inline-block; 
+  list-style:none;
+  zoom: 1;
+}
+
+.menuTabs ul li
+{
+  float:left;
+  margin-right: .8em;       
+  padding: 0; 
+}
+
+#aboutContent h1 h2 h3
+{
+  font-weight: bold;
+  color: #404040;
+}
+
+#about .teamItemInfo p
+{
+  text-align: center;
+  margin-bottom: 5px;
+  color: #2387dc;
+  font-weight: bold;
+}
+
+#about .teamItemInfo p span
+{
+  color: #5a83b5;
+}
+
+#about .teamItem
+{
+  alignment-adjust: middle;
+}
+
+#about .modal h2
+{
+  color: #5a83b5;
+}
+
+#about .modal h3
+{
+  font-weight: bold;
+}
+
+#about .modal span
+{
+  color: #bcd5f0;
+}
+
+#about .AboutInformationContacts p
+{
+  color: #bcd5f0;
+}
+
+#events h2
+{
+  font-weight: bold;
+  color: #49709e;
+  text-align: center;
+}
+
+#eventsFilter .panel-heading
+{
+  background-color: #648fc3;
+}
+
+#eventsFilter .panel-title
+{
+  color: #ffffff;
+}
+
+#eventsFilterPanel 
+{
+  background: #82b1ea;
+  overflow:hidden;
+  padding: 0 5px;
+}
+
+#eventsFilterPanel .wr 
+{
+  background: #82b1ea;
+  margin-top: 5px;
+  border: none;
+}
+
+
+#eventsFilterPanel input, #eventsFilterPanel select 
+{
+  width: 80%;
+  padding: 5px;
+}
+
+#eventsFilterPanel span 
+{
+  color: #fff;
+  height: 100%;
+  vertical-align: middle;
+  margin-bottom:0px;
+  display:inline;
+  font-weight: normal;
+}
+
+#eventsFilterPanel .btn
+{
+  background-color: #4e71d4;
+  width: 90%;
+  padding: 6px;
+  margin:3% 0px;
+  border-radius: 1px;
+}
+
+.eventItem
+{
+  padding-top: 15px; 
+}
+
+.eventItem h4
+{
+  color: #49709e;
+  font-weight: bold;
+}
+
+.eventItem span
+{
+  color: #a9c8f0;
+}
+
+#eventView h3
+{
+  color: #404040;
+  font-weight: bold;
+}
+
+#eventView .EventViewMainInfo
+{
+  background-color: #82b1ea;
+  color: #ffffff;
+  margin-bottom: 15px;
+}
+
+#eventView p
+{
+  color: #a0c3ed;
+  font-weight: bold;
+}
+
+#eventView h4
+{
+  font-weight: bold;
+  color: #5a83b5;
+}
+
+#eventViewFullContent
+{
+  padding-top: 15px;
+}
+
+#eventViewFull .menuTabs 
+{
+  background-color: #82b1ea;
+}
+
+#eventViewFull .menuTabs li.active a
+{
+  background-color: #5a83b5;
+}
+
+#eventViewFull .menuTabs li a
+{
+  color: #ffffff;
+}
+
+#eventViewFullPicture 
+{
+  background-image: url(../images/aboutUs.png);
+  width: 792px;
+  height: 300px;
+}
+
+#eventViewFullPicture
+{
+  color: #ffffff;
+}
+
+#eventViewFullMenuContent
+{
+  padding-top: 15px;
+}
+
+#eventViewFullMenuContent p
+{
+  color: #819ab8;
+}
+
+#eventViewFullMenuContent span
+{
+  font-weight: bold;
+  color: #49709e;
+}
+
+#eventLectors .eventLector
+{
+  padding-bottom: 15px;
+}
+
+#pageWelcome 
+{
+  background-image: url(../images/logo.jpg);
+  width: 792px;
+  height: 300px;
+}
+
+.notify
+{
+  /*height: 100%;*/
+  border-bottom: 1px solid #2387dc;
+}
+ 
+.notify-left
+{
+  vertical-align: middle;
+}
+
+.social {
+  display: block;
+  padding: 2px 2px;
+  float: left;
+  text-align: center;
+}
+
+
+
+
+

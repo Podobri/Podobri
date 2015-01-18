@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:security="http://www.springframework.org/schema/security"
+    xmlns:util="http://www.springframework.org/schema/util"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans
+      http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+      http://www.springframework.org/schema/security
+      http://www.springframework.org/schema/security/spring-security-3.0.xsd
+      http://www.springframework.org/schema/util
+      http://www.springframework.org/schema/util/spring-util-4.0.xsd">
+
+    <security:http auto-config="false" use-expressions="true"
+        entry-point-ref="authenticationEntryPoint" create-session="never">
+        <security:intercept-url pattern="/" filters="none" />
+        <security:intercept-url pattern="/resources/**" filters="none" />
+        <security:intercept-url pattern="/login/**" filters="none" />
+        <security:intercept-url pattern="/logout.jsp" filters="none" />
+        
+        <security:intercept-url pattern="/login.jsp" access="isAnonymous()" />
+        <security:intercept-url pattern="/j_spring_security_check" access="isAnonymous()" />
+        <security:intercept-url pattern="/error/**" access="hasRole('ROLE_USER')" />
+        <security:intercept-url pattern="/**" access="hasRole('ROLE_USER')"/>
+
+        <security:access-denied-handler ref="accessDeniedHandler" />
+        <security:request-cache ref="requestCache" />
+        
+        <security:form-login login-processing-url="/j_spring_security_check"
+			login-page="/login.jsp" default-target-url="/app"
+			authentication-failure-url="/login.jsp" />
+
+		<security:logout logout-url="/j_spring_security_logout"
+			logout-success-url="/login.jsp" invalidate-session="true" />
+
+        <security:session-management
+            session-authentication-strategy-ref="sessionAuthenticationStrategy">
+        </security:session-management>
+    </security:http>
+    
+     <security:authentication-manager>
+		<security:authentication-provider user-service-ref="userService" >
+			<security:password-encoder hash="md5" />    
+		</security:authentication-provider>
+	</security:authentication-manager>
+	
+     <bean id="authenticationEntryPoint"
+		class="org.springframework.security.web.authentication.LoginUrlAuthenticationEntryPoint">
+		<property name="loginFormUrl" value="/login.jsp" />
+		<property name="forceHttps" value="false" />
+	</bean>
+    
+    <bean id="accessDeniedHandler" class="com.mmm.podobri.security.handler.PodobriAccessDeniedHandler">
+        <property name="accessDeniedUrl" value="/error/" />
+    </bean>
+
+    <bean id="requestCache" class="org.springframework.security.web.savedrequest.HttpSessionRequestCache">
+        <property name="createSessionAllowed" value="false" />
+    </bean>
+
+    <bean id="sessionAuthenticationStrategy"
+        class="org.springframework.security.web.authentication.session.SessionFixationProtectionStrategy" />
+	
+</beans>
