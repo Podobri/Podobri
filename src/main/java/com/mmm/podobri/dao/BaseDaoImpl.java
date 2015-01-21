@@ -15,6 +15,9 @@ public abstract class BaseDaoImpl<T extends Serializable> implements BaseDao<T>
 
     @Autowired
     private SessionFactory sessionFactory;
+    
+    @Autowired
+    private DaoUtils daoUtils;
 
 
     public void setClazz(final Class<T> clazzToSet)
@@ -66,5 +69,21 @@ public abstract class BaseDaoImpl<T extends Serializable> implements BaseDao<T>
     protected final Session getCurrentSession()
     {
         return sessionFactory.getCurrentSession();
+    }
+    
+    public DaoUtils getDaoUtils()
+    {
+        return daoUtils;
+    }
+    
+    @Override
+    public void saveInTransaction(Serializable... entities)
+    {
+        getCurrentSession().beginTransaction();
+        for (Serializable entity : entities)
+        {
+            getCurrentSession().save(entity);
+        }
+        getCurrentSession().getTransaction().commit();
     }
 }

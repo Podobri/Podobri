@@ -5,6 +5,7 @@
  */
 package com.mmm.podobri.dao;
 
+import java.io.Serializable;
 import java.util.List;
 
 
@@ -16,6 +17,8 @@ public interface BaseDao<T>
     public T update(final T entity);
     public void delete(final T entity);
     public void deleteById(final long id);
+    public DaoUtils getDaoUtils();
+    public void saveInTransaction(Serializable... entities);
 }
 
 

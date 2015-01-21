@@ -1,17 +1,33 @@
 package com.mmm.podobri.service;
 
 
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.GrantedAuthorityImpl;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.mmm.podobri.dao.DaoUtils;
 import com.mmm.podobri.dao.UserDao;
+import com.mmm.podobri.model.City;
+import com.mmm.podobri.model.Country;
+import com.mmm.podobri.model.Education;
+import com.mmm.podobri.model.Individual;
+import com.mmm.podobri.model.Organization;
+import com.mmm.podobri.model.Role;
+import com.mmm.podobri.model.Role.UsersRoles;
 import com.mmm.podobri.model.User;
+import com.mmm.podobri.model.UserInfo;
 
 
 @Service("userService")
@@ -27,16 +43,30 @@ public class UserServiceImpl
     public UserDetails loadUserByUsername(final String username)
         throws UsernameNotFoundException
     {
-        return null;
-        // User user = userDao.findByUserName(username);
-        // List<GrantedAuthority> authorities = buildUserAuthority(user.getUserRole());
-        // return new User(user.getUsername(),
-        // user.getPassword(),
-        // user.isEnabled(),
-        // true,
-        // true,
-        // true,
-        // authorities);
+        User user = userDao.findByUserName(username);
+        List<GrantedAuthority> authorities = buildUserAuthority(user.getRoles());
+        return new org.springframework.security.core.userdetails.User(user.getUsername(),
+                                                                      user.getPassword(),
+                                                                      true,
+                                                                      true,
+                                                                      true,
+                                                                      true,
+                                                                      authorities);
+    }
+
+
+    private List<GrantedAuthority> buildUserAuthority(List<Role> userRoles)
+    {
+        Set<GrantedAuthority> setAuths = new HashSet<GrantedAuthority>();
+
+        // Build user's authorities
+        for (Role userRole : userRoles)
+        {
+            setAuths.add(new GrantedAuthorityImpl(userRole.getRoleName()));
+        }
+
+        List<GrantedAuthority> Result = new ArrayList<GrantedAuthority>(setAuths);
+        return Result;
     }
 
 
@@ -88,17 +118,50 @@ public class UserServiceImpl
         return userDao.findByUserName(username);
     }
 
-    // private List<GrantedAuthority> buildUserAuthority(Set<UserRole> userRoles)
-    // {
-    // Set<GrantedAuthority> setAuths = new HashSet<GrantedAuthority>();
-    //
-    // // Build user's authorities
-    // for (UserRole userRole : userRoles)
-    // {
-    // setAuths.add(new SimpleGrantedAuthority(userRole.getRole()));
-    // }
-    //
-    // List<GrantedAuthority> Result = new ArrayList<GrantedAuthority>(setAuths);
-    // return Result;
-    // }
+
+    public DaoUtils getDaoUtils()
+    {
+        return userDao.getDaoUtils();
+    }
+
+
+    @Override
+    public void saveInTransaction(Serializable... entities)
+    {
+        userDao.saveInTransaction(entities);
+    }
+
+
+    @Override
+    public void registerNewUser(User user, UsersRoles userRole)
+    {
+        Role role = getDaoUtils().getRolesByName(userRole.name());
+        user.getRoles().add(role);
+        user.setStatus(UserService.UserStatus.NEW.name());
+        final UserInfo userInfo = user.getUserInfo();
+        Date currentDate = new Date();
+        userInfo.setCreated(currentDate);
+        userInfo.setModified(currentDate);
+        Country country = getDaoUtils().getCountriesById(userInfo.getCountry().getId());
+        userInfo.setCountry(country);
+        City city = getDaoUtils().getCitiesById(userInfo.getCity().getId());
+        userInfo.setCity(city);
+        userInfo.setUser(user);
+        
+        if (userRole.equals(UsersRoles.INDIVIDUAL))
+        {
+            final Individual individual = user.getIndividual();
+            Education education = getDaoUtils().getEducationsById(individual.getEducation().getId());
+            individual.setEducation(education);
+            individual.setUser(user);;
+        }
+        else if (userRole.equals(UsersRoles.ORGANIZATION))
+        {
+            final Organization organization = user.getOrganization();
+            organization.setName(user.getUsername());
+            organization.setUser(user);
+        }
+        
+        save(user);
+    }
 }

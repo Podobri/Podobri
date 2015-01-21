@@ -1,0 +1,2 @@
+17.08.2014/23:59
+ALTER TABLE  `users` CHANGE  `role`  `roles` TINYINT( 1 ) NOT NULL COMMENT  '1 - Потребител, 2 -Организация, 3 - Админ'

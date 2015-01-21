@@ -9,7 +9,7 @@
 		<jsp:include page="menu.jsp" />
 		<div id="content" class="col-md-12">
 
-			<div id="users" class="container">
+			<div id="users">
 				<div class="row">
 					<div id="actual-events-label" class="col-md-10">
 						<h2>Потребители</h2>

@@ -684,8 +684,9 @@ background: #333333;
   width: 630px;
 }
 .register {
-  background: #edf6f6;
+  background-color: #edf6f6;
   color: #82b1ea;
+  margin-bottom: 5px;
 }
 
 legend {
@@ -693,9 +694,10 @@ legend {
   text-align: center;
 }
 #register_titles {
-  display:inline-block;
   margin-bottom:10px;
+  margin-top:10px;
   height:auto;
+  background-color: #edf6f6;
 }
 .register_user, .register_company {
   margin-left: 0px;
@@ -727,8 +729,10 @@ legend {
 }
 .register input, .register select {
   padding:8px;
-  margin:5% 0px;
+  margin:2% 0px;
   width: 100%;
+  border-radius: 6px;
+  border: 1px solid #ddd;
 }
 .register_left, .register_right {
   padding-right:0!important;

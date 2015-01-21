@@ -1,19 +1,22 @@
 #calendar-container
 {
   max-width: 1170px;
+  min-width: 995px;
   height: 773px;
   position: relative;
   margin: 0 auto;
   font-family: 'Lato', sans-serif;
   color: #7face2;
-  background-image: url(../images/back.jpg);
+/*   background-image: url(../images/back.jpg); */
   background-size: cover;
   height: 100%;
 }
 
 #calendar 
 {
-  margin-left: 30px;
+  margin-left: 50px;
+  margin-right: 50px;
+  margin-bottom: 10px;
 }
 
 #calendar-container ol, ul 
@@ -52,6 +55,7 @@ q:before, q:after
   /*width: 700px;*/
   border-right: 1px solid rgba(130, 177, 234, .4);
   position: relative;
+  max-height: 560px;
 }
 
 .cal-header 
@@ -249,11 +253,12 @@ q:before, q:after
 
 .cal-right 
 {
-  /*float: left;*/
+  float: left;
   /*width: 469px;*/
   position: relative;
   background-color: rgba(255,255,255, .95);
   /*height: 100%;*/
+  max-height: 560px;
 }
 
 .cal-date-info 
@@ -311,7 +316,8 @@ q:before, q:after
 .cal-events-list-container 
 {
   overflow: auto;
-  max-height: 607px;
+  display: block;
+  max-height: 400px;
 }
 
 .cal-browse-event 
@@ -445,5 +451,13 @@ q:before, q:after
   #calendar-container
   {
     max-width: 700px;
+  }
+}
+/* Media Queries */
+@media (max-width: 1000px) 
+{
+  #calendar-container
+  {
+    display: none !important;
   }
 }

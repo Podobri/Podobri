@@ -1,149 +1,336 @@
 package com.mmm.podobri.model;
 
+
 import java.io.Serializable;
-import javax.persistence.*;
+import java.util.Date;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.Lob;
+import javax.persistence.ManyToOne;
+import javax.persistence.NamedQuery;
+import javax.persistence.OneToOne;
+import javax.persistence.PrimaryKeyJoinColumn;
+import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+
+import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.Parameter;
 
 
 /**
- * The persistent class for the user_info database table.
- * 
+ * The persistent class for the user_infos database table.
  */
 @Entity
-@Table(name="user_info")
-@NamedQuery(name="UserInfo.findAll", query="SELECT u FROM UserInfo u")
-public class UserInfo implements Serializable {
-	private static final long serialVersionUID = 1L;
+@Table(name = "user_infos")
+@NamedQuery(name = "UserInfo.findAll", query = "SELECT u FROM UserInfo u")
+public class UserInfo
+    implements Serializable
+{
+    private static final long serialVersionUID = 1L;
+    
+    @GenericGenerator(name = "generator", strategy = "foreign", parameters = @Parameter(name = "property", value = "user"))
+    @GeneratedValue(generator = "generator")
+    @Id
+    @Column(name = "user_id", unique = true, nullable = false)
+    private int userId;
 
-	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
-	@Column(name="user_id", unique=true, nullable=false)
-	private int userId;
+    @Lob
+    private String description;
 
-	@Column(length=255)
-	private String description;
+    @Column(length = 45)
+    private String facebook;
 
-	@Column(length=45)
-	private String facebook;
+    @Column(length = 150)
+    private String file;
 
-	@Lob
-	private byte[] file;
+    @Column(length = 45)
+    private String linkedin;
 
-	@Column(length=45)
-	private String linkedin;
+    @Column(length = 20)
+    private String phone;
 
-	@Column(name="mobile_phone", length=20)
-	private String mobilePhone;
+    @Column(length = 150)
+    private String picture;
 
-	@Lob
-	private byte[] picture;
+    @Column(length = 45)
+    private String website;
 
-	@Column(length=45)
-	private String website;
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column(nullable = false)
+    private Date created;
 
-	//bi-directional many-to-one association to City
-	@ManyToOne
-	@JoinColumn(name="city_id", nullable=false)
-	private City city;
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column(nullable = false)
+    private Date modified;
 
-	//bi-directional many-to-one association to Country
-	@ManyToOne
-	@JoinColumn(name="country_id", nullable=false)
-	private Country country;
+    @Column(length = 100)
+    private String browser;
 
-	//bi-directional one-to-one association to User
-	@OneToOne
-	@JoinColumn(name="user_id", nullable=false, insertable=false, updatable=false)
-	private User user;
+    @Column(length = 15)
+    private String ip;
 
-	public UserInfo() {
-	}
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column(name = "last_login")
+    private Date lastLogin;
 
-	public int getUserId() {
-		return this.userId;
-	}
+    @Column(length = 100)
+    private String location;
 
-	public void setUserId(int userId) {
-		this.userId = userId;
-	}
+    @Column(length = 40)
+    private String os;
 
-	public String getDescription() {
-		return this.description;
-	}
+    @Column(length = 255)
+    private String token;
 
-	public void setDescription(String description) {
-		this.description = description;
-	}
+    // bi-directional many-to-one association to City
+    @ManyToOne
+    @JoinColumn(name = "city_id", nullable = false)
+    private City city;
 
-	public String getFacebook() {
-		return this.facebook;
-	}
+    // bi-directional many-to-one association to Country
+    @ManyToOne
+    @JoinColumn(name = "country_id", nullable = false)
+    private Country country;
 
-	public void setFacebook(String facebook) {
-		this.facebook = facebook;
-	}
+    // bi-directional one-to-one association to User
+    @OneToOne(optional = false)
+    @PrimaryKeyJoinColumn(name = "user_id", referencedColumnName = "id")
+    private User user;
 
-	public byte[] getFile() {
-		return this.file;
-	}
 
-	public void setFile(byte[] file) {
-		this.file = file;
-	}
+    public UserInfo()
+    {}
 
-	public String getLinkedin() {
-		return this.linkedin;
-	}
 
-	public void setLinkedin(String linkedin) {
-		this.linkedin = linkedin;
-	}
+    public int getUserId()
+    {
+        return this.userId;
+    }
 
-	public String getMobilePhone() {
-		return this.mobilePhone;
-	}
 
-	public void setMobilePhone(String mobilePhone) {
-		this.mobilePhone = mobilePhone;
-	}
+    public void setUserId(int userId)
+    {
+        this.userId = userId;
+    }
 
-	public byte[] getPicture() {
-		return this.picture;
-	}
 
-	public void setPicture(byte[] picture) {
-		this.picture = picture;
-	}
+    public String getDescription()
+    {
+        return this.description;
+    }
 
-	public String getWebsite() {
-		return this.website;
-	}
 
-	public void setWebsite(String website) {
-		this.website = website;
-	}
+    public void setDescription(String description)
+    {
+        this.description = description;
+    }
 
-	public City getCity() {
-		return this.city;
-	}
 
-	public void setCity(City city) {
-		this.city = city;
-	}
+    public String getFacebook()
+    {
+        return this.facebook;
+    }
 
-	public Country getCountry() {
-		return this.country;
-	}
 
-	public void setCountry(Country country) {
-		this.country = country;
-	}
+    public void setFacebook(String facebook)
+    {
+        this.facebook = facebook;
+    }
 
-	public User getUser() {
-		return this.user;
-	}
 
-	public void setUser(User user) {
-		this.user = user;
-	}
+    public String getFile()
+    {
+        return this.file;
+    }
 
+
+    public void setFile(String file)
+    {
+        this.file = file;
+    }
+
+
+    public String getLinkedin()
+    {
+        return this.linkedin;
+    }
+
+
+    public void setLinkedin(String linkedin)
+    {
+        this.linkedin = linkedin;
+    }
+
+
+    public String getPhone()
+    {
+        return this.phone;
+    }
+
+
+    public void setPhone(String phone)
+    {
+        this.phone = phone;
+    }
+
+
+    public String getPicture()
+    {
+        return this.picture;
+    }
+
+
+    public void setPicture(String picture)
+    {
+        this.picture = picture;
+    }
+
+
+    public String getWebsite()
+    {
+        return this.website;
+    }
+
+
+    public void setWebsite(String website)
+    {
+        this.website = website;
+    }
+
+
+    public String getBrowser()
+    {
+        return this.browser;
+    }
+
+
+    public void setBrowser(String browser)
+    {
+        this.browser = browser;
+    }
+
+
+    public Date getCreated()
+    {
+        return this.created;
+    }
+
+
+    public void setCreated(Date created)
+    {
+        this.created = created;
+    }
+
+
+    public String getIp()
+    {
+        return this.ip;
+    }
+
+
+    public void setIp(String ip)
+    {
+        this.ip = ip;
+    }
+
+
+    public Date getLastLogin()
+    {
+        return this.lastLogin;
+    }
+
+
+    public void setLastLogin(Date lastLogin)
+    {
+        this.lastLogin = lastLogin;
+    }
+
+
+    public String getLocation()
+    {
+        return this.location;
+    }
+
+
+    public void setLocation(String location)
+    {
+        this.location = location;
+    }
+
+
+    public Date getModified()
+    {
+        return this.modified;
+    }
+
+
+    public void setModified(Date modified)
+    {
+        this.modified = modified;
+    }
+
+
+    public String getOs()
+    {
+        return this.os;
+    }
+
+
+    public void setOs(String os)
+    {
+        this.os = os;
+    }
+
+
+    public String getToken()
+    {
+        return this.token;
+    }
+
+
+    public void setToken(String token)
+    {
+        this.token = token;
+    }
+
+
+    public City getCity()
+    {
+        return this.city;
+    }
+
+
+    public void setCity(City city)
+    {
+        this.city = city;
+    }
+
+
+    public Country getCountry()
+    {
+        return this.country;
+    }
+
+
+    public void setCountry(Country country)
+    {
+        this.country = country;
+    }
+
+
+    public User getUser()
+    {
+        return this.user;
+    }
+
+
+    public void setUser(User user)
+    {
+        this.user = user;
+    }
 }

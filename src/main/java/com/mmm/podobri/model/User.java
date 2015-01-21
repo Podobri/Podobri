@@ -1,304 +1,478 @@
 package com.mmm.podobri.model;
 
+
 import java.io.Serializable;
-import javax.persistence.*;
-import java.util.Date;
+import java.math.BigInteger;
+import java.util.ArrayList;
 import java.util.List;
+
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
+import javax.persistence.Transient;
 
 
 /**
  * The persistent class for the users database table.
- * 
  */
 @Entity
-@Table(name="users")
-@NamedQuery(name="User.findAll", query="SELECT u FROM User u")
-public class User implements Serializable {
-	private static final long serialVersionUID = 1L;
-
-	
-//	public Usercom.mmm.podobri.model()
-//	{
-//		this("D-U-M-M-Y", "D-U-M-M-Y");
-//	}
-//	
-//	public Usercom.mmm.podobri.model(String username, String password)
-//	{
-//		this(username, password, true, true, true, true, Collections.<GrantedAuthority> emptyList());
-//	}
-//	
-//	public Usercom.mmm.podobri.model(String username, String password, boolean enabled,
-//			boolean accountNonExpired, boolean credentialsNonExpired,
-//			boolean accountNonLocked,
-//			Collection<? extends GrantedAuthority> authorities) 
-//	{
-//		super(username, password, enabled, accountNonExpired, credentialsNonExpired,
-//				accountNonLocked, authorities);
-//	}
-	
-	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
-	@Column(unique=true, nullable=false)
-	private int id;
-
-	@Column(nullable=false, length=45)
-	private String email;
-
-	@Column(name="is_active", nullable=false)
-	private byte isActive;
-
-	@Column(name="is_organization", nullable=false)
-	private byte isOrganization;
-
-	@Column(nullable=false, length=45)
-	private String password;
-
-	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name="register_date", nullable=false)
-	private Date registerDate;
-
-	@Column(nullable=false, length=30)
-	private String username;
-
-	//bi-directional many-to-one association to EventCoorganizator
-	@OneToMany(mappedBy="user")
-	private List<EventCoorganizator> eventCoorganizators;
-
-	//bi-directional many-to-one association to Event
-	@OneToMany(mappedBy="user")
-	private List<Event> events1;
-
-	//bi-directional one-to-one association to Individual
-	@OneToOne(mappedBy="user")
-	private Individual individual;
-
-	//bi-directional many-to-one association to Lector
-	@OneToMany(mappedBy="user")
-	private List<Lector> lectors;
-
-	//bi-directional one-to-one association to Organization
-	@OneToOne(mappedBy="user")
-	private Organization organization;
-
-	//bi-directional many-to-one association to Sponsor
-	@OneToMany(mappedBy="user")
-	private List<Sponsor> sponsors;
-
-	//bi-directional one-to-one association to UserInfo
-	@OneToOne(mappedBy="user")
-	private UserInfo userInfo;
-
-	//bi-directional many-to-many association to ActivityType
-	@ManyToMany
-	@JoinTable(
-		name="users_activities"
-		, joinColumns={
-			@JoinColumn(name="user_id", nullable=false)
-			}
-		, inverseJoinColumns={
-			@JoinColumn(name="activity_id", nullable=false)
-			}
-		)
-	private List<ActivityType> activityTypes;
-
-	//bi-directional many-to-many association to Event
-	@ManyToMany
-	@JoinTable(
-		name="users_events"
-		, joinColumns={
-			@JoinColumn(name="user_id", nullable=false)
-			}
-		, inverseJoinColumns={
-			@JoinColumn(name="event_id", nullable=false)
-			}
-		)
-	private List<Event> events2;
+@Table(name = "users")
+@NamedQuery(name = "User.findAll", query = "SELECT u FROM User u")
+public class User
+    implements Serializable
+{
+    private static final long serialVersionUID = 1L;
 
-	public User() {
-	}
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(unique = true, nullable = false)
+    private int id;
 
-	public int getId() {
-		return this.id;
-	}
+    @Column(nullable = false, length = 70)
+    @org.hibernate.validator.constraints.Email
+    private String email;
 
-	public void setId(int id) {
-		this.id = id;
-	}
+    @Column(name = "facebook_fid")
+    private BigInteger facebookFid;
 
-	public String getEmail() {
-		return this.email;
-	}
+    @Column(name = "google_fid")
+    private BigInteger googleFid;
 
-	public void setEmail(String email) {
-		this.email = email;
-	}
+    @Column(name = "linkedin_fid")
+    private BigInteger linkedinFid;
 
-	public byte getIsActive() {
-		return this.isActive;
-	}
+    @Column(nullable = false, length = 45)
+    private String password;
 
-	public void setIsActive(byte isActive) {
-		this.isActive = isActive;
-	}
+    @Column(nullable = false, length = 15)
+    private String status;
 
-	public byte getIsOrganization() {
-		return this.isOrganization;
-	}
+    @Column(nullable = false, length = 70)
+    private String username;
 
-	public void setIsOrganization(byte isOrganization) {
-		this.isOrganization = isOrganization;
-	}
+    // bi-directional many-to-one association to EventCoorganizator
+    @OneToMany(mappedBy = "user")
+    private List<EventCoorganizator> eventCoorganizators = new ArrayList<EventCoorganizator>();
 
-	public String getPassword() {
-		return this.password;
-	}
+    // bi-directional many-to-one association to Event
+    @OneToMany(mappedBy = "user")
+    private List<Event> events1 = new ArrayList<Event>();
 
-	public void setPassword(String password) {
-		this.password = password;
-	}
+    // bi-directional one-to-one association to Individual
+    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
+    private Individual individual;
 
-	public Date getRegisterDate() {
-		return this.registerDate;
-	}
+    // bi-directional many-to-one association to Lector
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    private List<Lector> lectors = new ArrayList<Lector>();
 
-	public void setRegisterDate(Date registerDate) {
-		this.registerDate = registerDate;
-	}
+    // bi-directional one-to-one association to Organization
+    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
+    private Organization organization;
 
-	public String getUsername() {
-		return this.username;
-	}
+    // bi-directional many-to-one association to Sponsor
+    @OneToMany(mappedBy = "user")
+    private List<Sponsor> sponsors = new ArrayList<Sponsor>();
 
-	public void setUsername(String username) {
-		this.username = username;
-	}
+    // bi-directional one-to-one association to UserInfo
+    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
+    private UserInfo userInfo;
 
-	public List<EventCoorganizator> getEventCoorganizators() {
-		return this.eventCoorganizators;
-	}
+    // bi-directional many-to-many association to Activity
+    @ManyToMany
+    @JoinTable(name = "users_activities", joinColumns = {@JoinColumn(name = "user_id", nullable = false)}, inverseJoinColumns = {@JoinColumn(name = "activity_id", nullable = false)})
+    private List<Activity> activities = new ArrayList<Activity>();
 
-	public void setEventCoorganizators(List<EventCoorganizator> eventCoorganizators) {
-		this.eventCoorganizators = eventCoorganizators;
-	}
+    // bi-directional many-to-many association to Event
+    @ManyToMany
+    @JoinTable(name = "users_events", joinColumns = {@JoinColumn(name = "user_id", nullable = false)}, inverseJoinColumns = {@JoinColumn(name = "event_id", nullable = false)})
+    private List<Event> events2 = new ArrayList<Event>();
 
-	public EventCoorganizator addEventCoorganizator(EventCoorganizator eventCoorganizator) {
-		getEventCoorganizators().add(eventCoorganizator);
-		eventCoorganizator.setUser(this);
+    // bi-directional many-to-one association to UsersActivity
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    private List<UsersActivity> usersActivities = new ArrayList<UsersActivity>();
 
-		return eventCoorganizator;
-	}
+    // bi-directional many-to-many association to Activity
+    @ManyToMany
+    @JoinTable(name = "users_roles", joinColumns = {@JoinColumn(name = "user_id", nullable = false)}, inverseJoinColumns = {@JoinColumn(name = "role_id", nullable = false)})
+    private List<Role> roles = new ArrayList<Role>();
 
-	public EventCoorganizator removeEventCoorganizator(EventCoorganizator eventCoorganizator) {
-		getEventCoorganizators().remove(eventCoorganizator);
-		eventCoorganizator.setUser(null);
+    // bi-directional many-to-one association to UsersActivity
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    private List<UsersRole> usersRoles = new ArrayList<UsersRole>();
 
-		return eventCoorganizator;
-	}
+    @Transient
+    private String confirmedPassword;
 
-	public List<Event> getEvents1() {
-		return this.events1;
-	}
 
-	public void setEvents1(List<Event> events1) {
-		this.events1 = events1;
-	}
+    public User()
+    {}
 
-	public Event addEvents1(Event events1) {
-		getEvents1().add(events1);
-		events1.setUser(this);
 
-		return events1;
-	}
+    public int getId()
+    {
+        return this.id;
+    }
 
-	public Event removeEvents1(Event events1) {
-		getEvents1().remove(events1);
-		events1.setUser(null);
 
-		return events1;
-	}
+    public void setId(int id)
+    {
+        this.id = id;
+    }
 
-	public Individual getIndividual() {
-		return this.individual;
-	}
 
-	public void setIndividual(Individual individual) {
-		this.individual = individual;
-	}
+    public String getEmail()
+    {
+        return this.email;
+    }
 
-	public List<Lector> getLectors() {
-		return this.lectors;
-	}
 
-	public void setLectors(List<Lector> lectors) {
-		this.lectors = lectors;
-	}
+    public void setEmail(String email)
+    {
+        this.email = email;
+    }
 
-	public Lector addLector(Lector lector) {
-		getLectors().add(lector);
-		lector.setUser(this);
 
-		return lector;
-	}
+    public BigInteger getFacebookFid()
+    {
+        return this.facebookFid;
+    }
 
-	public Lector removeLector(Lector lector) {
-		getLectors().remove(lector);
-		lector.setUser(null);
 
-		return lector;
-	}
+    public void setFacebookFid(BigInteger facebookFid)
+    {
+        this.facebookFid = facebookFid;
+    }
 
-	public Organization getOrganization() {
-		return this.organization;
-	}
 
-	public void setOrganization(Organization organization) {
-		this.organization = organization;
-	}
+    public BigInteger getGoogleFid()
+    {
+        return this.googleFid;
+    }
 
-	public List<Sponsor> getSponsors() {
-		return this.sponsors;
-	}
 
-	public void setSponsors(List<Sponsor> sponsors) {
-		this.sponsors = sponsors;
-	}
+    public void setGoogleFid(BigInteger googleFid)
+    {
+        this.googleFid = googleFid;
+    }
 
-	public Sponsor addSponsor(Sponsor sponsor) {
-		getSponsors().add(sponsor);
-		sponsor.setUser(this);
 
-		return sponsor;
-	}
+    public BigInteger getLinkedinFid()
+    {
+        return this.linkedinFid;
+    }
 
-	public Sponsor removeSponsor(Sponsor sponsor) {
-		getSponsors().remove(sponsor);
-		sponsor.setUser(null);
 
-		return sponsor;
-	}
+    public void setLinkedinFid(BigInteger linkedinFid)
+    {
+        this.linkedinFid = linkedinFid;
+    }
 
-	public UserInfo getUserInfo() {
-		return this.userInfo;
-	}
 
-	public void setUserInfo(UserInfo userInfo) {
-		this.userInfo = userInfo;
-	}
+    public String getPassword()
+    {
+        return this.password;
+    }
 
-	public List<ActivityType> getActivityTypes() {
-		return this.activityTypes;
-	}
 
-	public void setActivityTypes(List<ActivityType> activityTypes) {
-		this.activityTypes = activityTypes;
-	}
+    public void setPassword(String password)
+    {
+        this.password = password;
+    }
 
-	public List<Event> getEvents2() {
-		return this.events2;
-	}
 
-	public void setEvents2(List<Event> events2) {
-		this.events2 = events2;
-	}
+    public String getStatus()
+    {
+        return this.status;
+    }
 
+
+    public void setStatus(String status)
+    {
+        this.status = status;
+    }
+
+
+    public String getUsername()
+    {
+        return this.username;
+    }
+
+
+    public void setUsername(String username)
+    {
+        this.username = username;
+    }
+
+
+    public List<EventCoorganizator> getEventCoorganizators()
+    {
+        return this.eventCoorganizators;
+    }
+
+
+    public void setEventCoorganizators(List<EventCoorganizator> eventCoorganizators)
+    {
+        this.eventCoorganizators = eventCoorganizators;
+    }
+
+
+    public EventCoorganizator addEventCoorganizator(EventCoorganizator eventCoorganizator)
+    {
+        getEventCoorganizators().add(eventCoorganizator);
+        eventCoorganizator.setUser(this);
+
+        return eventCoorganizator;
+    }
+
+
+    public EventCoorganizator removeEventCoorganizator(EventCoorganizator eventCoorganizator)
+    {
+        getEventCoorganizators().remove(eventCoorganizator);
+        eventCoorganizator.setUser(null);
+
+        return eventCoorganizator;
+    }
+
+
+    public List<Event> getEvents1()
+    {
+        return this.events1;
+    }
+
+
+    public void setEvents1(List<Event> events1)
+    {
+        this.events1 = events1;
+    }
+
+
+    public Event addEvents1(Event events1)
+    {
+        getEvents1().add(events1);
+        events1.setUser(this);
+
+        return events1;
+    }
+
+
+    public Event removeEvents1(Event events1)
+    {
+        getEvents1().remove(events1);
+        events1.setUser(null);
+
+        return events1;
+    }
+
+
+    public Individual getIndividual()
+    {
+        return this.individual;
+    }
+
+
+    public void setIndividual(Individual individual)
+    {
+        this.individual = individual;
+    }
+
+
+    public List<Lector> getLectors()
+    {
+        return this.lectors;
+    }
+
+
+    public void setLectors(List<Lector> lectors)
+    {
+        this.lectors = lectors;
+    }
+
+
+    public Lector addLector(Lector lector)
+    {
+        getLectors().add(lector);
+        lector.setUser(this);
+
+        return lector;
+    }
+
+
+    public Lector removeLector(Lector lector)
+    {
+        getLectors().remove(lector);
+        lector.setUser(null);
+
+        return lector;
+    }
+
+
+    public Organization getOrganization()
+    {
+        return this.organization;
+    }
+
+
+    public void setOrganization(Organization organization)
+    {
+        this.organization = organization;
+    }
+
+
+    public List<Sponsor> getSponsors()
+    {
+        return this.sponsors;
+    }
+
+
+    public void setSponsors(List<Sponsor> sponsors)
+    {
+        this.sponsors = sponsors;
+    }
+
+
+    public Sponsor addSponsor(Sponsor sponsor)
+    {
+        getSponsors().add(sponsor);
+        sponsor.setUser(this);
+
+        return sponsor;
+    }
+
+
+    public Sponsor removeSponsor(Sponsor sponsor)
+    {
+        getSponsors().remove(sponsor);
+        sponsor.setUser(null);
+
+        return sponsor;
+    }
+
+
+    public UserInfo getUserInfo()
+    {
+        return this.userInfo;
+    }
+
+
+    public void setUserInfo(UserInfo userInfo)
+    {
+        this.userInfo = userInfo;
+    }
+
+
+    public List<Activity> getActivities()
+    {
+        return this.activities;
+    }
+
+
+    public void setActivities(List<Activity> activities)
+    {
+        this.activities = activities;
+    }
+
+
+    public List<Event> getEvents2()
+    {
+        return this.events2;
+    }
+
+
+    public void setEvents2(List<Event> events2)
+    {
+        this.events2 = events2;
+    }
+
+
+    public List<UsersActivity> getUsersActivities()
+    {
+        return this.usersActivities;
+    }
+
+
+    public void setUsersActivities(List<UsersActivity> usersActivities)
+    {
+        this.usersActivities = usersActivities;
+    }
+
+
+    public UsersActivity addUsersActivity(UsersActivity usersActivity)
+    {
+        getUsersActivities().add(usersActivity);
+        usersActivity.setUser(this);
+
+        return usersActivity;
+    }
+
+
+    public UsersActivity removeUsersActivity(UsersActivity usersActivity)
+    {
+        getUsersActivities().remove(usersActivity);
+        usersActivity.setUser(null);
+
+        return usersActivity;
+    }
+
+
+    public void setConfirmedPassword(String pass)
+    {
+        this.confirmedPassword = pass;
+    }
+
+
+    public String getConfirmedPassword()
+    {
+        return this.confirmedPassword;
+    }
+
+
+    public List<Role> getRoles()
+    {
+        return this.roles;
+    }
+
+
+    public void setRoles(List<Role> roles)
+    {
+        this.roles = roles;
+    }
+
+
+    public List<UsersRole> getUsersRoles()
+    {
+        return this.usersRoles;
+    }
+
+
+    public void setUsersRoles(List<UsersRole> usersRoles)
+    {
+        this.usersRoles = usersRoles;
+    }
+
+
+    public UsersRole addUsersRole(UsersRole usersRole)
+    {
+        getUsersRoles().add(usersRole);
+        usersRole.setUser(this);
+        return usersRole;
+    }
+
+
+    public UsersRole removeUsersRole(UsersRole usersRole)
+    {
+        getUsersRoles().remove(usersRole);
+        usersRole.setUser(null);
+        return usersRole;
+    }
 }

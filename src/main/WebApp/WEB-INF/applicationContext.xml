@@ -12,7 +12,7 @@
 	<context:component-scan base-package="com.mmm.podobri" />
 	<mvc:annotation-driven />
 	<mvc:resources location="/resources/" mapping="/resources/**" />
-	<mvc:default-servlet-handler />
+<!-- 	<mvc:default-servlet-handler /> -->
 
 	<!-- <import resource="applicationContext-security.xml" /> -->
 	<import resource="applicationContext-dao.xml" />

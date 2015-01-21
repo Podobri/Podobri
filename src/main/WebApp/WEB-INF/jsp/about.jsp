@@ -1,14 +1,13 @@
-<%@taglib uri="http://www.springframework.org/tags" prefix="spring"%>
+<!DOCTYPE html>
 <%@ taglib uri="http://java.sun.com/jstl/core_rt" prefix="c"%>
 <c:url var="imgURL" value="resources/images/" />
-<!DOCTYPE html>
 <html>
 <jsp:include page="head.jsp" />
 <body>
 	<div class="container">
 		<jsp:include page="menu.jsp" />
-		<div id="content" class="col-md-12">
-			<div id="about" class="container">
+		<div id="content">
+			<div id="about" class="col-md-12">
 				<div class="row">
 					<div id="aboutPicture">
 						<img alt="about" src="${imgURL}/aboutUs.png" />
@@ -31,7 +30,7 @@
 				</div>
 
 				<div class="row">
-					<div id="aboutContent" class="tab-content col-md-10">
+					<div id="aboutContent" class="tab-content">
 
 						<div id="idea" class="tab-pane fade in active">
 							<h3>
