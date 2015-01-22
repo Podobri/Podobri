@@ -31,22 +31,21 @@
 									<div class="top-margin">
 										<input type="password" class="form-control" placeholder="password">
 									</div>
+									<div id="forgettenPassword">
+										<b> <a data-toggle="modal" data-target="#forgottenPassword" href="">Забравена парола?</a></b>
+									</div>
 								</div>
 								<br />
 								<div class="row">
 									<div class="text-center">
-										<input type="checkbox"> <label>Запомни ме</label>
+										<input id="rememberMe" type="checkbox"> 
+										<label for="rememberMe">Запомни ме</label>
 									</div>
 								</div>
 
 								<div class="row">
 									<div class="text-center">
-										<button class="btn btn-success" type="submit">В Х О Д</button>
-									</div>
-								</div>
-								<div class="row">
-									<div id="forgettenPassword" class="text-center">
-										<b> <a data-toggle="modal" data-target="#forgottenPassword" href="">Забравена парола?</a></b>
+										<button class="btn btn-success btn-lg" type="submit">В Х О Д</button>
 									</div>
 								</div>
 							</form>

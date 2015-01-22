@@ -25,7 +25,7 @@ public class Event
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(unique = true, nullable = false)
-    private String id;
+    private Integer id;
 
     @Column(name = "additional_info", length = 255)
     private String additionalInfo;
@@ -69,6 +69,10 @@ public class Event
     @Column(name = "recruit_coorganizators", columnDefinition = "TINYINT")
     @Type(type = "org.hibernate.type.NumericBooleanType")
     private boolean recruitCoorganizators;
+    
+    @Column(name = "require_applications", columnDefinition = "TINYINT")
+    @Type(type = "org.hibernate.type.NumericBooleanType")
+    private boolean applicationFormRequire;
 
     @Column(nullable = false)
     private byte status;
@@ -146,13 +150,13 @@ public class Event
     {}
 
 
-    public String getId()
+    public Integer getId()
     {
         return this.id;
     }
 
 
-    public void setId(String id)
+    public void setId(Integer id)
     {
         this.id = id;
     }
@@ -311,6 +315,18 @@ public class Event
     public void setRecruitCoorganizators(boolean recruitCoorganizators)
     {
         this.recruitCoorganizators = recruitCoorganizators;
+    }
+    
+    
+    public boolean getApplicationFormRequire()
+    {
+        return this.applicationFormRequire;
+    }
+
+
+    public void setApplicationFormRequire(boolean applicationFormRequire)
+    {
+        this.applicationFormRequire = applicationFormRequire;
     }
 
 

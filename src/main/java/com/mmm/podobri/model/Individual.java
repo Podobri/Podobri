@@ -115,7 +115,7 @@ public class Individual
     }
 
 
-    public boolean isMale()
+    public boolean getIsMale()
     {
         return this.isMale;
     }

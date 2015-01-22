@@ -36,135 +36,110 @@
 								<legend>Регистрация</legend>
 								<div class="row">
 									<!-- Text input-->
-									<div class="control-group col-md-6">
-										<div class="controls">
-											<form:input id="username" path="username" placeholder="потребителско име" required="required" />
-										</div>
+									<div class="form-group col-md-6">
+										<form:input id="username" path="username" placeholder="потребителско име" required="required"
+											cssClass="form-control" />
 									</div>
 
 									<!-- Text input-->
-									<div class="control-group col-md-6">
-										<div class="controls">
-											<form:input id="email" path="email" type="email" placeholder="email" required="required" />
-										</div>
+									<div class="form-group col-md-6">
+										<form:input id="email" path="email" type="email" placeholder="email" required="required"
+											cssClass="form-control" />
 									</div>
 								</div>
 
 								<div class="row">
 									<!-- Password input -->
-									<div class="control-group col-md-6">
-										<div class="controls">
-											<form:password id="password" path="password" placeholder="парола" required="required" />
-										</div>
+									<div class="form-group col-md-6">
+										<form:password id="password" path="password" placeholder="парола" required="required" cssClass="form-control" />
 									</div>
 
 									<!-- Password input -->
-									<div class="control-group col-md-6">
-										<div class="controls">
-											<form:password id="paswordConfirm" path="confirmedPassword" placeholder="повторете паролата"
-												required="required" />
-										</div>
+									<div class="form-group col-md-6">
+										<form:password id="paswordConfirm" path="confirmedPassword" placeholder="повторете паролата"
+											required="required" cssClass="form-control" />
 									</div>
 								</div>
 
 								<div class="row">
-									<div class="control-group col-md-6">
-										<div class="controls">
-											<form:input id="firstName" path="individual.firstName" placeholder="first name" required="required" />
-										</div>
+									<div class="form-group col-md-6">
+										<form:input id="firstName" path="individual.firstName" placeholder="име" required="required"
+											cssClass="form-control" />
 									</div>
 
-									<div class="control-group col-md-6">
-										<div class="controls">
-											<form:input id="lastName" path="individual.lastName" placeholder="last name" required="required" />
-										</div>
+									<div class="form-group col-md-6">
+										<form:input id="lastName" path="individual.lastName" placeholder="фамилия" required="required"
+											cssClass="form-control" />
 									</div>
 								</div>
 
 								<div class="row">
-									<div class="control-group col-md-6">
-										<div class="controls">
-											<form:select id="gender" path="individual.gender">
-												<form:option id="famele" value="false">Жена</form:option>
-												<form:option id="male" value="true">Мъж</form:option>
-											</form:select>
-										</div>
+									<div class="form-group col-md-6">
+										<form:select id="gender" path="individual.isMale" cssClass="form-control">
+											<form:option id="famele" value="false">Жена</form:option>
+											<form:option id="male" value="true">Мъж</form:option>
+										</form:select>
 									</div>
 
-									<div class="control-group col-md-6">
-										<div class="controls">
-											<form:input id="dateInput" path="individual.birthdate" type="date"
-												class="form-control date datepicker margin-top-none input-xxlarge" placeholder="23/9/2013"
-												required="required" />
-
-										</div>
+									<div class="form-group col-md-6">
+										<form:input id="dateInput" path="individual.birthdate" type="date"
+											cssClass="form-control date datepicker margin-top-none input-xxlarge" placeholder="23/9/2013"
+											required="required" />
 									</div>
 								</div>
 
 								<div class="row">
-									<div class="control-group col-md-6">
-										<div class="controls">
-											<form:select id="country" path="userInfo.country.id">
-												<form:option id="countryNone" value="-1" >---Държава---</form:option>
-												<form:options items="${countries}" itemValue="id" itemLabel="country" />
-											</form:select>
-										</div>
+									<div class="form-group col-md-6">
+										<form:select id="country" path="userInfo.country.id" cssClass="form-control">
+											<form:option id="countryNone" value="-1">---Държава---</form:option>
+											<form:options items="${countries}" itemValue="id" itemLabel="country" />
+										</form:select>
 									</div>
 
-									<div class="control-group col-md-6">
-										<div class="controls">
-											<form:select id="city" path="userInfo.city.id">
-												<form:option id="cityNone" value="-1">---Град---</form:option>
-												<form:options items="${cities}" itemValue="id" itemLabel="city" />
-											</form:select>
-										</div>
+									<div class="form-group col-md-6">
+										<form:select id="city" path="userInfo.city.id" cssClass="form-control">
+											<form:option id="cityNone" value="-1">---Град---</form:option>
+											<form:options items="${cities}" itemValue="id" itemLabel="city" />
+										</form:select>
 									</div>
 								</div>
 
 								<div class="row">
-									<div class="control-group col-md-12">
-										<div class="controls">
-											<form:select id="educations" path="individual.education.id">
-												<form:option id="educationNone" value="-1" >---Образование---</form:option>
-												<form:options items="${educations}" itemValue="id" itemLabel="education" />
-											</form:select>
-										</div>
+									<div class="form-group col-md-12">
+										<form:select id="educations" path="individual.education.id" cssClass="form-control">
+											<form:option id="educationNone" value="-1">---Образование---</form:option>
+											<form:options items="${educations}" itemValue="id" itemLabel="education" />
+										</form:select>
 									</div>
 								</div>
 
 								<div class="row">
-									<div class="control-group col-md-6">
-										<div class="controls">
-											<form:select path="activities" multiple="true">
-												<form:option id="activityNone" value="-1" disabled="true" >---Интереси---</form:option>
-												<form:options items="${activitiesList}" itemValue="id" itemLabel="type" />
-											</form:select>
-										</div>
+									<div class="form-group col-md-6">
+										<form:label path="activities">Интереси</form:label>
+										<form:select id="activities" path="activities" multiple="true" cssClass="form-control">
+											<form:options items="${activitiesList}" itemValue="id" itemLabel="type" />
+										</form:select>
 									</div>
 
-									<div class="control-group col-md-6">
-										<div class="controls">
-											<form:select path="individual.languages" multiple="true">
-												<form:option id="languageNone" value="-1" disabled="true">---Чужди езици---</form:option>
-												<form:options items="${languages}" itemValue="id" itemLabel="language" />
-											</form:select>
-										</div>
+									<div class="form-group col-md-6">
+										<form:label path="individual.languages">Езици</form:label>
+										<form:select id="languages" path="individual.languages" multiple="true" cssClass="form-control">
+											<form:options items="${languages}" itemValue="id" itemLabel="language" />
+										</form:select>
 									</div>
 								</div>
 
 								<div class="row">
-									<div class="control-group col-md-12">
+									<div class="form-group col-md-12">
 										<label class="control-label" for="description"></label>
-										<div class="controls">
-											<form:textarea id="description" path="userInfo.description" placeholder="описание за себе си" rows="5"
-												cols="78" />
-										</div>
+										<form:textarea id="description" path="userInfo.description" placeholder="описание за себе си" rows="5"
+											cols="78" cssClass="form-control" />
 									</div>
 								</div>
 
 								<div class="row">
 									<div class="col-md-2">
-										<input id="tos" type="checkbox">
+										<input id="tos" type="checkbox" required="required">
 									</div>
 									<div class="text-left col-md-6">
 										<span> I've read the </span> <a href="#">Terms and Condition</a>
@@ -188,103 +163,83 @@
 
 								<legend>Регистрация</legend>
 								<div class="row">
-									<div class="control-group col-md-6">
-										<div class="controls">
-											<form:input id="username" path="username" placeholder="име на организация"
-												required="required" />
-										</div>
+									<div class="form-group col-md-6">
+										<form:input id="username" path="username" placeholder="име на организация" required="required"
+											cssClass="form-control" />
 									</div>
 
-									<div class="control-group col-md-6">
-										<div class="controls">
-											<form:input id="email" path="email" type="email" placeholder="email" required="required" />
-										</div>
+									<div class="form-group col-md-6">
+										<form:input id="email" path="email" type="email" placeholder="email" required="required"
+											cssClass="form-control" />
 									</div>
 								</div>
 
 								<div class="row">
-									<div class="control-group col-md-6">
-										<div class="controls">
-											<form:password id="password" path="password" placeholder="парола"
-												required="required" />
-										</div>
+									<div class="form-group col-md-6">
+										<form:password id="password" path="password" placeholder="парола" required="required" cssClass="form-control" />
 									</div>
 
-									<div class="control-group col-md-6">
-										<div class="controls">
-											<form:password id="paswordConfirm" path="confirmedPassword" 
-												placeholder="Повторете паролата" required="required" />
-										</div>
+									<div class="form-group col-md-6">
+										<form:password id="paswordConfirm" path="confirmedPassword" placeholder="Повторете паролата"
+											required="required" cssClass="form-control" />
 									</div>
 								</div>
 
 								<div class="row">
-									<div class="control-group col-md-12">
-										<div class="controls">
-											<form:select id="organizationType" path="organization.organizationsType">
-												<form:option id="organizationType" value="-1">---Тип на организацията---</form:option>
-												<form:options items="${organizationTypes}" itemValue="id" itemLabel="type" />
-											</form:select>
-										</div>
+									<div class="form-group col-md-12">
+										<form:select id="organizationType" path="organization.organizationsType" cssClass="form-control">
+											<form:option id="organizationType" value="-1">---Тип на организацията---</form:option>
+											<form:options items="${organizationTypes}" itemValue="id" itemLabel="type" />
+										</form:select>
 									</div>
 								</div>
 
 								<div class="row">
-									<div class="control-group col-md-12">
-										<div class="controls">
-											<form:select id="activities" path="activities">
-												<form:option id="activityNone" value="-1" disabled="true">---Сфера на дейност---</form:option>
-												<form:options items="${activitiesList}" itemValue="id" itemLabel="type" />
-											</form:select>
-										</div>
+									<div class="form-group col-md-12">
+										<form:select id="activitiess" path="activities" cssClass="form-control">
+											<form:option id="activityNone" value="-1" disabled="true">---Сфера на дейност---</form:option>
+											<form:options items="${activitiesList}" itemValue="id" itemLabel="type" />
+										</form:select>
 									</div>
 								</div>
 
 								<div class="row">
-									<div class="control-group col-md-6">
-										<div class="controls">
-											<form:select id="country" path="userInfo.country.id">
-												<form:option id="countryNone" value="-1">---Държава---</form:option>
-												<form:options items="${countries}" itemValue="id" itemLabel="country" />
-											</form:select>
-										</div>
+									<div class="form-group col-md-6">
+										<form:select id="country" path="userInfo.country.id" cssClass="form-control">
+											<form:option id="countryNone" value="-1">---Държава---</form:option>
+											<form:options items="${countries}" itemValue="id" itemLabel="country" />
+										</form:select>
 									</div>
 
-									<div class="control-group col-md-6">
-										<div class="controls">
-											<form:select id="city" path="userInfo.city.id">
-												<form:option id="cityNone" value="-1">---Град---</form:option>
-												<form:options items="${cities}" itemValue="id" itemLabel="city" />
-											</form:select>
-										</div>
+									<div class="form-group col-md-6">
+										<form:select id="city" path="userInfo.city.id" cssClass="form-control">
+											<form:option id="cityNone" value="-1">---Град---</form:option>
+											<form:options items="${cities}" itemValue="id" itemLabel="city" />
+										</form:select>
 									</div>
 								</div>
 
 								<div class="row">
-									<div class="control-group col-md-12">
-										<div class="controls">
-											<form:input id="address" path="organization.address" placeholder="адрес" required="required" />
-										</div>
+									<div class="form-group col-md-12">
+										<form:input id="address" path="organization.address" placeholder="адрес" required="required"
+											cssClass="form-control" />
 									</div>
 								</div>
 
 								<div class="row">
-									<div class="control-group col-md-12">
+									<div class="form-group col-md-12">
 										<label class="control-label" for="description"></label>
-										<div class="controls">
-											<form:textarea id="description" path="userInfo.description" placeholder="описание" rows="5" cols="78" />
-										</div>
+										<form:textarea id="description" path="userInfo.description" placeholder="описание" rows="5" cols="78"
+											cssClass="form-control" />
 									</div>
 								</div>
 
 								<div class="row">
-									<div class="col-md-2">
-										<input id="tos" type="checkbox">
-									</div>
 									<div class="text-left col-md-6">
-										<span> I've read the </span> <a href="#">Terms and Condition</a>
+										<input id="tos" type="checkbox"> <label for="tos"> I've read the <a href="#">Terms
+												and Condition</a></label>
 									</div>
-									<div class="text-center col-md-4">
+									<div class="text-center col-md-6">
 										<button id="registerOrganization" class="btn btn-success btn-lg" type="submit">РЕГИСТРАЦИЯ</button>
 									</div>
 								</div>
@@ -303,6 +258,10 @@
 			var date = $('#dateInput').val();
 			$('#birthdate').val('date');
 		});
+		
+		$('#activities').chosen();
+		$('#activitiess').chosen();
+		$('#languages').chosen();
 	</script>
 </body>
 </html>
@@ -353,9 +312,3 @@
 <!-- // 						}); -->
 <!-- // 			}); -->
 <!-- </script> -->
-
-
-<!-- <option>---Изберете град---</option> -->
-<?php foreach ($cities as $key => $value): ?>
-<%-- <option value="<?php echo $key; ?>"><?php echo $value; ?></option> --%>
-<?php endforeach; ?>

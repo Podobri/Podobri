@@ -2,8 +2,19 @@ package com.mmm.podobri.model;
 
 
 import java.io.Serializable;
-import javax.persistence.*;
 import java.util.List;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.NamedQuery;
+import javax.persistence.NamedQueries;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
 
 /**
@@ -11,7 +22,14 @@ import java.util.List;
  */
 @Entity
 @Table(name = "opportunities")
-@NamedQuery(name = "Opportunity.findAll", query = "SELECT o FROM Opportunity o")
+@NamedQueries
+(
+ {
+     @NamedQuery(name = "Opportunity.findAll", query = "SELECT o FROM Opportunity o"),
+     @NamedQuery(name = "Opportunity.findAllDistinct", query = "SELECT DISTINCT o FROM Opportunity o")
+ }
+)
+
 public class Opportunity
     implements Serializable
 {

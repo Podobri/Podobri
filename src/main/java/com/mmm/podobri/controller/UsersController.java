@@ -33,7 +33,7 @@ import com.mmm.podobri.service.UserService;
 
 @Controller
 public class UsersController
-{   
+{
     @Autowired
     private UserService userService;
 
@@ -46,9 +46,6 @@ public class UsersController
         binder.registerCustomEditor(Date.class, new CustomDateEditor(dateFormat, true));
         binder.registerCustomEditor(List.class, "activities", new ActivityEditor(List.class, userService.getDaoUtils()));
         binder.registerCustomEditor(List.class, "individual.languages", new LanguageEditor(List.class, userService.getDaoUtils()));
-//        binder.registerCustomEditor(List.class, "countries", new CountryEditor(List.class));
-//        binder.registerCustomEditor(List.class, "cities", new CityEditor(List.class));
-//        binder.registerCustomEditor(List.class, "educations", new EducationEditor(List.class));
     }
 
 
@@ -106,13 +103,12 @@ public class UsersController
     {
         final ModelAndView model = new ModelAndView("register");
         model.addObject("user", new User());
-        model.addObject("countries", userService.getDaoUtils().findAllCountries());
-        model.addObject("cities", userService.getDaoUtils().findAllCities());
-        model.addObject("activitiesList", userService.getDaoUtils().findAllActivities());
-        model.addObject("educations", userService.getDaoUtils().findAllEducations());
-        model.addObject("languages", userService.getDaoUtils().findAllLanguages());
-        model.addObject("opportunityTypes", userService.getDaoUtils().findAllOpportunityTypes());
-        model.addObject("organizationTypes", userService.getDaoUtils().findAllOrganizationTypes());
+        model.addObject("countries", userService.getDaoUtils().getAllCountries());
+        model.addObject("cities", userService.getDaoUtils().getAllCities());
+        model.addObject("activitiesList", userService.getDaoUtils().getAllActivities());
+        model.addObject("educations", userService.getDaoUtils().getAllEducations());
+        model.addObject("languages", userService.getDaoUtils().getAllLanguages());
+        model.addObject("organizationTypes", userService.getDaoUtils().getAllOrganizationTypes());
         return model;
     }
 

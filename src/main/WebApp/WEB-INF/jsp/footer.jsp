@@ -1,5 +1,6 @@
 <%@ taglib uri="http://java.sun.com/jstl/core_rt" prefix="c"%>
 <c:url var="rootURL" value="/" />
+<c:url var="resURL" value="/resources" />
 <footer>
 	<div class="row">
 		<div id="partners">
@@ -57,3 +58,12 @@
 		<div id="copyright" class="col-md-12">Podobri 2015 &copy; All rights reserved</div>
 	</div>
 </footer>
+<script src="${resURL}/js/bootstrap.min.js"></script>
+<script src="${resURL}/js/jquery.dataTables.js"></script>
+<script src="${resURL}/js/jquery.isotope.min.js"></script>
+<script src="${resURL}/js/jquery.prettyPhoto.js"></script>
+<script src="${resURL}/js/jquery.flexisel.js"></script>
+<script src="${resURL}/js/jquery-ui.js"></script>
+<script src="${resURL}/js/jquery.datetimepicker.js"></script>
+<script src="${resURL}/js/main.js"></script>
+<script src="${resURL}/js/chosen.jquery.min.js"></script>

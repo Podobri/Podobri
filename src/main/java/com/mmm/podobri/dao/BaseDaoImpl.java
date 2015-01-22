@@ -80,7 +80,7 @@ public abstract class BaseDaoImpl<T extends Serializable> implements BaseDao<T>
     public void saveInTransaction(Serializable... entities)
     {
         getCurrentSession().beginTransaction();
-        for (Serializable entity : entities)
+        for (final Serializable entity : entities)
         {
             getCurrentSession().save(entity);
         }

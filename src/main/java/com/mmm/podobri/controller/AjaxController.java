@@ -5,6 +5,7 @@
  */
 package com.mmm.podobri.controller;
 
+
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,19 +20,18 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.mmm.podobri.dao.DaoUtils;
 import com.mmm.podobri.model.City;
 
+
 @Controller
 public class AjaxController
 {
     @Autowired
-    public DaoUtils daoUtils;
-    
-    @RequestMapping(value = "/ajax/getCities", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE) 
+    private DaoUtils daoUtils;
+
+
+    @RequestMapping(value = "/ajax/getCities", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     public @ResponseBody List<City> getCitiesByCountry(@PathVariable byte id, ModelMap model)
     {
         List<City> cities = daoUtils.findAllCitiesByCountryId(id);
         return cities;
     }
 }
-
-
-
