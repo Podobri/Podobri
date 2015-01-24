@@ -33,7 +33,6 @@
 
 				<div class="row">
 					<div id="eventViewFullMenuContent" class="tab-content">
-
 						<div id="aboutEvent" class="tab-pane fade in active">
 							<p>
 								<span>Изисквания към кандидатите: </span> няма
@@ -115,8 +114,7 @@
 						<div id="eventLectors" class="tab-pane fade">
 							<div id="lector1" class="eventLector">
 								<div class="media">
-									<a class="pull-left" href="#"> <?php echo $this->Html->image("team1_256x256.jpg"); ?>
-									</a>
+									<a class="pull-left" href="#"> </a>
 									<div class="media-body">
 										<h4 class="media-heading">Стефан Иванов</h4>
 										<h5>преподавател в СУ "Св.Климент Охридски</h5>
@@ -128,8 +126,7 @@
 
 							<div id="lector2" class="eventLector">
 								<div class="media">
-									<a class="pull-left" href="#"> <?php echo $this->Html->image("team2.jpg"); ?>
-									</a>
+									<a class="pull-left" href="#"> </a>
 									<div class="media-body">
 										<h4 class="media-heading">Мирослава Пенева</h4>
 										<h5>управител на "Wasd123" OOД</h5>

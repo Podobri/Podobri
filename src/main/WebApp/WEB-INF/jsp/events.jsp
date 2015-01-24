@@ -2,6 +2,7 @@
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 <%@ taglib uri="http://java.sun.com/jstl/core_rt" prefix="c"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <c:url var="imgURL" value="/resources/images/" />
 <html>
 <jsp:include page="head.jsp" />
@@ -10,17 +11,16 @@
 		<jsp:include page="menu.jsp" />
 		<div id="content">
 			<div id="actualEvents" class="col-md-10">
-				<c:if test="">
-					<div class="row">
-						<div id="filteredEventsMessage">${filteredEventsMessage}</div>
-					</div>
-				</c:if>
-
 				<div class="row">
-					<div id="actualEventsLabel">
-						<h2>Actual Events</h2>
+					<div id="actualEventsTitle" class="well well-sm">
+						<strong>Actual Events</strong>
+						<div class="btn-group">
+							<a href="#" id="list" class="btn btn-default btn-sm"><span class="glyphicon glyphicon-th-list"> </span>List</a> <a
+								href="#" id="grid" class="btn btn-default btn-sm"><span class="glyphicon glyphicon-th"></span>Grid</a>
+						</div>
 					</div>
 				</div>
+
 				<!-- FILTER -->
 				<div class="row">
 					<div id="eventsFilter">
@@ -33,7 +33,8 @@
 										</a>
 									</h4>
 								</div>
-								<div id="eventsFilterPanel" class="panel-collapse "> <!-- collapse -->
+								<div id="eventsFilterPanel" class="panel-collapse ">
+									<!-- collapse -->
 									<div class="panel-body">
 										<form:errors path="eventsFilter.*" />
 										<form:form id="eventsFilterForm" modelAttribute="eventsFilter" method="post"
@@ -53,7 +54,7 @@
 															<form:options items="${opportunitiesList}" itemValue="id" itemLabel="opportunity" />
 														</form:select>
 													</div>
-													
+
 													<div class="form-group col-md-4">
 														<form:select id="activities" path="activities" multiple="true" cssClass="form-control">
 															<form:option id="activityNone" value="-1" disabled="true">---Сфера---</form:option>
@@ -115,113 +116,166 @@
 					</div>
 					<!-- END OF FILTER -->
 				</div>
+				
+				<c:if test="${not empty filteredEventsMessage }">
+					<div class="row">
+						<div id="filteredEventsMessage">${filteredEventsMessage}</div>
+					</div>
+				</c:if>
+
+				<!-- 				<div id="products" class="row list-group"> -->
+				<!-- 					<div class="item col-md-4"> -->
+				<!-- 						<div class="thumbnail"> -->
+				<!-- 							<a data-toggle="modal" data-target="#eventView" href=""><img class="group list-group-image" -->
+				<!-- 								src="http://placehold.it/400x250/000/fff" alt="" /></a> -->
+				<!-- 							<div class="caption"> -->
+				<!-- 								<a data-toggle="modal" data-target="#eventView" href=""> -->
+				<!-- 									<h4 class="group inner list-group-item-heading">Subject</h4> -->
+				<!-- 								</a> -->
+				<!-- 								<p class="group inner list-group-item-text">Product description... Lorem ipsum dolor sit amet, consectetuer -->
+				<!-- 									adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.</p> -->
+				<!-- 								<br /> -->
+				<!-- 								<div class="row"> -->
+				<!-- 									<div class="col-xs-12 col-md-12"> -->
+				<!-- 										<p> -->
+				<!-- 											<span>Event category | event opportunity</span> -->
+				<!-- 										</p> -->
+				<!-- 									</div> -->
+				<!-- 									<div class="col-xs-12 col-md-12"> -->
+				<!-- 										<p> -->
+				<%-- 											<span> <img alt="" src="${imgURL}thumblines/location_24x24.png" /> София --%>
+				<!-- 											</span> -->
+				<!-- 										</p> -->
+				<!-- 									</div> -->
+				<!-- 									<div class="col-xs-12 col-md-12"> -->
+				<!-- 										<p> -->
+				<%-- 											<span> <img alt="" src="${imgURL}thumblines/calendar_24x24.png" /> 6 юни --%>
+				<%-- 											</span> <span> <img alt="" src="${imgURL}thumblines/views_24x24.png" /> 44 --%>
+				<%-- 											</span> <span> <img alt="" src="${imgURL}thumblines/time_24x24.png" /> 14:00 --%>
+				<!-- 											</span> -->
+				<!-- 										</p> -->
+				<!-- 									</div> -->
+				<!-- 									<div class="col-xs-12 col-md-12"> -->
+				<!-- 										<p> -->
+				<!-- 											<span> Organizator: TU-Sofia </span> -->
+				<!-- 										</p> -->
+				<!-- 									</div> -->
+				<!-- 								</div> -->
+				<!-- 							</div> -->
+				<!-- 						</div> -->
+				<!-- 					</div> -->
+				<!-- 				</div> -->
 
 				<div class="row">
-					<div id="eventItem">
-						<div class="media">
+					<c:forEach var="event" items="${actualEvents}">
+						<div id="eventItem" class="media">
 							<div id="eventPicture" class="media-left col-md-3">
-								<a data-toggle="modal" data-target="#eventView" href=""> <img alt="" src="${imgURL}team1_256x256.jpg" />
+								<a data-toggle="modal" data-target="#eventItem${event.id}" href=""> <img alt=""
+									src="${imgURL}team1_256x256.jpg" />
 								</a>
 							</div>
 							<div class="media-body caption col-md-9">
-								<a data-toggle="modal" data-target="#eventView" href="">
-									<h4 class="media-heading">Subject</h4>
+								<a data-toggle="modal" data-target="#eventItem${event.id}" href="">
+									<h4 class="media-heading">${event.title}</h4>
 								</a>
 								<hr />
-								<p>
-									This is some sample text. This is some sample text. <br /> This is some sample text. This is some sample text.
-								</p>
+								<p>${event.description}</p>
 								<hr />
 								<p>
-									<span>Event category | event opportunity</span>
+									<span>${event.opportunityCategory.category} | ${event.opportunity.opportunity}</span> <br />
+									<c:forEach varStatus="status" var="eventActivity" items="${event.activities}">
+									<span> 
+										${eventActivity.type }
+										<c:if test="${!status.last}">,</c:if> 
+									</span>
+								</c:forEach>
 								</p>
 								<p>
-									<span> <img alt="" src="${imgURL}thumblines/calendar_24x24.png" /> 6 юни
-									</span> <span> <img alt="" src="${imgURL}thumblines/location_24x24.png" /> София
-									</span> <span> <img alt="" src="${imgURL}thumblines/views_24x24.png" /> 44
-									</span> <span> <img alt="" src="${imgURL}thumblines/time_24x24.png" /> 14:00
+									<span> <img alt="" src="${imgURL}thumblines/calendar_24x24.png" /> ${event.dateFrom }
+									</span> <span> <img alt="" src="${imgURL}thumblines/location_24x24.png" /> ${event.city.city }
+									</span> <span> <img alt="" src="${imgURL}thumblines/views_24x24.png" /> ${fn:length(event.eventsParticipants)}
+									</span> <span> <img alt="" src="${imgURL}thumblines/time_24x24.png" /> ${event.dateFrom }
 									</span>
 								</p>
 								<p>
-									<span> Organizator: TU-Sofia </span>
+									<span> Organizator: ${event.user.username} </span>
 								</p>
 							</div>
 						</div>
-					</div>
-					<!-- END OF eventItem -->
+						<!-- END OF eventItem -->
 
-					<!-- MODAL FOR EVERY ITEM -->
-					<div class="modal fade col-md-12" id="eventView" tabindex="-1" aria-labelledby="myModalLabel" aria-hidden="true">
-						<div class="modal-dialog modal-wide70">
-							<div class="modal-content col-md-10">
-								<div class="modal-header">
-									<button type="button" class="close" data-dismiss="modal" aria-hidden="true">X</button>
-									<h3>Спортуването като начин на живот</h3>
-									<!-- <?php echo h($event['name']); ?> -->
-								</div>
-								<div class="modal-body">
-									<div class="row">
-										<div id="EventViewPictureSection">
-											<a href="#x" class="thumbnail"> <img alt="" src="${imgURL}team1.jpg" />
-											</a>
-										</div>
+						<!-- MODAL FOR EVERY ITEM -->
+						<div class="modal fade col-md-12 eventItem" id="eventItem${event.id}" tabindex="-1" aria-labelledby="myModalLabel"
+							aria-hidden="true">
+							<div class="modal-dialog modal-wide70">
+								<div class="modal-content col-md-10">
+									<div class="modal-header">
+										<button type="button" class="close" data-dismiss="modal" aria-hidden="true">X</button>
+										<h3>${event.title}</h3>
 									</div>
-									<div class="row">
-										<div id="EventViewMainInfo">
-											<img alt="" src="${imgURL}thumblines/location_24x24.png" /> Варна, бул.Генерал Колев 45 <img alt=""
-												src="${imgURL}thumblines/calendar_24x24.png" /> 15 май 2014 <img alt=""
-												src="${imgURL}thumblines/time_24x24.png" /> 14:00-17:00 <img alt=""
-												src="${imgURL}thumblines/views_24x24.png" /> 110
-										</div>
-									</div>
-									<div class="row">
-										<div id="EventViewShortDescription" class="col-md-7">This is some sample text. This is some sample
-											text.This is some sample text. This is some sample text. This is some sample text. This is some sample
-											text.This is some sample text. This is some sample text. This is some sample text. This is some sample
-											text.This is some sample text. This is some sample text. This is some sample text. This is some sample text.
-											This is some sample text. This is some sample text.This is some sample text. This is some sample text. This
-											is some sample text. This is some sample text.This is some sample text. This is some sample text. This is
-											some sample text. This is some sample text.This is some sample text. This is some sample text. This is some
-											sample text. This is some sample text. This is some sample text. This is some sample text.This is some sample
-											text. This is some sample text. This is some sample text. This is some sample text.This is some sample text.
-											This is some sample text. This is some sample text. This is some sample text.This is some sample text. This
-											is some sample text. This is some sample text. This is some sample text.</div>
-										<div id="EventViewMoreInfo" class="col-md-5">
-											<div id="EventViewOrganizator" class="col-md-12">
-												<p>
-												<h4>ОРГАНИЗАТОР:</h4>
-												</p>
-												<!-- <?php echo __('ORGANIZATOR_LABEL'); ?> -->
-												<p>ADM Bulgaria</p>
-												<!-- <?php echo h($event['User']['name']); ?> -->
-											</div>
-											<div id="EventViewIntendedFor" class="col-md-12">
-												<p>
-												<h4>ПРЕДНАЗНАЧЕНО ЗА:</h4>
-												</p>
-												<!-- <?php echo __('INTENDED_FOR_LABEL'); ?> -->
-												<p>sportisti, uchenici, atlelti, deputati, text, text, text</p>
-											</div>
-											<div id="EventViewSocial" class="col-md-12 social-links">
-												<img alt="" src="${imgURL}thumblines/fb_32.png" /> <img alt="" src="${imgURL}thumblines/twitter_32.png" />
-												<img alt="" src="${imgURL}thumblines/linkedin_32.png" /> <img alt=""
-													src="${imgURL}thumblines/google_32.png" /> <img alt="" src="${imgURL}thumblines/skype_32.png" />
-											</div>
-											<div id="EventViewFullDescription" class="col-md-12">
-												<a href="${pageContext.request.contextPath}/events/viewEvent/"> <!-- ${id} -->
-													<button type="button" class="btn btn-primary btn-lg">
-														ПЪЛНО ОПИСАНИЕ
-														<!-- <?php __('EVENT_VIEW_FULL_DESC'); ?> -->
-													</button>
+									<div class="modal-body">
+										<div class="row">
+											<div id="EventViewPictureSection">
+												<a href="#x" class="thumbnail"> <img alt="" src="${imgURL}team1.jpg" />
 												</a>
+											</div>
+										</div>
+										<div class="row">
+											<div id="EventViewMainInfo">
+												<img alt="" src="${imgURL}thumblines/location_24x24.png" /> ${event.country.country }, ${event.city.city },
+												${event.address } <img alt="" src="${imgURL}thumblines/views_24x24.png" />
+												${fn:length(event.eventsParticipants)} <br /> <img alt="" src="${imgURL}thumblines/calendar_24x24.png" />
+												${event.dateFrom } <img alt="" src="${imgURL}thumblines/time_24x24.png" /> ${event.dateTo }
+											</div>
+										</div>
+										<div class="row">
+											<div id="EventViewShortDescription" class="col-md-7">${event.description}Thisissomesample text. This is
+												some sample text.This is some sample text. This is some sample text. This is some sample text. This is some
+												sample text.This is some sample text. This is some sample text. This is some sample text. This is some
+												sample text.This is some sample text. This is some sample text. This is some sample text. This is some
+												sample text. This is some sample text. This is some sample text.This is some sample text. This is some
+												sample text. This is some sample text. This is some sample text.This is some sample text. This is some
+												sample text. This is some sample text. This is some sample text.This is some sample text. This is some
+												sample text. This is some sample text. This is some sample text. This is some sample text. This is some
+												sample text.This is some sample text. This is some sample text. This is some sample text. This is some
+												sample text.This is some sample text. This is some sample text. This is some sample text. This is some
+												sample text.This is some sample text. This is some sample text. This is some sample text. This is some
+												sample text.</div>
+											<div id="EventViewMoreInfo" class="col-md-5">
+												<div id="EventViewOrganizator" class="col-md-12">
+													<p>
+													<h4>ОРГАНИЗАТОР:</h4>
+													</p>
+													<p>${event.user.username}</p>
+												</div>
+												<div id="EventViewIntendedFor" class="col-md-12">
+													<p>
+													<h4>ПРЕДНАЗНАЧЕНО ЗА:</h4>
+													</p>
+													<!-- <?php echo __('INTENDED_FOR_LABEL'); ?> -->
+													<p>sportisti, uchenici, atlelti, deputati, text, text, text</p>
+												</div>
+												<div id="EventViewSocial" class="col-md-12 social-links">
+													<img alt="" src="${imgURL}thumblines/fb_32.png" /> <img alt="" src="${imgURL}thumblines/twitter_32.png" />
+													<img alt="" src="${imgURL}thumblines/linkedin_32.png" /> <img alt=""
+														src="${imgURL}thumblines/google_32.png" /> <img alt="" src="${imgURL}thumblines/skype_32.png" />
+												</div>
+												<div id="EventViewFullDescription" class="col-md-12">
+													<a href="${pageContext.request.contextPath}/events/viewEvent/${event.id}">
+														<button type="button" class="btn btn-primary btn-lg">
+															ПЪЛНО ОПИСАНИЕ
+															<!-- <?php __('EVENT_VIEW_FULL_DESC'); ?> -->
+														</button>
+													</a>
+												</div>
 											</div>
 										</div>
 									</div>
 								</div>
 							</div>
 						</div>
-					</div>
-					<!-- END OF MODAL -->
+						<!-- END OF MODAL -->
+					</c:forEach>
 				</div>
 			</div>
 			<!-- END OF actualEvents -->
@@ -239,6 +293,19 @@
 		$('#accordion').on('hidden.bs.collapse', toggleChevron);
 		$('#accordion').on('shown.bs.collapse', toggleChevron);
 		$('#activities').chosen();
+
+		$(document).ready(function() {
+			$('#list').click(function(event) {
+				event.preventDefault();
+				// 				$('#products .item').removeClass('grid-group-item');
+				$('#products .item').addClass('list-group-item');
+			});
+			$('#grid').click(function(event) {
+				event.preventDefault();
+				$('#products .item').removeClass('list-group-item');
+				$('#products .item').addClass('grid-group-item');
+			});
+		});
 	</script>
 </body>
 </html>

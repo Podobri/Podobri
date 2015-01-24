@@ -24,6 +24,7 @@ import com.mmm.podobri.model.Country;
 import com.mmm.podobri.model.Education;
 import com.mmm.podobri.model.Individual;
 import com.mmm.podobri.model.Organization;
+import com.mmm.podobri.model.OrganizationsType;
 import com.mmm.podobri.model.Role;
 import com.mmm.podobri.model.Role.UsersRoles;
 import com.mmm.podobri.model.User;
@@ -71,7 +72,7 @@ public class UserServiceImpl
 
 
     @Override
-    public User findOne(long id)
+    public User findOne(int id)
     {
         return userDao.findOne(id);
     }
@@ -106,7 +107,7 @@ public class UserServiceImpl
 
 
     @Override
-    public void deleteById(long id)
+    public void deleteById(int id)
     {
         userDao.deleteById(id);
     }
@@ -135,29 +136,32 @@ public class UserServiceImpl
     @Override
     public void registerNewUser(User user, UsersRoles userRole)
     {
-        Role role = getDaoUtils().getRolesByName(userRole.name());
+        Role role = getDaoUtils().getRoleByName(userRole.name());
         user.getRoles().add(role);
         user.setStatus(UserService.UserStatus.NEW.name());
         final UserInfo userInfo = user.getUserInfo();
         Date currentDate = new Date();
         userInfo.setCreated(currentDate);
         userInfo.setModified(currentDate);
-        Country country = getDaoUtils().getCountriesById(userInfo.getCountry().getId());
+        Country country = getDaoUtils().getCountryById(userInfo.getCountry().getId());
         userInfo.setCountry(country);
-        City city = getDaoUtils().getCitiesById(userInfo.getCity().getId());
+        City city = getDaoUtils().getCityById(userInfo.getCity().getId());
         userInfo.setCity(city);
         userInfo.setUser(user);
         
         if (userRole.equals(UsersRoles.INDIVIDUAL))
         {
             final Individual individual = user.getIndividual();
-            Education education = getDaoUtils().getEducationsById(individual.getEducation().getId());
+            Education education = getDaoUtils().getEducationById(individual.getEducation().getId());
             individual.setEducation(education);
             individual.setUser(user);;
         }
         else if (userRole.equals(UsersRoles.ORGANIZATION))
         {
             final Organization organization = user.getOrganization();
+            byte organizationTypeId = organization.getOrganizationsType().getId();
+            OrganizationsType organizationsType = getDaoUtils().getOrganizationTypeById(organizationTypeId);
+            organization.setOrganizationsType(organizationsType);
             organization.setName(user.getUsername());
             organization.setUser(user);
         }

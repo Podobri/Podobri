@@ -98,7 +98,7 @@ public class UserInfo
     private Country country;
 
     // bi-directional one-to-one association to User
-    @OneToOne(optional = false)
+    @OneToOne
     @PrimaryKeyJoinColumn(name = "user_id", referencedColumnName = "id")
     private User user;
 

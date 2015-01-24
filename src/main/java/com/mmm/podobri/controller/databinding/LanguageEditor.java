@@ -33,7 +33,7 @@ public class LanguageEditor
         if (element instanceof String)
         {
             Byte languageId = Byte.parseByte((String)element);
-            Language lang = daoUtils.getLanguagesById(languageId);
+            Language lang = daoUtils.getLanguageById(languageId);
             return lang;
         }
         return null;

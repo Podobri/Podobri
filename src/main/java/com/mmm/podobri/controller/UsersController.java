@@ -56,24 +56,30 @@ public class UsersController
         model.addObject("users", userService.findAll());
         return model;
     }
-
-
+    
     @RequestMapping(value = "/users/viewUser", method = RequestMethod.GET)
+    public String viewUser()
+    {
+        return "usersView";
+    }
+
+
+    @RequestMapping(value = "/users/viewUser/{id}", method = RequestMethod.GET)
     public ModelAndView viewUser(@PathVariable Integer id)
     {
         final ModelAndView model = new ModelAndView("usersView");
         final User user = userService.findOne(id);
-        model.addObject("userForView", user);
+        model.addObject("user", user);
         return model;
     }
 
 
-    @RequestMapping(value = "/users/updateUser", method = RequestMethod.GET)
+    @RequestMapping(value = "/users/updateUser/{id}", method = RequestMethod.GET)
     public ModelAndView editUser(@PathVariable Integer id)
     {
         final ModelAndView model = new ModelAndView("usersEdit");
         final User user = userService.findOne(id);
-        model.addObject("userForEdit", user);
+        model.addObject("user", user);
         return model;
     }
 

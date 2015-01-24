@@ -31,9 +31,9 @@
 									<tr>
 										<td>${user.username }</td>
 										<td>${user.email }</td>
-										<td>${user.registerDate }</td>
-										<td>${user.userInfo.country.countryName }</td>
-										<td>${user.userInfo.city.cityName }</td>
+										<td>${user.individual.firstName }</td>
+										<td>${user.userInfo.country.country }</td>
+										<td>${user.userInfo.city.city }</td>
 										<td>
 											<div class="btn-group actions">
 												<button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown">

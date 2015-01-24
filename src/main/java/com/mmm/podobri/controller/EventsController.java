@@ -87,9 +87,7 @@ public class EventsController
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyy-MM-dd");
         dateFormat.setLenient(false);
         binder.registerCustomEditor(Date.class, new CustomDateEditor(dateFormat, true));
-        binder.registerCustomEditor(List.class,
-                                    "activities",
-                                    new ActivityEditor(List.class, eventService.getDaoUtils()));
+        binder.registerCustomEditor(List.class, "activities", new ActivityEditor(List.class, eventService.getDaoUtils()));
     }
 
 
@@ -102,33 +100,37 @@ public class EventsController
         model.addObject("actualEvents", eventService.findAll());
         return addStaticObjects(model);
     }
-    
-    
-    @RequestMapping(value = "/events/viewEvent", method = RequestMethod.GET)
+
+
+    @RequestMapping(value = "/events/viewEvent/{id}", method = RequestMethod.GET)
     public ModelAndView viewEvent(@PathVariable Integer id)
     {
         final ModelAndView model = new ModelAndView("eventsView");
-//        final Event event = eventService.findOne(id);
-//        model.addObject("userForView", event);
+        final Event event = eventService.findOne(id);
+        model.addObject("event", event);
         return model;
     }
 
 
     @RequestMapping(value = "/events/search", method = RequestMethod.POST)
-    public ModelMap searchEvents(@Valid @ModelAttribute("eventsFilter") EventsFilter searchCriteria, BindingResult result, ModelMap model)
+    public ModelAndView searchEvents(@Valid @ModelAttribute("eventsFilter") EventsFilter searchCriteria,
+                                 BindingResult result,
+                                 ModelMap model)
     {
         if (result.hasErrors())
         {
-            return model;
+//            return model;
         }
+        final ModelAndView m = new ModelAndView("events");
         List<Event> filteredEvents = eventService.search(searchCriteria);
-        model.put("actualEvents", filteredEvents);
+        model.addAttribute("actualEvents", filteredEvents);
         String filteredEventsMessage = "Found " + filteredEvents.size() + " results";
-        model.put("filteredEventsMessage", filteredEventsMessage);
-        return model;
+        model.addAttribute("filteredEventsMessage", filteredEventsMessage);
+        m.addAllObjects(model);
+        return addStaticObjects(m);
     }
-    
-    
+
+
     @RequestMapping(value = "/events/createEvent", method = RequestMethod.GET)
     public ModelAndView createEvent()
     {
@@ -136,9 +138,19 @@ public class EventsController
         model.addObject("event", new Event());
         return addStaticObjects(model);
     }
-    
-    @RequestMapping(value = "/events/createEvent", method = RequestMethod.POST)
-    public ModelAndView registerIndividual(@ModelAttribute("event") Event event, BindingResult result, ModelAndView model)
+
+
+    @RequestMapping(value = "/events/createInitiative", method = RequestMethod.GET)
+    public ModelAndView createInitiative()
+    {
+        final ModelAndView model = new ModelAndView("eventsInit");
+        model.addObject("event", new Event());
+        return addStaticObjects(model);
+    }
+
+
+    @RequestMapping(value = "/events/createEventSubmit", method = RequestMethod.POST)
+    public ModelAndView createEventSubmit(@ModelAttribute("event") Event event, BindingResult result, ModelAndView model)
     {
         if (result.hasErrors())
         {
@@ -147,7 +159,8 @@ public class EventsController
         eventService.createNewEvent(event);
         return new ModelAndView("redirect:/events");
     }
-    
+
+
     private ModelAndView addStaticObjects(ModelAndView model)
     {
         model.addObject("categoriesList", categoriesList);

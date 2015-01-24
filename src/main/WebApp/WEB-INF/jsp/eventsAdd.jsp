@@ -36,8 +36,8 @@
 										</div>
 										<div class="col-md-6">
 											<div class="form-group">
-												<form:label path="name" cssClass="control-label">Title</form:label>
-												<form:input id="title" path="name" required="required" cssClass="form-control" />
+												<form:label path="title" cssClass="control-label">Title</form:label>
+												<form:input id="title" path="title" required="required" cssClass="form-control" />
 											</div>
 
 											<div class="form-group">
@@ -263,7 +263,6 @@
 										<button id="createEventSubmit" class="btn btn-success btn-lg" type="submit">СЪЗДАЙ СЪБИТИЕ</button>
 									</div>
 								</div>
-
 							</fieldset>
 						</form:form>
 					</div>

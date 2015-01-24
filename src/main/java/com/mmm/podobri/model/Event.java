@@ -5,6 +5,8 @@ import java.io.Serializable;
 
 import javax.persistence.*;
 
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 import org.hibernate.annotations.Type;
 
 import java.util.Date;
@@ -61,7 +63,7 @@ public class Event
     private Date modified;
 
     @Column(nullable = false, length = 45)
-    private String name;
+    private String title;
 
     @Column(length = 150)
     private String picture;
@@ -70,8 +72,7 @@ public class Event
     @Type(type = "org.hibernate.type.NumericBooleanType")
     private boolean recruitCoorganizators;
     
-    @Column(name = "require_applications", columnDefinition = "TINYINT")
-    @Type(type = "org.hibernate.type.NumericBooleanType")
+    @Column(name = "require_applications")
     private boolean applicationFormRequire;
 
     @Column(nullable = false)
@@ -86,6 +87,7 @@ public class Event
 
     // bi-directional many-to-many association to Activity
     @ManyToMany
+    @LazyCollection(LazyCollectionOption.FALSE)
     @JoinTable(name = "events_activities", joinColumns = {@JoinColumn(name = "event_id", nullable = false)}, inverseJoinColumns = {@JoinColumn(name = "activity_id", nullable = false)})
     private List<Activity> activities;
 
@@ -131,14 +133,17 @@ public class Event
 
     // bi-directional many-to-one association to EventsActivity
     @OneToMany(mappedBy = "event")
+    @LazyCollection(LazyCollectionOption.FALSE)
     private List<EventsActivity> eventsActivities;
 
     // bi-directional many-to-one association to EventsParticipant
     @OneToMany(mappedBy = "event")
+    @LazyCollection(LazyCollectionOption.FALSE)
     private List<EventsParticipant> eventsParticipants;
 
     // bi-directional many-to-one association to EventsProgram
     @OneToMany(mappedBy = "event")
+    @LazyCollection(LazyCollectionOption.FALSE)
     private List<EventsProgram> eventsPrograms;
 
     // bi-directional many-to-many association to User
@@ -282,15 +287,15 @@ public class Event
     }
 
 
-    public String getName()
+    public String getTitle()
     {
-        return this.name;
+        return this.title;
     }
 
 
-    public void setName(String name)
+    public void setTitle(String title)
     {
-        this.name = name;
+        this.title = title;
     }
 
 

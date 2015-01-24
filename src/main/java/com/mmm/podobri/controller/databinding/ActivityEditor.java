@@ -34,7 +34,7 @@ public class ActivityEditor
         if (element instanceof String)
         {
             byte activityId = Byte.parseByte((String)element);
-            Activity activity = daoUtils.getActivitiesById(activityId);
+            Activity activity = daoUtils.getActivityById(activityId);
             return activity;
         }
         return null;

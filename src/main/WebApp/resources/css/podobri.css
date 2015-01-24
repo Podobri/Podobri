@@ -183,36 +183,36 @@ textarea
 	background-color: #648fc3;
 }
 
-#eventItem h4 {
+.eventItem h4 {
 	color: #49709e;
 	font-weight: bold;
 }
 
-#eventItem span {
+.eventItem span {
 	color: #a9c8f0;
 }
 
-#eventItem .media {
+.eventItem .media {
 	height: 256px;
 }
 
-#eventView h3 {
+.eventItem h3 {
 	color: #404040;
 	font-weight: bold;
 }
 
-#eventView #EventViewMainInfo {
+.eventItem #EventViewMainInfo {
 	background-color: #82b1ea;
 	color: #ffffff;
 	margin-bottom: 15px;
 }
 
-#eventView p {
+.eventItem p {
 	color: #a0c3ed;
 	font-weight: bold;
 }
 
-#eventView h4 {
+.eventItem h4 {
 	font-weight: bold;
 	color: #5a83b5;
 }
@@ -231,7 +231,7 @@ textarea
 
 #eventViewFullPicture {
 	background-image: url(../images/aboutUs.png);
-	width: 792px;
+/* 	width: 792px; */
 	height: 300px;
 }
 
@@ -305,7 +305,7 @@ textarea
   z-index: 123;
 }
 
-#createNewEvent
+#createNewEvent 
 {
 	background-color: #82b1ea;
 }
@@ -347,6 +347,11 @@ textarea
 /* 	width: 20%; */
 	text-align: left;
 	color: #fff !important;
+}
+
+#createNewEvent .panel-heading
+{
+	padding: 3px 3px;
 }
 
 

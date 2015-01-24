@@ -187,49 +187,49 @@ public class DaoUtils
     }
 
 
-    public Activity getActivitiesById(Byte id)
+    public Activity getActivityById(Byte id)
     {
         return activitiesById.get(id);
     }
 
 
-    public Activity getActivitiesByName(String name)
+    public Activity getActivityByName(String name)
     {
         return activitiesByName.get(name);
     }
 
 
-    public Country getCountriesById(Byte id)
+    public Country getCountryById(Byte id)
     {
         return countriesById.get(id);
     }
 
 
-    public Country getCountriesByName(String name)
+    public Country getCountryByName(String name)
     {
         return countriesByName.get(name);
     }
 
 
-    public City getCitiesById(int id)
+    public City getCityById(int id)
     {
         return citiesById.get(id);
     }
 
 
-    public City getCitiesByName(String name)
+    public City getCityByName(String name)
     {
         return citiesByName.get(name);
     }
 
 
-    public Education getEducationsById(Byte id)
+    public Education getEducationById(Byte id)
     {
         return educationsById.get(id);
     }
 
 
-    public Education getEducationsByName(String name)
+    public Education getEducationByName(String name)
     {
         return educationsByName.get(name);
     }
@@ -247,61 +247,61 @@ public class DaoUtils
     }
 
 
-    public Language getLanguagesById(Byte id)
+    public Language getLanguageById(Byte id)
     {
         return languagesById.get(id);
     }
 
 
-    public Language getLanguagesByName(String name)
+    public Language getLanguageByName(String name)
     {
         return languagesByName.get(name);
     }
 
 
-    public OpportunityCategory getOpportunityCategoriesById(Byte id)
+    public OpportunityCategory getOpportunityCategoryById(Byte id)
     {
         return opportunityCategoriesById.get(id);
     }
 
 
-    public OpportunityCategory getOpportunityCategoriesByName(String name)
+    public OpportunityCategory getOpportunityCategoryByName(String name)
     {
         return opportunityCategoriesByName.get(name);
     }
 
 
-    public Opportunity getOpportunitiesById(Byte id)
+    public Opportunity getOpportunityById(Byte id)
     {
         return opportunitiesById.get(id);
     }
 
 
-    public Opportunity getOpportunitiesByName(String name)
+    public Opportunity getOpportunityByName(String name)
     {
         return opportunitiesByName.get(name);
     }
 
 
-    public OrganizationsType getOrganizationtypesById(Byte id)
+    public OrganizationsType getOrganizationTypeById(Byte id)
     {
         return organizationTypesById.get(id);
     }
 
 
-    public OrganizationsType getOrganizationtypesByName(String name)
+    public OrganizationsType getOrganizationTypeByName(String name)
     {
         return organizationTypesByName.get(name);
     }
 
 
-    public Role getRolesById(byte id)
+    public Role getRoleById(byte id)
     {
         return rolesById.get(id);
     }
 
 
-    public Role getRolesByName(String name)
+    public Role getRoleByName(String name)
     {
         return rolesByName.get(name);
     }

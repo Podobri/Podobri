@@ -27,7 +27,7 @@ public abstract class BaseDaoImpl<T extends Serializable> implements BaseDao<T>
 
 
     @SuppressWarnings("unchecked")
-    public T findOne(final long id)
+    public T findOne(final int id)
     {
         return (T)getCurrentSession().get(clazz, id);
     }
@@ -59,7 +59,7 @@ public abstract class BaseDaoImpl<T extends Serializable> implements BaseDao<T>
     }
 
 
-    public void deleteById(final long id)
+    public void deleteById(final int id)
     {
         final T entity = findOne(id);
         delete(entity);
