@@ -1,12 +1,13 @@
 <%@taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 <%@ taglib uri="http://java.sun.com/jstl/core_rt" prefix="c"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <c:url var="imgURL" value="resources/images/" />
 <!DOCTYPE html>
 <html>
-<jsp:include page="head.jsp" />
+<jsp:include page="layout/head.jsp" />
 <body>
 	<div class="container">
-		<jsp:include page="menu.jsp" />
+		<jsp:include page="layout/menu.jsp" />
 		<div id="content">
 			<div id="main" class="col-md-12">
 				<div class="row">
@@ -78,90 +79,42 @@
 							<div id="closestEvents-carousel" class="carousel slide" data-ride="carousel">
 								<!-- Indicators -->
 								<ol class="carousel-indicators">
-									<li data-target="#closestEvents-carousel" data-slide-to="0" class="active"></li>
-									<li data-target="#closestEvents-carousel" data-slide-to="1"></li>
-									<li data-target="#closestEvents-carousel" data-slide-to="2"></li>
+									<c:forEach var="closestEventGroup" items="${closestEventsGroup}" varStatus="status">
+										<li data-target="#closestEvents-carousel" data-slide-to="${status.index }"
+											${status.first ? 'class="active"' : '' }></li>
+									</c:forEach>
 								</ol>
 								<!-- Wrapper for slides -->
 								<div class="carousel-inner" role="listbox">
-									<div class="item active">
-										<div class="row">
-											<!-- item 1 -->
-											<div class="col-md-4">
-												<div class="thumbnail">
-													<a href="#x"> <img src="${imgURL}/team1.jpg" alt="..."></a>
-													<div class="caption">
-														<h3>Новина 1</h3>
-														<p>От : Технически Университет - София</p>
-														<p class="thumbnail_footer">
-															<span class="thumbnail_date"> <img alt="date" src="${imgURL}/thumblines/date.png"> 27 май
-															</span> <span class="thumbnail_location"> <img alt="location" src="${imgURL}/thumblines/location.png">
-																София
-															</span> <span class="thumbnail_views"> <img alt="views" src="${imgURL}/thumblines/views.png"> 44
-															</span>
-														</p>
+									<c:forEach var="closestEventGroup" items="${closestEventsGroup}" varStatus="status">
+										<div class="item ${status.first ? 'active' : '' }">
+											<div class="row">
+												<c:forEach var="closestEvent" items="${closestEventGroup}" varStatus="status">
+													<div class="item col-md-4">
+														<div class="thumbnail">
+															<a data-toggle="modal" data-target="#eventView" href=""><img class="group list-group-image"
+																src="http://placehold.it/400x250/000/fff" alt="" /></a>
+															<div class="caption">
+																<a data-toggle="modal" data-target="#eventView" href="">
+																	<h4 class="group inner list-group-item-heading">${closestEvent.event.title }</h4>
+																</a>
+																<p>От : ${closestEvent.event.user.username }</p>
+																<p class="thumbnail_footer">
+																	<span class="thumbnail_date"> <img alt="date" src="${imgURL}/thumblines/date.png">
+																		${closestEvent.dateFromDayOfMonth } ${closestEvent.dateFromMonth }
+																	</span> <span class="thumbnail_location"> <img alt="location" src="${imgURL}/thumblines/location.png">
+																		${closestEvent.event.city.city }
+																	</span> <span class="thumbnail_views"> <img alt="views" src="${imgURL}/thumblines/views.png">
+																		${closestEvent.eventParticipantsSize}
+																	</span>
+																</p>
+															</div>
+														</div>
 													</div>
-												</div>
-											</div>
-
-											<!-- item 2 -->
-											<div class="col-md-4">
-												<div class="thumbnail">
-													<a href="#x"> <img src="${imgURL}/team1.jpg" alt="..."></a>
-													<div class="caption">
-														<h3>Новина 1</h3>
-														<p>От : Технически Университет - София</p>
-														<p class="thumbnail_footer">
-															<span class="thumbnail_date"> <img alt="date" src="${imgURL}/thumblines/date.png"> 27 май
-															</span> <span class="thumbnail_location"> <img alt="location" src="${imgURL}/thumblines/location.png">
-																София
-															</span> <span class="thumbnail_views"> <img alt="views" src="${imgURL}/thumblines/views.png"> 44
-															</span>
-														</p>
-													</div>
-												</div>
-											</div>
-
-											<!-- item 3 -->
-											<div class="col-md-4">
-												<div class="thumbnail">
-													<a href="#x"> <img src="${imgURL}/team1.jpg" alt="..."></a>
-													<div class="caption">
-														<h3>Новина 1</h3>
-														<p>От : Технически Университет - София</p>
-														<p class="thumbnail_footer">
-															<span class="thumbnail_date"> <img alt="date" src="${imgURL}/thumblines/date.png"> 27 май
-															</span> <span class="thumbnail_location"> <img alt="location" src="${imgURL}/thumblines/location.png">
-																София
-															</span> <span class="thumbnail_views"> <img alt="views" src="${imgURL}/thumblines/views.png"> 44
-															</span>
-														</p>
-													</div>
-												</div>
+												</c:forEach>
 											</div>
 										</div>
-									</div>
-									<!-- second slide -->
-									<div class="item">
-										<div class="row">
-											<div class="col-md-4">
-												<div class="thumbnail">
-													<a href="#x"> <img src="${imgURL}/team1.jpg" alt="..."></a>
-													<div class="caption">
-														<h3>Новина 1</h3>
-														<p>От : Технически Университет - София</p>
-														<p class="thumbnail_footer">
-															<span class="thumbnail_date"> <img alt="date" src="${imgURL}/thumblines/date.png"> 27 май
-															</span> <span class="thumbnail_location"> <img alt="location" src="${imgURL}/thumblines/location.png">
-																София
-															</span> <span class="thumbnail_views"> <img alt="views" src="${imgURL}/thumblines/views.png"> 44
-															</span>
-														</p>
-													</div>
-												</div>
-											</div>
-										</div>
-									</div>
+									</c:forEach>
 								</div>
 							</div>
 						</div>
@@ -171,7 +124,7 @@
 				<jsp:include page="mainCalendar.jsp" />
 			</div>
 		</div>
-		<jsp:include page="footer.jsp" />
+		<jsp:include page="layout/footer.jsp" />
 	</div>
 	<!-- end main container -->
 </body>

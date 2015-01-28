@@ -1,5 +1,8 @@
 package com.mmm.podobri.service;
 
+import java.util.List;
+
+import com.mmm.podobri.model.Event;
 import com.mmm.podobri.model.User;
 import com.mmm.podobri.model.Role.UsersRoles;
 
@@ -8,6 +11,7 @@ public interface UserService extends BaseDaoServices<User>
     public enum UserStatus { NEW, ACTIVED, BLOCKED }
 	public User findByUserName(String username);
 	public void registerNewUser(User user, UsersRoles userRole);
+	public List<Event> getMyEvents();
 //	void changePassword(UserModel user, String password);
 //    void deleteUser(Long userId);
 //    boolean eMailAddressExists(String eMailAddress, Long userToExclude);

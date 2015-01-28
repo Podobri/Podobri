@@ -107,7 +107,8 @@ public class Event
     private EventCostType eventCostType;
 
     // bi-directional many-to-many association to Lector
-    @ManyToMany
+    @ManyToMany(cascade = CascadeType.ALL)
+    @LazyCollection(LazyCollectionOption.FALSE)
     @JoinTable(name = "events_lectors", joinColumns = {@JoinColumn(name = "event_id", nullable = false)}, inverseJoinColumns = {@JoinColumn(name = "lector_id", nullable = false)})
     private List<Lector> lectors;
 
@@ -122,7 +123,8 @@ public class Event
     private OpportunityCategory opportunityCategory;
 
     // bi-directional many-to-many association to Sponsor
-    @ManyToMany
+    @ManyToMany(cascade = CascadeType.ALL)
+    @LazyCollection(LazyCollectionOption.FALSE)
     @JoinTable(name = "events_sponsors", joinColumns = {@JoinColumn(name = "event_id", nullable = false)}, inverseJoinColumns = {@JoinColumn(name = "sponsor_id", nullable = false)})
     private List<Sponsor> sponsors;
 
@@ -137,12 +139,12 @@ public class Event
     private List<EventsActivity> eventsActivities;
 
     // bi-directional many-to-one association to EventsParticipant
-    @OneToMany(mappedBy = "event")
+    @OneToMany(mappedBy = "event", cascade = CascadeType.ALL)
     @LazyCollection(LazyCollectionOption.FALSE)
     private List<EventsParticipant> eventsParticipants;
 
     // bi-directional many-to-one association to EventsProgram
-    @OneToMany(mappedBy = "event")
+    @OneToMany(mappedBy = "event", cascade = CascadeType.ALL)
     @LazyCollection(LazyCollectionOption.FALSE)
     private List<EventsProgram> eventsPrograms;
 

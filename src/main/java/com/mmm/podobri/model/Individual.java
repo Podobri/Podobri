@@ -6,6 +6,8 @@ import java.io.Serializable;
 import javax.persistence.*;
 
 import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 import org.hibernate.annotations.Type;
 import org.hibernate.annotations.Parameter;
 
@@ -58,11 +60,13 @@ public class Individual
 
     // bi-directional many-to-one association to Education
     @ManyToOne
+    @LazyCollection(LazyCollectionOption.FALSE)
     @JoinColumn(name = "education_id", nullable = false)
     private Education education;
 
     // bi-directional many-to-many association to Language
     @ManyToMany
+    @LazyCollection(LazyCollectionOption.FALSE)
     @JoinTable(name = "individuals_languages", joinColumns = {@JoinColumn(name = "user_id", nullable = false)}, inverseJoinColumns = {@JoinColumn(name = "language_id", nullable = false)})
     private List<Language> languages;
 
@@ -73,7 +77,9 @@ public class Individual
     // bi-directional many-to-many association to Organization
     @ManyToMany(mappedBy = "individuals")
     private List<Organization> organizations;
-
+    
+    @Transient
+    private String fullName;
 
     public Individual()
     {}
@@ -239,5 +245,11 @@ public class Individual
     {
         this.organizations = organizations;
     }
-
+    
+    
+    public String getFullName()
+    {
+        this.fullName = getFirstName() + " " + getLastName(); 
+        return fullName;
+    }
 }

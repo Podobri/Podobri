@@ -9,8 +9,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.mmm.podobri.model.Event;
+import com.mmm.podobri.service.EventService;
 import com.mmm.podobri.service.UserService;
-import com.mmm.podobri.main.TeamInfo;
+import com.mmm.podobri.util.EventViewWrapper;
 
 
 @Controller
@@ -19,11 +21,15 @@ public class PodobriApplicationController
     @Autowired
     UserService userService;
 
+    @Autowired
+    EventService eventService;
 
-    @RequestMapping("/")
+
+    @RequestMapping(value = {"", "/"})
     public ModelAndView podobri()
     {
         final ModelAndView model = new ModelAndView("podobri");
+        model.addObject("closestEventsGroup", buildClosesEventSection());
         model.addObject("teaminfos", buildTeamInfoList());
         return model;
     }
@@ -35,6 +41,23 @@ public class PodobriApplicationController
         final ModelAndView model = new ModelAndView("about");
         model.addObject("teaminfos", buildTeamInfoList());
         return model;
+    }
+
+
+    private List<List<EventViewWrapper>> buildClosesEventSection()
+    {
+        List<List<EventViewWrapper>> closestEventsGroup = new ArrayList<List<EventViewWrapper>>();
+        int groupSize = 6;
+        List<Event> allEvents = eventService.findAll();
+        List<EventViewWrapper> allEventsWrapper = EventViewWrapper.buildEventViewWrapperList(allEvents);
+        int i = 0;
+        while (i + groupSize < allEventsWrapper.size())
+        {
+            closestEventsGroup.add(allEventsWrapper.subList(i, i + groupSize));
+            i += groupSize;
+        }
+        closestEventsGroup.add(allEventsWrapper.subList(i, allEventsWrapper.size()));
+        return closestEventsGroup;
     }
 
 

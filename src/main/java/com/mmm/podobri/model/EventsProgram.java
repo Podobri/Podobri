@@ -21,7 +21,7 @@ public class EventsProgram
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(unique = true, nullable = false)
-    private String id;
+    private int id;
 
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "date_from")
@@ -52,13 +52,13 @@ public class EventsProgram
     {}
 
 
-    public String getId()
+    public int getId()
     {
         return this.id;
     }
 
 
-    public void setId(String id)
+    public void setId(int id)
     {
         this.id = id;
     }

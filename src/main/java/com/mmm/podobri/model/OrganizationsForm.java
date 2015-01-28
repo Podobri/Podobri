@@ -5,6 +5,8 @@ import java.io.Serializable;
 
 import javax.persistence.*;
 
+import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.Parameter;
 import org.hibernate.annotations.Type;
 
 import java.util.Date;
@@ -21,6 +23,8 @@ public class OrganizationsForm
 {
     private static final long serialVersionUID = 1L;
 
+    @GenericGenerator(name = "generator", strategy = "foreign", parameters = @Parameter(name = "property", value = "organization"))
+    @GeneratedValue(generator = "generator")
     @Id
     @Column(name = "organization_id", insertable = false, updatable = false, unique = false, nullable = false)
     private int organizationId;

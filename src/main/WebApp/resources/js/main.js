@@ -90,15 +90,49 @@ $(document).ready(
 									.toggleClass('hide');
 
 						}
-					})
+					});
+			$('#activitiesCompany').next('div').css('width', "100%");
 		});
 
-$(document).ready(function setTagsManager(id) {
-	var container = id + 'container';
-	$('#' + id).tagsManager({
-		tagsContainer : '#' + container,
-		hiddenTagListName : '#' + id,
-		tagClass : 'tm-tag-info',
-		preventSubmitOnEnter : true
+// $(document).ready(function setTagsManager(id) {
+// var container = id + 'container';
+// $('#' + id).tagsManager({
+// tagsContainer : '#' + container,
+// hiddenTagListName : '#' + id,
+// tagClass : 'tm-tag-info',
+// preventSubmitOnEnter : true
+// });
+// });
+function makeAjaxCall(selector, path, event, targetSelector, textKey) {
+	$('#' + selector).on(event, function() {
+		var optionId = $(this).val();
+		$.ajax({
+			type : "GET",
+			url : 'ajax/'+path + '/'+optionId,
+			success : function(response) {
+				console.log('Success');
+			},
+			error : function(e) {
+				alert('Error: ' + e);
+			}
+		}).done(function(data) {
+			makeOptionList(data, targetSelector, textKey);
+		})
 	});
-});
+}
+
+function makeOptionList(data, selector, textKey) {
+	if (!data) {
+		data = [ {
+			"id" : -1,
+			textKey : "Няма намерени резултати"
+		} ];
+	}
+	if (data) {
+		$('#' + selector).html('');
+		$.each(data, function(index, item) {
+			$('#' + selector).append(
+					$('<option></option>').text(item[textKey]).val(item.id));
+		});
+	}
+}

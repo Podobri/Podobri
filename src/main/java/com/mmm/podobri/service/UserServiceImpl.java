@@ -18,10 +18,12 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.mmm.podobri.dao.DaoUtils;
+import com.mmm.podobri.dao.EventDao;
 import com.mmm.podobri.dao.UserDao;
 import com.mmm.podobri.model.City;
 import com.mmm.podobri.model.Country;
 import com.mmm.podobri.model.Education;
+import com.mmm.podobri.model.Event;
 import com.mmm.podobri.model.Individual;
 import com.mmm.podobri.model.Organization;
 import com.mmm.podobri.model.OrganizationsType;
@@ -38,6 +40,9 @@ public class UserServiceImpl
 {
     @Autowired
     public UserDao userDao;
+
+    @Autowired
+    public EventDao eventDao;
 
 
     @Override
@@ -148,13 +153,14 @@ public class UserServiceImpl
         City city = getDaoUtils().getCityById(userInfo.getCity().getId());
         userInfo.setCity(city);
         userInfo.setUser(user);
-        
+
         if (userRole.equals(UsersRoles.INDIVIDUAL))
         {
             final Individual individual = user.getIndividual();
             Education education = getDaoUtils().getEducationById(individual.getEducation().getId());
             individual.setEducation(education);
-            individual.setUser(user);;
+            individual.setUser(user);
+            ;
         }
         else if (userRole.equals(UsersRoles.ORGANIZATION))
         {
@@ -165,7 +171,19 @@ public class UserServiceImpl
             organization.setName(user.getUsername());
             organization.setUser(user);
         }
-        
+
         save(user);
+    }
+
+
+    @Override
+    public List<Event> getMyEvents()
+    {
+        // Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        // String username = auth.getName(); //get logged in username
+        String username = "test";
+        User user = findByUserName(username);
+        List<Event> events = eventDao.findEventsByParticipant(user);
+        return events;
     }
 }

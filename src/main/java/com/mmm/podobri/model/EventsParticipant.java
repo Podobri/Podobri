@@ -5,6 +5,9 @@ import java.io.Serializable;
 
 import javax.persistence.*;
 
+import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.Parameter;
+
 
 /**
  * The persistent class for the events_participants database table.
@@ -17,10 +20,14 @@ public class EventsParticipant
 {
     private static final long serialVersionUID = 1L;
 
+    @GenericGenerator(name = "generator", strategy = "foreign", parameters = @Parameter(name = "property", value = "event"))
+    @GeneratedValue(generator = "generator")
     @Id
     @Column(name = "event_id", insertable = false, updatable = false, unique = false, nullable = false)
-    private String eventId;
+    private int eventId;
 
+    @GenericGenerator(name = "generator", strategy = "foreign", parameters = @Parameter(name = "property", value = "individual"))
+    @GeneratedValue(generator = "generator")
     @Id
     @Column(name = "user_id", insertable = false, updatable = false, unique = false, nullable = false)
     private int userId;
@@ -43,13 +50,13 @@ public class EventsParticipant
     {}
 
 
-    public String getEventId()
+    public int getEventId()
     {
         return this.eventId;
     }
 
 
-    public void setEventId(String eventId)
+    public void setEventId(int eventId)
     {
         this.eventId = eventId;
     }
@@ -114,7 +121,7 @@ public class EventsParticipant
             return false;
         }
         EventsParticipant castOther = (EventsParticipant)other;
-        return this.eventId.equals(castOther.eventId) && (this.userId == castOther.userId);
+        return this.eventId == castOther.eventId && (this.userId == castOther.userId);
     }
 
 
@@ -122,7 +129,7 @@ public class EventsParticipant
     {
         final int prime = 31;
         int hash = 17;
-        hash = hash * prime + this.eventId.hashCode();
+        hash = hash * prime + this.eventId;
         hash = hash * prime + this.userId;
 
         return hash;

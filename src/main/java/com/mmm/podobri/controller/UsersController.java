@@ -26,12 +26,15 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.mmm.podobri.controller.databinding.ActivityEditor;
 import com.mmm.podobri.controller.databinding.LanguageEditor;
+import com.mmm.podobri.model.Event;
 import com.mmm.podobri.model.Role.UsersRoles;
 import com.mmm.podobri.model.User;
 import com.mmm.podobri.service.UserService;
+import com.mmm.podobri.util.EventViewWrapper;
 
 
 @Controller
+@RequestMapping("/users")
 public class UsersController
 {
     @Autowired
@@ -49,102 +52,115 @@ public class UsersController
     }
 
 
-    @RequestMapping("/users")
+    @RequestMapping
     public ModelAndView usersHome()
     {
-        final ModelAndView model = new ModelAndView("users");
+        final ModelAndView model = new ModelAndView("users/users");
         model.addObject("users", userService.findAll());
         return model;
     }
     
-    @RequestMapping(value = "/users/viewUser", method = RequestMethod.GET)
-    public String viewUser()
+    @RequestMapping(value = "/myProfile", method = RequestMethod.GET)
+    public ModelAndView userHome()
     {
-        return "usersView";
+        final ModelAndView model = new ModelAndView("users/usersView");
+//        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+//      String username = auth.getName(); //get logged in username
+        String username = "test";
+        final User user = userService.findByUserName(username);
+        List<Event> myEvents = userService.getMyEvents();
+        model.addObject("user", user);
+        model.addObject("events", EventViewWrapper.buildEventViewWrapperList(myEvents));
+        return loadSelects(model);
     }
 
 
-    @RequestMapping(value = "/users/viewUser/{id}", method = RequestMethod.GET)
+    @RequestMapping(value = "/viewUser/{id}", method = RequestMethod.GET)
     public ModelAndView viewUser(@PathVariable Integer id)
     {
-        final ModelAndView model = new ModelAndView("usersView");
+        final ModelAndView model = new ModelAndView("users/usersView");
         final User user = userService.findOne(id);
         model.addObject("user", user);
         return model;
     }
 
 
-    @RequestMapping(value = "/users/updateUser/{id}", method = RequestMethod.GET)
+    @RequestMapping(value = "/updateUser/{id}", method = RequestMethod.GET)
     public ModelAndView editUser(@PathVariable Integer id)
     {
-        final ModelAndView model = new ModelAndView("usersEdit");
+        final ModelAndView model = new ModelAndView("users/usersEdit");
         final User user = userService.findOne(id);
         model.addObject("user", user);
-        return model;
+        return loadSelects(model);
     }
 
 
-    @RequestMapping(value = "/users/updateUser", method = RequestMethod.POST)
-    public ModelAndView editUser(@ModelAttribute User user)
+    @RequestMapping(value = "/updateUser", method = RequestMethod.POST)
+    public ModelAndView updateUser(@ModelAttribute User user)
     {
-        final ModelAndView model = new ModelAndView("users");
+        final ModelAndView model = new ModelAndView("users/users");
         userService.update(user);
         model.addObject("users", userService.findAll());
         return model;
     }
 
 
-    @RequestMapping(value = "/users/deleteUser", method = RequestMethod.GET)
+    @RequestMapping(value = "/deleteUser", method = RequestMethod.GET)
     public ModelAndView deleteUser(@PathVariable Integer id)
     {
-        final ModelAndView model = new ModelAndView("users");
+        final ModelAndView model = new ModelAndView("users/users");
         userService.deleteById(id);
         model.addObject("users", userService.findAll());
         return model;
     }
 
 
-    @RequestMapping(value = "/users/register", method = RequestMethod.GET)
-    public ModelAndView addNewUser()
+    @RequestMapping(value = "/register", method = RequestMethod.GET)
+    public ModelAndView registerNewUser()
     {
-        final ModelAndView model = new ModelAndView("register");
+        final ModelAndView model = new ModelAndView("users/register");
         model.addObject("user", new User());
-        model.addObject("countries", userService.getDaoUtils().getAllCountries());
-        model.addObject("cities", userService.getDaoUtils().getAllCities());
-        model.addObject("activitiesList", userService.getDaoUtils().getAllActivities());
-        model.addObject("educations", userService.getDaoUtils().getAllEducations());
-        model.addObject("languages", userService.getDaoUtils().getAllLanguages());
-        model.addObject("organizationTypes", userService.getDaoUtils().getAllOrganizationTypes());
-        return model;
+        return loadSelects(model);
     }
 
 
-    @RequestMapping(value = "/users/register/individual", method = RequestMethod.POST)
+    @RequestMapping(value = "/register/individual", method = RequestMethod.POST)
     public ModelAndView registerIndividual(@ModelAttribute("user") User user, BindingResult result)
     {
         if (result.hasErrors())
         {
-            final ModelAndView model = new ModelAndView("register");
+            final ModelAndView model = new ModelAndView("users/register");
             return model;
         }
-        final ModelAndView model = new ModelAndView("users");
+        final ModelAndView model = new ModelAndView("users/users");
         userService.registerNewUser(user, UsersRoles.INDIVIDUAL);
         model.addObject("users", userService.findAll());
         return model;
     }
 
 
-    @RequestMapping(value = "/users/register/organization", method = RequestMethod.POST)
+    @RequestMapping(value = "/register/organization", method = RequestMethod.POST)
     public ModelAndView registerOrganization(@Valid @ModelAttribute("user") User user, BindingResult result)
     {
         if (result.hasErrors())
         {
-            final ModelAndView model = new ModelAndView("register");
+            final ModelAndView model = new ModelAndView("users/register");
             return model;
         }
-        final ModelAndView model = new ModelAndView("users");
+        final ModelAndView model = new ModelAndView("users/users");
         userService.registerNewUser(user, UsersRoles.ORGANIZATION);
         model.addObject("users", userService.findAll());
+        return model;
+    }
+    
+    private ModelAndView loadSelects(ModelAndView model)
+    {
+        model.addObject("countries", userService.getDaoUtils().getAllCountries());
+        model.addObject("cities", userService.getDaoUtils().getAllCities());
+        model.addObject("activitiesList", userService.getDaoUtils().getAllActivities());
+        model.addObject("educations", userService.getDaoUtils().getAllEducations());
+        model.addObject("languages", userService.getDaoUtils().getAllLanguages());
+        model.addObject("organizationTypes", userService.getDaoUtils().getAllOrganizationTypes());
         return model;
     }
 }

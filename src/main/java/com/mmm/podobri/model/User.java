@@ -21,6 +21,9 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
+
 
 /**
  * The persistent class for the users database table.
@@ -90,6 +93,7 @@ public class User
 
     // bi-directional many-to-many association to Activity
     @ManyToMany
+    @LazyCollection(LazyCollectionOption.FALSE)
     @JoinTable(name = "users_activities", joinColumns = {@JoinColumn(name = "user_id", nullable = false)}, inverseJoinColumns = {@JoinColumn(name = "activity_id", nullable = false)})
     private List<Activity> activities = new ArrayList<Activity>();
 

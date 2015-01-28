@@ -10,6 +10,7 @@ import java.util.Date;
 import java.util.List;
 
 import org.hibernate.Criteria;
+import org.hibernate.Query;
 import org.hibernate.criterion.Restrictions;
 import org.hibernate.sql.JoinType;
 import org.springframework.stereotype.Repository;
@@ -17,6 +18,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.mmm.podobri.model.Activity;
 import com.mmm.podobri.model.Event;
+import com.mmm.podobri.model.User;
 import com.mmm.podobri.util.EventsFilter;
 
 
@@ -96,6 +98,31 @@ public class EventDaoImpl
                                  Restrictions.in("activityId", activityIds));
         }
 
+        List<Event> result = criteria.list();
+        return result;
+    }
+
+
+    @SuppressWarnings("unchecked")
+    @Override
+    public List<Event> findEventsByOrganizator(int userId)
+    {
+        Query query = getCurrentSession().createQuery("from Event e where e.user.id = ?");
+        query.setParameter(0, userId);
+        List<Event> events = query.list();
+        return events;
+    }
+
+
+    @SuppressWarnings("unchecked")
+    @Override
+    public List<Event> findEventsByParticipant(User user)
+    {
+        Criteria criteria = getCurrentSession().createCriteria(Event.class);
+        criteria.createAlias("eventsParticipants",
+                             "event_participants",
+                             JoinType.LEFT_OUTER_JOIN,
+                             Restrictions.eq("userId", user.getId()));
         List<Event> result = criteria.list();
         return result;
     }

@@ -19,6 +19,8 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 import org.hibernate.annotations.Parameter;
 
 
@@ -89,11 +91,13 @@ public class UserInfo
 
     // bi-directional many-to-one association to City
     @ManyToOne
+    @LazyCollection(LazyCollectionOption.FALSE)
     @JoinColumn(name = "city_id", nullable = false)
     private City city;
 
     // bi-directional many-to-one association to Country
     @ManyToOne
+    @LazyCollection(LazyCollectionOption.FALSE)
     @JoinColumn(name = "country_id", nullable = false)
     private Country country;
 

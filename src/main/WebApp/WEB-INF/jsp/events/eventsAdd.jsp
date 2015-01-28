@@ -2,17 +2,20 @@
 <%@taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@ taglib uri="http://java.sun.com/jstl/core_rt" prefix="c"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <c:url var="imgURL" value="resources/images/" />
 <html>
-<jsp:include page="head.jsp" />
+<jsp:include page="../layout/head.jsp" />
 <body>
 	<div class="container">
-		<jsp:include page="menu.jsp" />
+		<jsp:include page="../layout/menu.jsp" />
 		<div id="content">
 			<div id="createEvent" class="col-md-10">
 				<div class="row">
 					<div id="createEventTitle">
-						<h2>Create event</h2>
+						<h3>
+							<strong>Create event</strong>
+						</h3>
 					</div>
 				</div>
 
@@ -178,26 +181,10 @@
 								</div>
 
 								<div class="row">
-									<div class="schedule">
-										<div class="form-group col-md-8">
-											<label for="eventProgramSubject" class="control-label">Title</label> <input id="eventProgramSubject"
-												type="text" class="form-control" />
-										</div>
-										<div class="form-group col-md-2">
-											<label for="eventProgramDateFrom" class="control-label">Start time</label> <input id="eventProgramDateFrom"
-												type="datetime-local" class="form-control date datepicker margin-top-none" placeholder="23/9/2013" />
-										</div>
-										<div class="form-group col-md-2">
-											<label for="eventProgramDateTo" class="control-label">End time</label> <input id="eventProgramDateTo"
-												type="datetime-local" class="form-control date datepicker margin-top-none" placeholder="23/9/2013" />
-										</div>
-										<div class="form-group col-md-12">
-											<label for="eventProgramDescription" class="control-label">Description</label>
-											<textarea id="eventProgramDescription" name="eventProgramDescription" class="col-md-12 form-control" rows="5"></textarea>
-										</div>
-										<div class="form-group">
-											<span class="addElement">Добави елемент...</span>
-										</div>
+									<div id="addProgramRow" class="form-group">
+										<button id="addProgram" type="button" class="btn btn-success">
+											<span class="glyphicon glyphicon-plus"></span>Добави елемент
+										</button>
 									</div>
 								</div>
 
@@ -208,30 +195,10 @@
 								</div>
 
 								<div class="row">
-									<div class="lector">
-										<div class="form-group col-md-6">
-											<label for="lectorName" class="control-label">Name</label> <input id="lectorName" type="text"
-												class="form-control" />
-										</div>
-										<div class="form-group col-md-6">
-											<label for="lectorLastName" class="control-label">Description</label> <input id="lectorLastName" type="text"
-												class="form-control" />
-										</div>
-										<div class="form-group col-md-6">
-											<label for="lectorJob" class="control-label">Job</label> <input id="lectorJob" type="text"
-												class="form-control" />
-										</div>
-										<div class="form-group col-md-6">
-											<label for="lectorPicture" class="control-label">Picture</label> <input id="lectorPicture" type="file"
-												class="form-control" />
-										</div>
-										<div class="form-group col-md-12">
-											<label for="lectorInformation" class="control-label">Information</label>
-											<textarea id="lectorInformation" name="lectorInformation" class="col-md-12 form-control" rows="5"></textarea>
-										</div>
-										<div class="form-group">
-											<span class="addElement">Добави лектор...</span>
-										</div>
+									<div id="addLectorRow" class="form-group">
+										<button id="addLector" type="button" class="btn btn-success">
+											<span class="glyphicon glyphicon-plus"></span>Добави елемент
+										</button>
 									</div>
 								</div>
 
@@ -242,21 +209,12 @@
 								</div>
 
 								<div class="row">
-									<div class="lector">
-										<div class="form-group col-md-6">
-											<label for="sponsorName" class="control-label">Full name</label> <input id="sponsorName" type="text"
-												class="form-control" />
-										</div>
-										<div class="form-group col-md-6">
-											<label for="sponsorPicture" class="control-label">Picture</label> <input id="sponsorPicture" type="file"
-												class="form-control" />
-										</div>
-										<div class="form-group">
-											<span class="addElement">Добави спонсор...</span>
-										</div>
+									<div id="addSponsorRow" class="form-group">
+										<button id="addSponsor" type="button" class="btn btn-success">
+											<span class="glyphicon glyphicon-plus"></span>Добави елемент
+										</button>
 									</div>
 								</div>
-
 
 								<div class="row">
 									<div class="form-group text-center">
@@ -269,25 +227,19 @@
 				</div>
 			</div>
 			<!-- End createEvent -->
-			<jsp:include page="reklams.jsp" />
+			<jsp:include page="../reklams.jsp" />
 		</div>
 		<!-- End main content -->
-		<jsp:include page="footer.jsp" />
+		<jsp:include page="../layout/footer.jsp" />
 	</div>
 	<!-- End container -->
 	<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=places"></script>
 	<script src="/Podobri/resources/js/gmaps.js"></script>
+	<script src="/Podobri/resources/js/eventsAddElement.js"></script>
 	<script>
-		$('.addElement').on('click', function() {
-			$divNewElement = $(this).parent('div').first();
-			$new = $divNewElement.toHtmlString();
-			$(this).parent('div').before($new);
-		});
-
-		jQuery.fn.toHtmlString = function() {
-			return $('<div></div>').html($(this).clone()).html();
-		};
-
+		$(document).ready($(function() {
+			addElement(0, 0, 0);
+		}));
 		$('#activities').chosen();
 	</script>
 </body>

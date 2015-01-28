@@ -4,15 +4,15 @@
 <%@ taglib uri="http://java.sun.com/jstl/core_rt" prefix="c"%>
 <c:url var="imgURL" value="resources/images/" />
 <html>
-<jsp:include page="head.jsp" />
+<jsp:include page="../layout/head.jsp" />
 <body>
 	<div class="container">
-		<jsp:include page="menu.jsp" />
+		<jsp:include page="../layout/menu.jsp" />
 		<div id="content">
 			<div id="createEvent" class="col-md-10">
 				<div class="row">
 					<div id="createEventTitle">
-						<h2>Create initiative</h2>
+						<h3><strong>Create initiative</strong></h3>
 					</div>
 				</div>
 
@@ -228,25 +228,15 @@
 				</div>
 			</div>
 			<!-- End createEvent -->
-			<jsp:include page="reklams.jsp" />
+			<jsp:include page="../reklams.jsp" />
 		</div>
 		<!-- End main content -->
-		<jsp:include page="footer.jsp" />
+		<jsp:include page="../layout/footer.jsp" />
 	</div>
 	<!-- End container -->
 	<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=places"></script>
 	<script src="/Podobri/resources/js/gmaps.js"></script>
 	<script>
-		$('.addElement').on('click', function() {
-			$divNewElement = $(this).parent('div').first();
-			$new = $divNewElement.toHtmlString();
-			$(this).parent('div').before($new);
-		});
-
-		jQuery.fn.toHtmlString = function() {
-			return $('<div></div>').html($(this).clone()).html();
-		};
-
 		$('#activities').chosen();
 	</script>
 </body>

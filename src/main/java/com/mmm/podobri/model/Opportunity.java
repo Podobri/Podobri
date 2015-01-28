@@ -16,6 +16,8 @@ import javax.persistence.NamedQueries;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 
 /**
  * The persistent class for the opportunities database table.
@@ -45,11 +47,13 @@ public class Opportunity
 
     // bi-directional many-to-one association to Event
     @OneToMany(mappedBy = "opportunity")
+    @JsonIgnore
     private List<Event> events;
 
     // bi-directional many-to-one association to OpportunityCategory
     @ManyToOne
     @JoinColumn(name = "opportunity_categories_id", nullable = false)
+    @JsonIgnore
     private OpportunityCategory opportunityCategory;
 
 

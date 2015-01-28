@@ -28,8 +28,12 @@
 				<h4>НОВИНИ И АБОНАМЕНТ</h4>
 				<p>Абонирайте се за новини и нови събития</p>
 				<form name="SubscibeEmail" action="Subscribe">
-					<input id="emailForSubscribe" type="text" placeholder="Email" /> <input id="subscibe" type="submit"
-						value="Subscibe" />
+					<div class="input-group">
+						<input id="emailForSubscribe" type="text" class="form-control" placeholder="email address"> <span
+							class="input-group-btn">
+							<button class="btn btn-warning" type="button"><span class="glyphicon glyphicon-ok"></span>Subscribe</button>
+						</span>
+					</div>
 				</form>
 			</div>
 			<div class="col-md-3 col-md-offset-1">
@@ -63,7 +67,6 @@
 <script src="${resURL}/js/jquery.isotope.min.js"></script>
 <script src="${resURL}/js/jquery.prettyPhoto.js"></script>
 <script src="${resURL}/js/jquery.flexisel.js"></script>
-<script src="${resURL}/js/jquery-ui.js"></script>
 <script src="${resURL}/js/jquery.datetimepicker.js"></script>
 <script src="${resURL}/js/main.js"></script>
 <script src="${resURL}/js/chosen.jquery.min.js"></script>

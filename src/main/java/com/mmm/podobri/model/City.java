@@ -2,7 +2,14 @@ package com.mmm.podobri.model;
 
 
 import java.io.Serializable;
+
 import javax.persistence.*;
+
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import java.util.List;
 
 
@@ -30,15 +37,19 @@ public class City
 
     // bi-directional many-to-one association to Country
     @ManyToOne
+    @LazyCollection(LazyCollectionOption.FALSE)
     @JoinColumn(name = "country_id", nullable = false)
+    @JsonIgnore
     private Country country;
 
     // bi-directional many-to-one association to Event
     @OneToMany(mappedBy = "city")
+    @JsonIgnore
     private List<Event> events;
 
     // bi-directional many-to-one association to UserInfo
     @OneToMany(mappedBy = "city")
+    @JsonIgnore
     private List<UserInfo> userInfos;
 
 

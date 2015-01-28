@@ -9,12 +9,12 @@
     http://www.springframework.org/schema/tx 
     http://www.springframework.org/schema/tx/spring-tx-4.0.xsd">
 
-	<bean id="propertyPlaceholderConfigurer"
-		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
-		<property name="location">
-			<value>/resources/application.properties</value>
-		</property>
-	</bean>
+<!-- 	<bean id="propertyPlaceholderConfigurer" -->
+<!-- 		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer"> -->
+<!-- 		<property name="location"> -->
+<!-- 			<value>/resources/application.properties</value> -->
+<!-- 		</property> -->
+<!-- 	</bean> -->
 
 	<bean id="dataSource"
 		class="org.springframework.jdbc.datasource.DriverManagerDataSource"> <!-- org.apache.tomcat.dbcp.dbcp.BasicDataSource -->
@@ -34,12 +34,6 @@
 				<prop key="hibernate.dialect">${hibernate.dialect}</prop>
 				<prop key="hibernate.show_sql">${hibernate.show_sql}</prop>
 				<prop key="hibernate.hbm2ddl.import_files">${hibernate.hbm2ddl.import_files}</prop>
-<!-- 				<prop key="hibernate.transaction.jta.platform">org.hibernate.service.jta.platform.internal.JBossAppServerJtaPlatform -->
-<!-- 				</prop> -->
-<!-- 				<prop key="hibernate.transaction.factory_class">org.hibernate.transaction.JTATransactionFactory -->
-<!-- 				</prop> -->
-<!-- 				<prop key="hibernate.transaction.manager_lookup_class">org.hibernate.transaction.JBossTransactionManagerLookup -->
-<!-- 				</prop> -->
 			</props>
 		</property>
 	</bean>
@@ -48,7 +42,4 @@
 	<bean id="transactionManager" class="org.springframework.orm.hibernate4.HibernateTransactionManager">
 		<property name="sessionFactory" ref="sessionFactory" />
 	</bean>
-	
-<!-- 	<bean id="persistenceExceptionTranslationPostProcessor" -->
-<!--         class="org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor"/> -->
 </beans>

@@ -25,7 +25,7 @@ public class EventsActivity
 
     @Id
     @Column(name = "event_id", insertable = false, updatable = false, unique = false, nullable = false)
-    private String eventId;
+    private int eventId;
 
     @Id
     @Column(name = "activity_id", insertable = false, updatable = false, unique = false, nullable = false)
@@ -41,13 +41,13 @@ public class EventsActivity
     {}
 
 
-    public String getEventId()
+    public int getEventId()
     {
         return this.eventId;
     }
 
 
-    public void setEventId(String eventId)
+    public void setEventId(int eventId)
     {
         this.eventId = eventId;
     }
@@ -88,7 +88,7 @@ public class EventsActivity
             return false;
         }
         EventsActivity castOther = (EventsActivity)other;
-        return this.eventId.equals(castOther.eventId) && (this.activityId == castOther.activityId);
+        return (this.eventId == castOther.eventId) && (this.activityId == castOther.activityId);
     }
 
 
@@ -96,7 +96,7 @@ public class EventsActivity
     {
         final int prime = 31;
         int hash = 17;
-        hash = hash * prime + this.eventId.hashCode();
+        hash = hash * prime + this.eventId;
         hash = hash * prime + ((int)this.activityId);
 
         return hash;

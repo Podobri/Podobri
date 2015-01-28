@@ -12,12 +12,14 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.TransactionStatus;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.transaction.support.TransactionCallback;
 import org.springframework.transaction.support.TransactionTemplate;
 
@@ -34,6 +36,7 @@ import com.mmm.podobri.model.Role;
 
 
 @Repository
+@Transactional
 public class DaoUtils
 {
     @Autowired
@@ -150,10 +153,20 @@ public class DaoUtils
     @SuppressWarnings("unchecked")
     public List<Opportunity> findAllOpportunities()
     {
-//        Criteria criteria = getCurrentSession().createCriteria(Opportunity.class);
-//        criteria.setProjection(Projections.distinct(Projections.property("opportunity")));
-//        return criteria.list();
+        // Criteria criteria = getCurrentSession().createCriteria(Opportunity.class);
+        // criteria.setProjection(Projections.distinct(Projections.property("opportunity")));
+        // return criteria.list();
         return getCurrentSession().createQuery("from " + Opportunity.class.getName()).list();
+    }
+
+
+    @SuppressWarnings("unchecked")
+    public List<Opportunity> findAllOpportunitiesByCategoryId(byte id)
+    {
+        Query query = getCurrentSession().createQuery("from " + Opportunity.class.getName() + " where opportunityCategory.id=?");
+        query.setParameter(0, id);
+        return query.list();
+
     }
 
 
@@ -431,7 +444,7 @@ public class DaoUtils
                 opportunityCategoriesByName.put(o.getCategory(), o);
             }
         }
-        
+
         if (opportunitiesById.isEmpty() || opportunitiesByName.isEmpty())
         {
             for (Opportunity o : findAllOpportunities())
