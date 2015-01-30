@@ -42,7 +42,7 @@ public class UserServiceImpl
     public UserDao userDao;
 
     @Autowired
-    public EventDao eventDao;
+    public EventService eventService;
 
 
     @Override
@@ -183,7 +183,7 @@ public class UserServiceImpl
         // String username = auth.getName(); //get logged in username
         String username = "test";
         User user = findByUserName(username);
-        List<Event> events = eventDao.findEventsByParticipant(user);
+        List<Event> events = eventService.findEventsByParticipant(user);
         return events;
     }
 }

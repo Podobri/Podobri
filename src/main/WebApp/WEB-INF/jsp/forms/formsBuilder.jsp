@@ -4,10 +4,10 @@
 <c:url var="imgURL" value="resources/images/" />
 <c:url var="resURL" value="/resources" />
 <html>
-<jsp:include page="layout/head.jsp" />
+<jsp:include page="../layout/head.jsp" />
 <body>
 	<div class="container">
-		<jsp:include page="layout/menu.jsp" />
+		<jsp:include page="../layout/menu.jsp" />
 		<div id="content">
 			<div id="formsBuilder" class="col-md-10">
 				<form action="${pageContext.request.contextPath}/forms/add" method="POST">
@@ -18,20 +18,20 @@
 					<input id="formBuilderSubmit" type='submit' value="zapazi">
 				</form>
 			</div>
-			<jsp:include page="reklams.jsp" />
+			<jsp:include page="../reklams.jsp" />
 		</div>
 		<!-- End main content -->
-		<jsp:include page="layout/footer.jsp" />
+		<jsp:include page="../layout/footer.jsp" />
 	</div>
 	<!-- End container -->
 	<script>
 		$('#formBuilderSubmit').click(
 				function(e) {
 					e.preventDefault();
-					var content = $('#formBuilderFrame').contents().find('.fb-response-fields').html();
+					var content = $('#formBuilderFrame').contents().find('.fb-response-fields').find('.actions-wrapper').html();
 					var address = $('#postAddress').val();
 					var formName = $('#formName').val();
-					$.ajax({
+					$.ajax({ 
 						type: "POST",
 						url : address,
 						data : {

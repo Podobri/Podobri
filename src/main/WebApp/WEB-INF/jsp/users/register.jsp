@@ -187,7 +187,7 @@
 
 								<div class="row">
 									<div class="form-group col-md-12">
-										<form:select id="organizationType" path="organization.organizationsType" cssClass="form-control">
+										<form:select id="organizationType" path="organization.organizationsType.id" cssClass="form-control">
 											<form:option id="organizationType" value="-1">---Тип на организацията---</form:option>
 											<form:options items="${organizationTypes}" itemValue="id" itemLabel="type" />
 										</form:select>

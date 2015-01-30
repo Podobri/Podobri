@@ -21,7 +21,7 @@ import com.mmm.podobri.model.Opportunity;
 
 
 @Controller
-@RequestMapping("*/ajax")
+@RequestMapping("**/ajax")
 public class AjaxController
 {
     @Autowired

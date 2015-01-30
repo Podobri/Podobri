@@ -10,6 +10,7 @@ import org.hibernate.annotations.Parameter;
 import org.hibernate.annotations.Type;
 
 import java.util.Date;
+import java.util.List;
 
 
 /**
@@ -26,12 +27,16 @@ public class OrganizationsForm
     @GenericGenerator(name = "generator", strategy = "foreign", parameters = @Parameter(name = "property", value = "organization"))
     @GeneratedValue(generator = "generator")
     @Id
-    @Column(name = "organization_id", insertable = false, updatable = false, unique = false, nullable = false)
-    private int organizationId;
+    @Column(name = "user_id", insertable = false, updatable = false, unique = false, nullable = false)
+    private int userId;
 
     @Id
     @Column(unique = false, nullable = false, length = 45)
     private String name;
+
+    @Column(name = "form")
+    @Lob
+    private String form;
 
     @Temporal(TemporalType.TIMESTAMP)
     @Column(nullable = false)
@@ -46,23 +51,27 @@ public class OrganizationsForm
 
     // bi-directional many-to-one association to Organization
     @ManyToOne
-    @JoinColumn(name = "organization_id", nullable = false, insertable = false, updatable = false)
+    @JoinColumn(name = "user_id", nullable = false, insertable = false, updatable = false)
     private Organization organization;
+
+    // bi-directional many-to-one association to OrganizationsForm
+    @OneToMany(mappedBy = "form")
+    private List<Event> events;
 
 
     public OrganizationsForm()
     {}
 
 
-    public int getOrganizationId()
+    public int getUserId()
     {
-        return this.organizationId;
+        return this.userId;
     }
 
 
-    public void setOrganizationId(int organizationId)
+    public void setUserId(int userId)
     {
-        this.organizationId = organizationId;
+        this.userId = userId;
     }
 
 
@@ -126,6 +135,30 @@ public class OrganizationsForm
     }
 
 
+    public String getForm()
+    {
+        return form;
+    }
+
+
+    public void setForm(String form)
+    {
+        this.form = form;
+    }
+
+
+    public List<Event> getEvents()
+    {
+        return events;
+    }
+
+
+    public void setEvents(List<Event> events)
+    {
+        this.events = events;
+    }
+
+
     public boolean equals(Object other)
     {
         if (this == other)
@@ -137,7 +170,7 @@ public class OrganizationsForm
             return false;
         }
         OrganizationsForm castOther = (OrganizationsForm)other;
-        return (this.organizationId == castOther.organizationId) && this.name.equals(castOther.name);
+        return (this.userId == castOther.userId) && this.name.equals(castOther.name);
     }
 
 
@@ -145,7 +178,7 @@ public class OrganizationsForm
     {
         final int prime = 31;
         int hash = 17;
-        hash = hash * prime + this.organizationId;
+        hash = hash * prime + this.userId;
         hash = hash * prime + this.name.hashCode();
 
         return hash;

@@ -32,6 +32,9 @@
 							<li><a href="${pageContext.request.contextPath}/events/myEvents">Моите събития<span
 									class="glyphicon glyphicon-list-alt pull-right"></span></a></li>
 							<li class="divider"></li>
+							<li><a href="${pageContext.request.contextPath}/forms/create">Създай форма<span
+									class="glyphicon glyphicon-plus pull-right"></span></a></li>
+							<li class="divider"></li>
 							<li><a href="#">Messages <span class="badge pull-right"> 42 </span></a></li>
 							<li class="divider"></li>
 							<li><a href="#">Sign Out <span class="glyphicon glyphicon-log-out pull-right"></span></a></li>

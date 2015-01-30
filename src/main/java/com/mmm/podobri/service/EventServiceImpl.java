@@ -12,21 +12,27 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
 import com.mmm.podobri.dao.DaoUtils;
 import com.mmm.podobri.dao.EventDao;
-import com.mmm.podobri.dao.UserDao;
 import com.mmm.podobri.model.City;
 import com.mmm.podobri.model.Country;
 import com.mmm.podobri.model.Event;
 import com.mmm.podobri.model.EventCostType;
 import com.mmm.podobri.model.EventsParticipant;
 import com.mmm.podobri.model.EventsProgram;
+import com.mmm.podobri.model.Lector;
 import com.mmm.podobri.model.Opportunity;
 import com.mmm.podobri.model.OpportunityCategory;
+import com.mmm.podobri.model.OrganizationsForm;
+import com.mmm.podobri.model.Sponsor;
 import com.mmm.podobri.model.User;
+import com.mmm.podobri.util.EditParticipants;
 import com.mmm.podobri.util.EventsFilter;
+import com.mmm.podobri.util.FileUploadUtil;
 import com.mmm.podobri.util.MailTemplate;
 
 
@@ -39,10 +45,13 @@ public class EventServiceImpl
     private EventDao eventDao;
 
     @Autowired
-    private UserDao userDao;
-    
+    private UserService userService;
+
     @Autowired
     private MailService mailService;
+
+    @Autowired
+    private FormService formService;
 
 
     @Override
@@ -120,35 +129,77 @@ public class EventServiceImpl
         {
 
         }
+        
 
         for (EventsProgram ep : event.getEventsPrograms())
         {
             ep.setEvent(event);
         }
 
+        for (Lector l : event.getLectors())
+        {
+            if (l != null)
+            {
+                CommonsMultipartFile pictureFile = l.getPictureFile();
+                if (pictureFile != null)
+                {
+                    String imageName = FileUploadUtil.processImages(pictureFile, true, true);
+                    l.setPicture(imageName);
+                }
+            }
+        }
+
+        for (Sponsor s : event.getSponsors())
+        {
+            if (s != null)
+            {
+                CommonsMultipartFile pictureFile = s.getPictureFile();
+                if (pictureFile != null)
+                {
+                    String imageName = FileUploadUtil.processImages(pictureFile, true, false);
+                    s.setPicture(imageName);
+                }
+            }
+        }
+        
+        CommonsMultipartFile pictureFile = event.getPictureFile();
+        String imageName = FileUploadUtil.processImages(pictureFile, false, true);
+        event.setPicture(imageName);
+        
         DaoUtils daoUtils = getDaoUtils();
+        
         byte opportunityCaregoryId = event.getOpportunityCategory().getId();
         OpportunityCategory opportunityCategory = daoUtils.getOpportunityCategoryById(opportunityCaregoryId);
+        event.setOpportunityCategory(opportunityCategory);
+        
         byte opportunityId = event.getOpportunity().getId();
         Opportunity opportunity = daoUtils.getOpportunityById(opportunityId);
+        event.setOpportunity(opportunity);
+        
         byte costTypeId = event.getEventCostType().getId();
         EventCostType eventCostType = daoUtils.getEventCostTypeById(costTypeId);
+        event.setEventCostType(eventCostType);
+        
         byte countryId = event.getCountry().getId();
         Country country = daoUtils.getCountryById(countryId);
+        event.setCountry(country);
+        
         int cityId = event.getCity().getId();
         City city = daoUtils.getCityById(cityId);
-
-        event.setOpportunityCategory(opportunityCategory);
-        event.setOpportunity(opportunity);
-        event.setEventCostType(eventCostType);
-        event.setCountry(country);
         event.setCity(city);
-
+        
+        String formName = event.getForm().getName();
+        if (formName != null && !formName.isEmpty())
+        {
+            OrganizationsForm form = formService.getForm(formName);
+            event.setForm(form);
+        }
+        
         event.setStatus(EventStatus.INCOMING.getStatus());
         Date currentDate = new Date();
         event.setCreated(currentDate);
         event.setModified(currentDate);
-        User user = userDao.findOne(1);
+        User user = userService.findOne(1);
         event.setUser(user);
         save(event);
         return event;
@@ -157,11 +208,7 @@ public class EventServiceImpl
 
     public boolean apply(Event event)
     {
-        // TODO
-        // Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        // String username = auth.getName(); //get logged in username
-        String username = "test";
-        User currentUser = userDao.findByUserName(username);
+        User currentUser = getCurrentUser();
         EventsParticipant participant = new EventsParticipant();
         event.addEventsParticipant(participant);
         currentUser.getIndividual().addEventsParticipant(participant);
@@ -204,10 +251,7 @@ public class EventServiceImpl
 
     public List<Event> getMyEvents()
     {
-        // Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        // String username = auth.getName(); //get logged in username
-        String username = "test";
-        User currentUser = userDao.findByUserName(username);
+        User currentUser = getCurrentUser();
         int currentUserId = currentUser.getId();
         List<Event> myEvents = eventDao.findEventsByOrganizator(currentUserId);
         return myEvents;
@@ -215,6 +259,7 @@ public class EventServiceImpl
 
 
     @Override
+    @Transactional(propagation = Propagation.REQUIRES_NEW)
     public void sendMailToAllParticipants(int eventId, MailTemplate template)
     {
         Event event = findOne(eventId);
@@ -230,13 +275,53 @@ public class EventServiceImpl
     @Override
     public void sendMailToParticipant(int eventId, int userId, MailTemplate template)
     {
-     // Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        User currentUser = getCurrentUser();
+        template.setFrom(currentUser.getEmail());
+        User toUser = userService.findOne(userId);
+        template.setTo(toUser.getEmail());
+        mailService.sendMail(template.toMailMessage());
+    }
+
+
+    public void updateParticipants(EditParticipants participants)
+    {
+        Event event = null;
+        List<EventsParticipant> participantsList = participants.getParticipantsList();
+        for (EventsParticipant edited : participantsList)
+        {
+            event = findOne(edited.getEventId());
+            break;
+        }
+
+        if (event != null)
+        {
+            event.setEventsParticipants(participantsList);
+            update(event);
+        }
+    }
+
+
+    @Override
+    public List<Event> findEventsByParticipant(User user)
+    {
+        return eventDao.findEventsByParticipant(user);
+    }
+
+
+    @Override
+    public List<OrganizationsForm> getAvailableForms()
+    {
+        List<OrganizationsForm> organizationForms = formService.getOrganizationForms();
+        return organizationForms;
+    }
+    
+
+    private User getCurrentUser()
+    {
+        // Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         // String username = auth.getName(); //get logged in username
         String username = "test";
-        User currentUser = userDao.findByUserName(username);
-        template.setFrom(currentUser.getUsername());
-        User toUser = userDao.findOne(userId);
-        template.setTo(toUser.getUsername());
-        mailService.sendMail(template.toMailMessage());
+        User currentUser = userService.findByUserName(username);
+        return currentUser;
     }
 }

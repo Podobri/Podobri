@@ -21,6 +21,7 @@
 
 				<div class="row">
 					<div id="uploadEventPicture" class="uploadEventPictureSection">
+						<input type="file" name="eventPicture" class="notVisible" />
 						<div id="uploadEventPicturePhoto"></div>
 						<div id="uploadEventPictureLabel">Качете снимка</div>
 					</div>
@@ -29,7 +30,7 @@
 				<div class="row">
 					<div id="createNewEvent">
 						<form:errors path="event.*" />
-						<form:form id="createEventForm" modelAttribute="event" method="post"
+						<form:form id="createEventForm" modelAttribute="event" method="post" enctype="multipart/form-data"
 							action="${pageContext.request.contextPath}/events/createEventSubmit">
 							<fieldset>
 								<div class="row">
@@ -59,15 +60,17 @@
 										<div class="col-md-6">
 											<div class="form-group">
 												<form:label path="opportunityCategory.id" cssClass="control-label">Category</form:label>
-												<form:select id="opportunityCategory" path="opportunityCategory.id" required="required"
+												<form:select id="opportunityCategoryId" path="opportunityCategory.id" required="required"
 													cssClass="form-control">
+													<form:option id="opportunityCategoryNone" value="-1">---Категория---</form:option>
 													<form:options items="${categoriesList}" itemValue="id" itemLabel="category" />
 												</form:select>
 											</div>
 											<div class="form-group">
 												<form:label path="opportunity.id" cssClass="control-label">Opportunity</form:label>
-												<form:select id="opportunity" path="opportunity.id" required="required" cssClass="form-control">
-													<form:options items="${opportunitiesList}" itemValue="id" itemLabel="opportunity" />
+												<form:select id="opportunityId" path="opportunity.id" required="required" cssClass="form-control">
+													<form:option id="opportunityNone" value="-1">---изберете категория---</form:option>
+													<%-- 													<form:options items="${opportunitiesList}" itemValue="id" itemLabel="opportunity" /> --%>
 												</form:select>
 											</div>
 											<div class="form-group">
@@ -88,15 +91,17 @@
 										<div class="col-md-6">
 											<div class="form-group">
 												<form:label path="country.id" cssClass="control-label">Country</form:label>
-												<form:select id="country" path="country.id" required="required" cssClass="form-control">
+												<form:select id="countryId" path="country.id" required="required" cssClass="form-control">
+													<form:option id="countryNone" value="-1">---Държава---</form:option>
 													<form:options items="${countriesList}" itemValue="id" itemLabel="country" />
 												</form:select>
 											</div>
 
 											<div class="form-group">
 												<form:label path="city.id" cssClass="control-label">City</form:label>
-												<form:select id="city" path="city.id" required="required" cssClass="form-control">
-													<form:options items="${citiesList}" itemValue="id" itemLabel="city" />
+												<form:select id="cityId" path="city.id" required="required" cssClass="form-control">
+													<form:option id="cityNone" value="-1">---изберете държава---</form:option>
+													<%-- 													<form:options items="${citiesList}" itemValue="id" itemLabel="city" /> --%>
 												</form:select>
 											</div>
 
@@ -159,13 +164,13 @@
 										</div>
 										<div class="col-md-6">
 											<div class="form-group">
-												<form:label path="recruitCoorganizators" cssClass="control-label">Recruit coorganizators?</form:label>
-												<form:checkbox id="recruitCoorganizators" path="recruitCoorganizators" cssClass="form-control" />
-											</div>
-											<div class="form-group">
 												<form:label path="applicationFormRequire" cssClass="control-label">Require applications?</form:label>
 												<form:checkbox id="applicationFormRequire" path="applicationFormRequire" cssClass="form-control" />
 											</div>
+											<form:select id="formId" path="form.name"  cssClass="form-control">
+												<form:option id="formNone" value="">---Аппликационна форма---</form:option>
+												<form:options items="${forms}" itemValue="name" itemLabel="name" />
+											</form:select>
 										</div>
 										<div class="form-group col-md-12">
 											<form:label path="additionalInfo" cssClass="control-label">Additional information</form:label>
@@ -237,6 +242,10 @@
 	<script src="/Podobri/resources/js/gmaps.js"></script>
 	<script src="/Podobri/resources/js/eventsAddElement.js"></script>
 	<script>
+		makeAjaxCall('countryId', 'getCitiesByCountry', 'change', "cityId",
+				"city");
+		makeAjaxCall('opportunityCategoryId', 'getOpportunitiesByCategory',
+				'change', "opportunityId", "opportunity");
 		$(document).ready($(function() {
 			addElement(0, 0, 0);
 		}));

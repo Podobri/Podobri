@@ -89,6 +89,8 @@ public class MailServiceImpl
     {
         if (msg != null)
         {
+            String from = "from:" + msg.getFrom() + " ";
+            msg.setSubject(from+msg.getSubject());;
             msg.setSentDate(new Date());
             mailSender.send(msg);
         }

@@ -78,6 +78,7 @@ public class MailTemplate
         message.setTo(to);
         message.setSubject(subject);
         message.setText(content);
+        message.setReplyTo(from);
         return message;
     }
 }

@@ -8,6 +8,7 @@ import javax.persistence.*;
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
 import org.hibernate.annotations.Type;
+import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
 import java.util.Date;
 import java.util.List;
@@ -71,7 +72,7 @@ public class Event
     @Column(name = "recruit_coorganizators", columnDefinition = "TINYINT")
     @Type(type = "org.hibernate.type.NumericBooleanType")
     private boolean recruitCoorganizators;
-    
+
     @Column(name = "require_applications")
     private boolean applicationFormRequire;
 
@@ -151,6 +152,15 @@ public class Event
     // bi-directional many-to-many association to User
     @ManyToMany(mappedBy = "events2")
     private List<User> users;
+
+    // // bi-directional many-to-one association to Organization
+    @ManyToOne
+    @JoinColumns(value = {@JoinColumn(name = "organization_id", referencedColumnName = "user_id"),
+                          @JoinColumn(name = "form_name", referencedColumnName = "name")})
+    private OrganizationsForm form;
+
+    @Transient
+    private CommonsMultipartFile pictureFile;
 
 
     public Event()
@@ -323,8 +333,8 @@ public class Event
     {
         this.recruitCoorganizators = recruitCoorganizators;
     }
-    
-    
+
+
     public boolean getApplicationFormRequire()
     {
         return this.applicationFormRequire;
@@ -598,5 +608,29 @@ public class Event
     public void setUsers(List<User> users)
     {
         this.users = users;
+    }
+
+
+    public OrganizationsForm getForm()
+    {
+        return form;
+    }
+
+
+    public void setForm(OrganizationsForm form)
+    {
+        this.form = form;
+    }
+
+
+    public CommonsMultipartFile getPictureFile()
+    {
+        return pictureFile;
+    }
+
+
+    public void setPictureFile(CommonsMultipartFile pictureFile)
+    {
+        this.pictureFile = pictureFile;
     }
 }

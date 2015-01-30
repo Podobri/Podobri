@@ -14,7 +14,6 @@ import java.util.List;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.propertyeditors.CustomCollectionEditor;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.PlatformTransactionManager;
@@ -30,6 +29,8 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.commons.CommonsMultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.mmm.podobri.controller.databinding.ActivityEditor;
@@ -39,14 +40,18 @@ import com.mmm.podobri.model.City;
 import com.mmm.podobri.model.Country;
 import com.mmm.podobri.model.Event;
 import com.mmm.podobri.model.EventCostType;
+import com.mmm.podobri.model.EventsParticipant;
 import com.mmm.podobri.model.EventsProgram;
 import com.mmm.podobri.model.Lector;
 import com.mmm.podobri.model.Opportunity;
 import com.mmm.podobri.model.OpportunityCategory;
+import com.mmm.podobri.model.OrganizationsForm;
 import com.mmm.podobri.model.Sponsor;
 import com.mmm.podobri.service.EventService;
+import com.mmm.podobri.util.EditParticipants;
 import com.mmm.podobri.util.EventViewWrapper;
 import com.mmm.podobri.util.EventsFilter;
+import com.mmm.podobri.util.FileUploadUtil;
 import com.mmm.podobri.util.MailTemplate;
 
 
@@ -96,20 +101,7 @@ public class EventsController
         dateFormat.setLenient(false);
         binder.registerCustomEditor(Date.class, new CustomDateEditor(dateFormat, true));
         binder.registerCustomEditor(List.class, "activities", new ActivityEditor(List.class, eventService.getDaoUtils()));
-        binder.registerCustomEditor(List.class, "editParticipants", new CustomCollectionEditor(List.class)
-        {
-            @Override
-            protected Object convertElement(Object element)
-            {
-                // if (element instanceof String)
-                // {
-                // byte activityId = Byte.parseByte((String)element);
-                // Activity activity = daoUtils.getActivityById(activityId);
-                // return activity;
-                // }
-                return super.convertElement(element);
-            }
-        });
+        // binder.registerCustomEditor(byte[].class, new ByteArrayMultipartFileEditor());
     }
 
 
@@ -193,6 +185,8 @@ public class EventsController
         Event event = new Event();
         initEventAutoPopulation(event);
         model.addObject("event", event);
+        List<OrganizationsForm> forms = eventService.getAvailableForms();
+        model.addObject("forms", forms);
         return loadSelects(model);
     }
 
@@ -206,6 +200,22 @@ public class EventsController
         }
         eventService.createNewEvent(event);
         return new ModelAndView("redirect:/events");
+    }
+
+
+    @RequestMapping(value = "/fileUpload", method = RequestMethod.GET)
+    public String fileUpload()
+    {
+        return "events/fileUpload";
+    }
+
+
+    @RequestMapping(value = "/fileUploadSubmit", method = RequestMethod.POST)
+    public String fileUpload(@RequestParam("file") CommonsMultipartFile file)
+    {
+        String processImages = FileUploadUtil.processImages(file, true, true);
+        System.out.println("Image saved:" + processImages);
+        return "events/fileUpload";
     }
 
 
@@ -235,7 +245,9 @@ public class EventsController
     {
         final ModelAndView model = new ModelAndView("events/myEvents");
         List<Event> myEvents = eventService.getMyEvents();
-        List<EditEventParticipant> editParticipants = new AutoPopulatingList<EditEventParticipant>(EditEventParticipant.class);
+        List<EventsParticipant> editParticipantsList = new AutoPopulatingList<EventsParticipant>(EventsParticipant.class);
+        EditParticipants editParticipants = new EditParticipants();
+        editParticipants.setParticipantsList(editParticipantsList);
         model.addObject("editParticipants", editParticipants);
         MailTemplate mailTemplate = new MailTemplate();
         model.addObject("mailTemplate", mailTemplate);
@@ -245,12 +257,18 @@ public class EventsController
 
 
     @RequestMapping(value = "/updateParticipants", method = RequestMethod.POST)
-    public String updateParticipants(ArrayList<EditEventParticipant> editParticipants, BindingResult result, ModelAndView model)
+    public String updateParticipants(@ModelAttribute("editParticipants") EditParticipants editParticipants,
+                                     BindingResult result,
+                                     ModelAndView model)
     {
         if (result.hasErrors())
-        {}
+        {
+
+        }
+        eventService.updateParticipants(editParticipants);
         return "redirect:/events/myEvents";
     }
+
 
     @RequestMapping(value = "/myEvents/sendMailToParticipants/{id}", method = RequestMethod.POST)
     public String sendMailToParticipants(@PathVariable Integer id, @ModelAttribute("mailTemplate") MailTemplate template)
@@ -292,52 +310,5 @@ public class EventsController
         List<Lector> lectors = new AutoPopulatingList<Lector>(Lector.class);
         event.setLectors(lectors);
         return event;
-    }
-
-    public class EditEventParticipant
-    {
-        int eventId;
-        int userId;
-        int status;
-
-
-        public EditEventParticipant()
-        {}
-
-
-        public int getEventId()
-        {
-            return eventId;
-        }
-
-
-        public void setEventId(int eventId)
-        {
-            this.eventId = eventId;
-        }
-
-
-        public int getUserId()
-        {
-            return userId;
-        }
-
-
-        public void setUserId(int userId)
-        {
-            this.userId = userId;
-        }
-
-
-        public int getStatus()
-        {
-            return status;
-        }
-
-
-        public void setStatus(int status)
-        {
-            this.status = status;
-        }
     }
 }

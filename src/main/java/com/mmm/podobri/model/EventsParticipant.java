@@ -34,6 +34,10 @@ public class EventsParticipant
 
     @Column(nullable = false)
     private byte status;
+    
+    @Column(name = "application_form")
+    @Lob
+    private String appForm;
 
     // bi-directional many-to-one association to Event
     @ManyToOne
@@ -85,6 +89,18 @@ public class EventsParticipant
         this.status = status;
     }
 
+   
+    public String getAppForm()
+    {
+        return appForm;
+    }
+    
+    
+    public void setAppForm(String appForm)
+    {
+        this.appForm = appForm;
+    }
+   
 
     public Event getEvent()
     {

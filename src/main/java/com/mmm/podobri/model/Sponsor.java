@@ -2,7 +2,11 @@ package com.mmm.podobri.model;
 
 
 import java.io.Serializable;
+
 import javax.persistence.*;
+
+import org.springframework.web.multipart.commons.CommonsMultipartFile;
+
 import java.util.List;
 
 
@@ -36,6 +40,9 @@ public class Sponsor
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;
+
+    @Transient
+    private CommonsMultipartFile pictureFile;
 
 
     public Sponsor()
@@ -101,4 +108,15 @@ public class Sponsor
         this.user = user;
     }
 
+
+    public CommonsMultipartFile getPictureFile()
+    {
+        return pictureFile;
+    }
+
+
+    public void setPictureFile(CommonsMultipartFile pictureFile)
+    {
+        this.pictureFile = pictureFile;
+    }
 }

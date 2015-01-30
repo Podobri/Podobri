@@ -90,7 +90,7 @@ function addElement(programsSize, lectorsSize, sponsorsSize) {
 								+ "].picture' class='control-label'>Picture</label>"
 								+ "<input name='lectors["
 								+ lectorIndex
-								+ "].picture' type='file' class='form-control' />"
+								+ "].pictureFile' type='file' class='form-control' />"
 								+ "</div>"
 								+ "<div class='form-group col-md-12'>"
 								+ "<label for='lectors["
@@ -117,7 +117,7 @@ function addElement(programsSize, lectorsSize, sponsorsSize) {
 						+ "<label for='sponsors[" + sponsorIndex
 						+ "].picture' class='control-label'>Picture</label>"
 						+ "<input name='sponsors[" + sponsorIndex
-						+ "].picture' type='file' class='form-control' />"
+						+ "].pictureFile' type='file' class='form-control' />"
 						+ "</div> </div>";
 				$("#addSponsorRow").before(inputSection);
 				sponsorIndex++;

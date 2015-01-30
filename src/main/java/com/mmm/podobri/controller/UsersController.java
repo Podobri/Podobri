@@ -140,17 +140,14 @@ public class UsersController
 
 
     @RequestMapping(value = "/register/organization", method = RequestMethod.POST)
-    public ModelAndView registerOrganization(@Valid @ModelAttribute("user") User user, BindingResult result)
+    public String registerOrganization(@ModelAttribute("user") User user, BindingResult result)
     {
         if (result.hasErrors())
         {
-            final ModelAndView model = new ModelAndView("users/register");
-            return model;
+            return "redirect:/users/register/";
         }
-        final ModelAndView model = new ModelAndView("users/users");
         userService.registerNewUser(user, UsersRoles.ORGANIZATION);
-        model.addObject("users", userService.findAll());
-        return model;
+        return "redirect:/users/";
     }
     
     private ModelAndView loadSelects(ModelAndView model)

@@ -71,8 +71,7 @@
 																	</a></li>
 																	<li><a data-toggle="modal" data-target="#eventParticipantModal${event.event.id}" href=""><i
 																			class="fa fa-home"></i> Участници </a></li>
-																	<li><a
-																		href="${pageContext.request.contextPath}/events/myEvents/sendMailToParticipants/${event.event.id}"><i
+																	<li><a data-toggle="modal" data-target="#sendMailForm${event.event.id}" href=""><i
 																			class="fa fa-envelope-o"></i> Изпращане на мейл до участниците</a></li>
 																</ul>
 															</div>
@@ -127,8 +126,7 @@
 																	</a></li>
 																	<li><a data-toggle="modal" data-target="#eventParticipantModal${event.event.id}" href=""><i
 																			class="fa fa-home"></i> Участници </a></li>
-																	<li><a
-																		href="${pageContext.request.contextPath}/events/myEvents/sendMailToParticipants/${event.event.id}"><i
+																	<li><a data-toggle="modal" data-target="#sendMailForm${event.event.id}" href=""><i
 																			class="fa fa-envelope-o"></i> Изпращане на мейл до участниците</a></li>
 																</ul>
 															</div>
@@ -181,8 +179,7 @@
 																</a></li>
 																<li><a data-toggle="modal" data-target="#eventParticipantModal${event.event.id}" href=""><i
 																		class="fa fa-home"></i> Участници </a></li>
-																<li><a
-																	href="${pageContext.request.contextPath}/events/myEvents/sendMailToParticipants/${event.event.id}"><i
+																<li><a data-toggle="modal" data-target="#sendMailForm${event.event.id}" href=""><i
 																		class="fa fa-envelope-o"></i> Изпращане на мейл до участниците</a></li>
 															</ul>
 														</div>
@@ -199,14 +196,13 @@
 							<!-- PARTICIPANTS MODAL -->
 							<div class="modal fade col-md-12" id="eventParticipantModal${event.event.id}" tabindex="-1"
 								aria-labelledby="myModalLabel" aria-hidden="true">
-								<div class="modal-dialog modal-wide80">
+								<div class="modal-dialog modal-wide100">
 									<div class="modal-content col-md-10">
 										<div class="modal-header">
 											<button type="button" class="close" data-dismiss="modal" aria-hidden="true">X</button>
 											<h3>${event.event.title}</h3>
 										</div>
-										<form:form commandName="editParticipants"
-											action="${pageContext.request.contextPath}/events/updateParticipants">
+										<form action="${pageContext.request.contextPath}/events/updateParticipants" method="POST">
 											<div class="modal-body col-md-12">
 												<table id="eventParticipantTable${event.event.id}"
 													class="eventParticipantTable table table-striped table-bordered">
@@ -220,19 +216,13 @@
 													</thead>
 													<tbody>
 														<c:forEach var="participant" items="${event.event.eventsParticipants}" varStatus="participantStatus">
-															<input type="text" name="editParticipants[${participantStatus.index}].eventId"
-																value="${participant.eventId}" />
-															<input type="text" name="editParticipants[${participantStatus.index}].userId"
-																value="${participant.userId}" />
-															<input type="text" name="editParticipants[${participantStatus.index}].status"
-																value="${participant.status}" />
 															<tr>
 																<td>${participant.individual.firstName }</td>
 																<td>${participant.individual.lastName }</td>
 																<td>${participant.individual.isMale ? 'Мъж' : 'Жена' }</td>
 																<td>
 																	<div class="col-md-12">
-																		<div class="col-md-3">
+																		<div class="col-md-2">
 																			<a target="_blank"
 																				href="${pageContext.request.contextPath}/users/viewUser/${participant.individual.userId}">
 																				<button type="button" class="btn btn-info">
@@ -240,23 +230,34 @@
 																				</button>
 																			</a>
 																		</div>
-																		<div class="col-md-3">
+																		<div class="col-md-2">
 																			<a data-toggle="modal" data-target="#applicationFrom${participantStatus.index}" href="">
 																				<button type="button" class="btn btn-info">
 																					<span class="fa fa-eye">Форма</span>
 																				</button>
 																			</a>
 																		</div>
-																		<!--  vkarai po 1 input hidden s id-to za vsichki -->
-																		<div class="btn-group" data-toggle="buttons">
-																			<input type="hidden" name='eventId' value="${participant.eventId}" /> <input type="hidden"
-																				name='userId' value="${participant.userId}" /> <label
+																		<div class="col-md-3">
+																			<a data-toggle="modal" data-target="#sendMailFormTo${participant.userId}" href="">
+																				<button type="button" class="btn btn-info">
+																					<span class="fa fa-envelope-o">Изпрати мейл</span>
+																				</button>
+																			</a>
+																		</div>
+																		<div class="btn-group col-md-5" data-toggle="buttons">
+																			<input type="hidden" name="participantsList[${participantStatus.index}].eventId"
+																				value="${participant.eventId}" /> <input type="hidden"
+																				name="participantsList[${participantStatus.index}].userId" value="${participant.userId}" /> <input
+																				type="hidden" name="participantsList[${participantStatus.index}].status"
+																				value="${participant.status}" class="status" /> <label
 																				class="btn btn-success ${participant.status == 1 ? 'active' : ''}"> <input type="radio"
 																				name="event.event.eventsParticipants[${participantStatus.index}].status"
-																				value="${participant.status}"> Одобри <span class="glyphicon glyphicon-ok"></span>
+																				value="${participant.status}" onchange="switchStatus(this,1)"> Одобри <span
+																				class="glyphicon glyphicon-ok"></span>
 																			</label> <label class="btn btn-danger ${participant.status == 2 ? 'active' : ''}"> <input
 																				type="radio" name="event.event.eventsParticipants[${participantStatus.index}].status"
-																				value="${participant.status}"> Откажи <span class="glyphicon glyphicon-ok"></span>
+																				value="${participant.status}" onchange="switchStatus(this,2)"> Откажи <span
+																				class="glyphicon glyphicon-ok"></span>
 																			</label>
 																		</div>
 																	</div>
@@ -270,7 +271,7 @@
 												<button type="submit" class="btn btn-primary save">Save</button>
 												<button type="button" data-dismiss="modal" class="btn btn-default">Close</button>
 											</div>
-										</form:form>
+										</form>
 									</div>
 								</div>
 							</div>
@@ -300,6 +301,42 @@
 									</div>
 								</div>
 							</div>
+
+							<!-- Email FORM -->
+							<div class="modal fade col-md-12" id="sendMailForm${event.event.id}" tabindex="-1" aria-labelledby="myModalLabel"
+								aria-hidden="true">
+								<div class="modal-dialog modal-wide60">
+									<form:form modelAttribute="mailTemplate"
+										action="${pageContext.request.contextPath}/events/myEvents/sendMailToParticipants/${event.event.id}"
+										method="POST">
+										<div class="modal-content col-md-10">
+											<div class="modal-header">
+												<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+												<h3>Изпращане на имейл до участниците в ${event.event.title}</h3>
+											</div>
+											<div class="modal-body col-md-12">
+												<input type="hidden" name="eventId" value="${event.event.id}" />
+												<div class="col-md-12">
+													<form:label path="subject">Тема:</form:label>
+												</div>
+												<div class="col-md-12">
+													<form:input path="subject" required="required" />
+												</div>
+												<div class="col-md-12">
+													<form:label path="content">Съобщение:</form:label>
+													<form:textarea path="content" rows="5" required="required" />
+												</div>
+											</div>
+											<div class="modal-footer">
+												<button type="submit" class="btn btn-default">
+													<i class="fa fa-envelope-o"></i>Изпрати
+												</button>
+												<button type="button" data-dismiss="modal" class="btn btn-default">Close</button>
+											</div>
+										</div>
+									</form:form>
+								</div>
+							</div>
 						</c:forEach>
 
 						<c:forEach var="event" items="${events}">
@@ -314,8 +351,7 @@
 												<h3>Аппликационна форма на ${participant.individual.firstName } ${participant.individual.lastName }</h3>
 											</div>
 											<div class="modal-body col-md-12">
-												<p>One fine body…</p>
-												<p>One fine body…</p>
+												${participant.appForm}
 											</div>
 											<div class="modal-footer">
 												<button type="button" data-dismiss="modal" class="btn btn-default">Close</button>
@@ -323,8 +359,44 @@
 										</div>
 									</div>
 								</div>
+
+								<!-- Email FORM -->
+								<div class="modal fade col-md-12" id="sendMailFormTo${participant.userId}" tabindex="-1"
+									aria-labelledby="myModalLabel" aria-hidden="true">
+									<div class="modal-dialog modal-wide60">
+										<form:form modelAttribute="mailTemplate"
+											action="${pageContext.request.contextPath}/events/myEvents/sendMailToParticipants/${event.event.id}/${participant.userId}"
+											method="POST">
+											<div class="modal-content col-md-10">
+												<div class="modal-header">
+													<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+													<h3>Изпращане на имейл до ${participant.individual.firstName } ${participant.individual.lastName }</h3>
+												</div>
+												<div class="modal-body col-md-12">
+													<div class="col-md-12">
+														<form:label path="subject">Тема:</form:label>
+													</div>
+													<div class="col-md-12">
+														<form:input path="subject" required="required" />
+													</div>
+													<div class="col-md-12">
+														<form:label path="content">Съобщение:</form:label>
+														<form:textarea path="content" rows="5" required="required" />
+													</div>
+												</div>
+												<div class="modal-footer">
+													<button type="submit" class="btn btn-default">
+														<i class="fa fa-envelope-o"></i>Изпрати
+													</button>
+													<button type="button" data-dismiss="modal" class="btn btn-default">Close</button>
+												</div>
+											</div>
+										</form:form>
+									</div>
+								</div>
 							</c:forEach>
 						</c:forEach>
+
 					</div>
 					<jsp:include page="../reklams.jsp" />
 				</div>
@@ -335,11 +407,18 @@
 	</div>
 	<!-- End container -->
 	<script>
-		function save() {
-			console.log("success");
-			e.preventDefault();
+		function switchStatus(e, status) {
+			console.log("status:" + status);
+			console.log(e);
+			$(e).parents('td').find('.status').val(status);
 		}
 		$(document).ready(
+
+				$('input[type=radio]').on('change', function() {
+					var optionId = $(this).val();
+					console.log(optionId);
+				}),
+
 				function() {
 					$('.myEventsTable').DataTable(
 							{
