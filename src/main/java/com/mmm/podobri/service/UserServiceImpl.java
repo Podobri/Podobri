@@ -18,7 +18,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.mmm.podobri.dao.DaoUtils;
-import com.mmm.podobri.dao.EventDao;
 import com.mmm.podobri.dao.UserDao;
 import com.mmm.podobri.model.City;
 import com.mmm.podobri.model.Country;
@@ -50,6 +49,16 @@ public class UserServiceImpl
         throws UsernameNotFoundException
     {
         User user = userDao.findByUserName(username);
+        if (user == null)
+        {
+            user = userDao.findByEmail(username);
+        }
+        
+        if (user == null)
+        {
+            throw new UsernameNotFoundException("Cannot find user with given credentials");
+        }
+        
         List<GrantedAuthority> authorities = buildUserAuthority(user.getRoles());
         return new org.springframework.security.core.userdetails.User(user.getUsername(),
                                                                       user.getPassword(),
@@ -154,7 +163,7 @@ public class UserServiceImpl
         userInfo.setCity(city);
         userInfo.setUser(user);
 
-        if (userRole.equals(UsersRoles.INDIVIDUAL))
+        if (userRole.equals(UsersRoles.ROLE_INDIVIDUAL))
         {
             final Individual individual = user.getIndividual();
             Education education = getDaoUtils().getEducationById(individual.getEducation().getId());
@@ -162,7 +171,7 @@ public class UserServiceImpl
             individual.setUser(user);
             ;
         }
-        else if (userRole.equals(UsersRoles.ORGANIZATION))
+        else if (userRole.equals(UsersRoles.ROLE_ORGANIZATION))
         {
             final Organization organization = user.getOrganization();
             byte organizationTypeId = organization.getOrganizationsType().getId();

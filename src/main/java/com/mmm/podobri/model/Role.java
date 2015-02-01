@@ -29,7 +29,7 @@ public class Role
 
     public enum UsersRoles
     {
-        ADMINISTRATOR, ORGANIZATION, INDIVIDUAL
+        ROLE_ADMINISTRATOR, ROLE_ORGANIZATION, ROLE_INDIVIDUAL
     }
 
     @Id

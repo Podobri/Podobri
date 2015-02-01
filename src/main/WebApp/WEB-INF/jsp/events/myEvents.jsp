@@ -73,6 +73,10 @@
 																			class="fa fa-home"></i> Участници </a></li>
 																	<li><a data-toggle="modal" data-target="#sendMailForm${event.event.id}" href=""><i
 																			class="fa fa-envelope-o"></i> Изпращане на мейл до участниците</a></li>
+																	<li><a target="_blank" href="${pageContext.request.contextPath}/events/generatePDF/${event.event.id}"><i
+																			class="fa fa-file-pdf-o"></i> Генерирай списък с участниците(PDF)</a></li>
+																	<li><a href="${pageContext.request.contextPath}/events/generateExcel/${event.event.id}"><i
+																			class="fa fa-file-excel-o"></i> Генерирай списък с участниците(Excel)</a></li>
 																</ul>
 															</div>
 														</td>
@@ -350,9 +354,7 @@
 												<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
 												<h3>Аппликационна форма на ${participant.individual.firstName } ${participant.individual.lastName }</h3>
 											</div>
-											<div class="modal-body col-md-12">
-												${participant.appForm}
-											</div>
+											<div class="modal-body col-md-12">${participant.appForm}</div>
 											<div class="modal-footer">
 												<button type="button" data-dismiss="modal" class="btn btn-default">Close</button>
 											</div>

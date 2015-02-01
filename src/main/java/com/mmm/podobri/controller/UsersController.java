@@ -133,7 +133,7 @@ public class UsersController
             return model;
         }
         final ModelAndView model = new ModelAndView("users/users");
-        userService.registerNewUser(user, UsersRoles.INDIVIDUAL);
+        userService.registerNewUser(user, UsersRoles.ROLE_INDIVIDUAL);
         model.addObject("users", userService.findAll());
         return model;
     }
@@ -146,7 +146,7 @@ public class UsersController
         {
             return "redirect:/users/register/";
         }
-        userService.registerNewUser(user, UsersRoles.ORGANIZATION);
+        userService.registerNewUser(user, UsersRoles.ROLE_ORGANIZATION);
         return "redirect:/users/";
     }
     

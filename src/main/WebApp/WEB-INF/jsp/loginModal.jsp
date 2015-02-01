@@ -14,22 +14,23 @@
 							<p class="text-center text-muted">
 								<span> Нямате профил? </span><a href="${pageContext.request.contextPath}/users/register">Регистрирай се</a>.
 							</p>
-							<c:if test="${not empty var1}">
-								<div class="alert alert-error">${message}</div>
+							
+							<c:if test="${not empty error}">
+								<div class="alert alert-error">${error}</div>
 							</c:if>
 
 							<hr>
 
-							<form method="post" action="<c:url value='j_spring_security_check' />">
+							<form method="post" action="<c:url value='/j_spring_security_check' />">
 								<div class="row">
 									<div class="top-margin">
-										<input type="text" class="form-control" placeholder="email">
+										<input type="text" class="form-control" name="j_username" placeholder="email/username">
 									</div>
 								</div>
 								<br />
 								<div class="row">
 									<div class="top-margin">
-										<input type="password" class="form-control" placeholder="password">
+										<input type="password" class="form-control" name="j_password" placeholder="password">
 									</div>
 									<div id="forgettenPassword">
 										<b> <a data-toggle="modal" data-target="#forgottenPassword" href="">Забравена парола?</a></b>
@@ -38,8 +39,7 @@
 								<br />
 								<div class="row">
 									<div class="text-center">
-										<input id="rememberMe" type="checkbox"> 
-										<label for="rememberMe">Запомни ме</label>
+										<input id="rememberMe" type="checkbox"> <label for="rememberMe">Запомни ме</label>
 									</div>
 								</div>
 

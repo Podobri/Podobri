@@ -287,6 +287,24 @@ public class EventsController
         eventService.sendMailToParticipant(id, userId, template);
         return "redirect:/events/myEvents";
     }
+    
+    @RequestMapping(value = "/generatePDF/{id}", method = RequestMethod.GET)
+    public ModelAndView generatePDF(@PathVariable Integer id)
+    {
+        ModelAndView model = new ModelAndView("pdfView");
+        Event event = eventService.findOne(id);
+        model.addObject("event", event);
+        return model;
+    }
+    
+    @RequestMapping(value = "/generateExcel/{id}", method = RequestMethod.GET)
+    public ModelAndView generateExcel(@PathVariable Integer id)
+    {
+        ModelAndView model = new ModelAndView("excelView");
+        Event event = eventService.findOne(id);
+        model.addObject("event", event);
+        return model;
+    }
 
 
     private ModelAndView loadSelects(ModelAndView model)

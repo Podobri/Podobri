@@ -5,6 +5,7 @@ import com.mmm.podobri.model.User;
 public interface UserDao extends BaseDao<User>
 {
 	public User findByUserName(String username);
+	public User findByEmail(String email);
 //	void changePassword(UserModel user, String password);
 //    void deleteUser(Long userId);
 //    boolean eMailAddressExists(String eMailAddress, Long userToExclude);

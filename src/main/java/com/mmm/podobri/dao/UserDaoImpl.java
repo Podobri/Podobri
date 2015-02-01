@@ -30,9 +30,7 @@ public class UserDaoImpl
     {
         List<User> users = new ArrayList<User>();
 
-        users = getCurrentSession().createQuery("from User where username=?")
-                                   .setParameter(0, username)
-                                   .list();
+        users = getCurrentSession().createQuery("from User where username=?").setParameter(0, username).list();
 
         if (users.size() > 0)
         {
@@ -42,5 +40,13 @@ public class UserDaoImpl
         {
             return null;
         }
+    }
+
+
+    @Override
+    public User findByEmail(String email)
+    {
+        User user = (User)getCurrentSession().createQuery("from User where email = ?").setParameter(0, email).uniqueResult();
+        return user;
     }
 }

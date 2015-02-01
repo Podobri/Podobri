@@ -469,7 +469,8 @@ textarea {
 }
 
 #events p {
-	margin-bottom: 6px;
+	padding:5px;
+	margin-bottom: 0px;
 }
 
 #eventViewFullPicture div {
