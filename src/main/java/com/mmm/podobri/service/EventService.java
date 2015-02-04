@@ -8,12 +8,12 @@ package com.mmm.podobri.service;
 
 import java.util.List;
 
+import com.mmm.podobri.bo.EditParticipants;
+import com.mmm.podobri.bo.EventsFilter;
+import com.mmm.podobri.bo.MailTemplate;
 import com.mmm.podobri.model.Event;
 import com.mmm.podobri.model.OrganizationsForm;
 import com.mmm.podobri.model.User;
-import com.mmm.podobri.util.EditParticipants;
-import com.mmm.podobri.util.EventsFilter;
-import com.mmm.podobri.util.MailTemplate;
 
 
 public interface EventService

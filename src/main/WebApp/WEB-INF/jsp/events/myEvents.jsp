@@ -43,7 +43,6 @@
 										</thead>
 										<tbody>
 											<c:forEach var="event" items="${events}">
-												<c:if test="${event.event.title == 'MyEvent'}">
 													<tr>
 														<td>${event.event.title }</td>
 														<td>${event.event.created }</td>
@@ -81,7 +80,6 @@
 															</div>
 														</td>
 													</tr>
-												</c:if>
 											</c:forEach>
 										</tbody>
 									</table>
@@ -102,7 +100,6 @@
 										</thead>
 										<tbody>
 											<c:forEach var="event" items="${events}">
-												<c:if test="${event.event.title != 'MyEvent'}">
 													<tr>
 														<td>${event.event.title }</td>
 														<td>${event.event.created }</td>
@@ -136,7 +133,6 @@
 															</div>
 														</td>
 													</tr>
-												</c:if>
 											</c:forEach>
 										</tbody>
 									</table>

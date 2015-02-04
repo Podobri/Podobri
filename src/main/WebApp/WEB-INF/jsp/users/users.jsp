@@ -11,41 +11,43 @@
 			<div id="users">
 				<div class="row">
 					<div id="actual-events-label" class="col-md-10">
-						<h3><strong>Потребители</strong></h3>
+						<h3><strong>Организации</strong></h3>
 						<hr />
 						<table id="users-table"
 							class="table table-striped table-bordered">
 							<thead>
 								<tr>
-									<th>Username</th>
+									<th>Потребителско име</th>
+									<th>Наименование</th>
 									<th>Email</th>
-									<th>Created</th>
-									<th>Modified</th>
-									<th>Country</th>
-									<th></th>
+									<th>Регистрирана</th>
+									<th>Държава</th>
+									<th>Град</th>
+<!-- 									<th></th> -->
 								</tr>
 							</thead>
 							<tbody>
 								<c:forEach var="user" items="${users}">
 									<tr>
 										<td>${user.username }</td>
+										<td>${user.organization.name }</td>
 										<td>${user.email }</td>
-										<td>${user.individual.firstName }</td>
+										<td>${user.userInfo.created }</td>
 										<td>${user.userInfo.country.country }</td>
 										<td>${user.userInfo.city.city }</td>
-										<td>
-											<div class="btn-group actions">
-												<button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown">
-													<span class="glyphicons glyphicons-cogwheel">Действие</span>
-												</button>
-												<ul class="dropdown-menu checkbox-persist pull-right text-left" role="menu">
-													<li><a href="${pageContext.request.contextPath}/users/viewUser/${user.id}"><i class="fa fa-user"></i> Преглед </a></li>
-													<li><a href="${pageContext.request.contextPath}/users/editUser/${user.id}"><i class="fa fa-pencil"></i> Редакция </a></li>
-													<li><a href="${pageContext.request.contextPath}/users/deleteUser/${user.id}"><i class="fa fa-pencil"></i> Изтриване </a></li>
-													<li><a href="http://higps.org:8000/ibrokers/software/contact/simpleMail?contactID=2"><i class="fa fa-envelope-o"></i> Изпращане на мейл </a></li>
-												</ul>
-											</div>
-										</td>
+<!-- 										<td> -->
+<!-- 											<div class="btn-group actions"> -->
+<!-- 												<button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown"> -->
+<!-- 													<span class="glyphicons glyphicons-cogwheel">Действие</span> -->
+<!-- 												</button> -->
+<!-- 												<ul class="dropdown-menu checkbox-persist pull-right text-left" role="menu"> -->
+<%-- 													<li><a href="${pageContext.request.contextPath}/users/viewUser/${user.id}"><i class="fa fa-user"></i> Преглед </a></li> --%>
+<%-- 													<li><a href="${pageContext.request.contextPath}/users/editUser/${user.id}"><i class="fa fa-pencil"></i> Редакция </a></li> --%>
+<%-- 													<li><a href="${pageContext.request.contextPath}/users/deleteUser/${user.id}"><i class="fa fa-pencil"></i> Изтриване </a></li> --%>
+<!-- 													<li><a href="http://higps.org:8000/ibrokers/software/contact/simpleMail?contactID=2"><i class="fa fa-envelope-o"></i> Изпращане на мейл </a></li> -->
+<!-- 												</ul> -->
+<!-- 											</div> -->
+<!-- 										</td> -->
 									</tr>
 								</c:forEach>
 							</tbody>

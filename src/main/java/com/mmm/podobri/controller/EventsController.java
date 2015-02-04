@@ -33,6 +33,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.mmm.podobri.bo.EditParticipants;
+import com.mmm.podobri.bo.EventViewWrapper;
+import com.mmm.podobri.bo.EventsFilter;
+import com.mmm.podobri.bo.MailTemplate;
 import com.mmm.podobri.controller.databinding.ActivityEditor;
 import com.mmm.podobri.dao.DaoUtils;
 import com.mmm.podobri.model.Activity;
@@ -48,11 +52,7 @@ import com.mmm.podobri.model.OpportunityCategory;
 import com.mmm.podobri.model.OrganizationsForm;
 import com.mmm.podobri.model.Sponsor;
 import com.mmm.podobri.service.EventService;
-import com.mmm.podobri.util.EditParticipants;
-import com.mmm.podobri.util.EventViewWrapper;
-import com.mmm.podobri.util.EventsFilter;
 import com.mmm.podobri.util.FileUploadUtil;
-import com.mmm.podobri.util.MailTemplate;
 
 
 @Controller

@@ -12,6 +12,7 @@ public interface UserService extends BaseDaoServices<User>
 	public User findByUserName(String username);
 	public void registerNewUser(User user, UsersRoles userRole);
 	public List<Event> getMyEvents();
+	public List<User> findAllOrganizations();
 //	void changePassword(UserModel user, String password);
 //    void deleteUser(Long userId);
 //    boolean eMailAddressExists(String eMailAddress, Long userToExclude);

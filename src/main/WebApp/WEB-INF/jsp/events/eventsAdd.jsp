@@ -14,7 +14,7 @@
 				<div class="row">
 					<div id="createEventTitle">
 						<h3>
-							<strong>Create event</strong>
+							<strong>Създай събитие</strong>
 						</h3>
 					</div>
 				</div>
@@ -40,18 +40,18 @@
 										</div>
 										<div class="col-md-6">
 											<div class="form-group">
-												<form:label path="title" cssClass="control-label">Title</form:label>
+												<form:label path="title" cssClass="control-label">Наименование</form:label>
 												<form:input id="title" path="title" required="required" cssClass="form-control" />
 											</div>
 
 											<div class="form-group">
-												<form:label path="description" cssClass="control-label">Description</form:label>
-												<form:input id="description" path="description" placeholder="Enter Short Description" required="required"
+												<form:label path="description" cssClass="control-label">Описание</form:label>
+												<form:input id="description" path="description" placeholder="Въведете кратко описание" required="required"
 													cssClass="form-control" />
 											</div>
 
 											<div class="form-group">
-												<form:label path="activities" cssClass="control-label">Activity</form:label>
+												<form:label path="activities" cssClass="control-label">Сфера</form:label>
 												<form:select id="activities" path="activities" multiple="true" required="required" cssClass="form-control">
 													<form:options items="${activitiesList}" itemValue="id" itemLabel="type" />
 												</form:select>
@@ -59,7 +59,7 @@
 										</div>
 										<div class="col-md-6">
 											<div class="form-group">
-												<form:label path="opportunityCategory.id" cssClass="control-label">Category</form:label>
+												<form:label path="opportunityCategory.id" cssClass="control-label">Категория</form:label>
 												<form:select id="opportunityCategoryId" path="opportunityCategory.id" required="required"
 													cssClass="form-control">
 													<form:option id="opportunityCategoryNone" value="-1">---Категория---</form:option>
@@ -67,14 +67,14 @@
 												</form:select>
 											</div>
 											<div class="form-group">
-												<form:label path="opportunity.id" cssClass="control-label">Opportunity</form:label>
+												<form:label path="opportunity.id" cssClass="control-label">Възможност</form:label>
 												<form:select id="opportunityId" path="opportunity.id" required="required" cssClass="form-control">
 													<form:option id="opportunityNone" value="-1">---изберете категория---</form:option>
 													<%-- 													<form:options items="${opportunitiesList}" itemValue="id" itemLabel="opportunity" /> --%>
 												</form:select>
 											</div>
 											<div class="form-group">
-												<form:label path="eventCostType" cssClass="control-label">Financing</form:label>
+												<form:label path="eventCostType" cssClass="control-label">Финансиране</form:label>
 												<form:select id="eventCostType" path="eventCostType.id" cssClass="form-control">
 													<form:options items="${costTypesList}" itemValue="id" itemLabel="cost" />
 												</form:select>
@@ -90,7 +90,7 @@
 										</div>
 										<div class="col-md-6">
 											<div class="form-group">
-												<form:label path="country.id" cssClass="control-label">Country</form:label>
+												<form:label path="country.id" cssClass="control-label">Държава</form:label>
 												<form:select id="countryId" path="country.id" required="required" cssClass="form-control">
 													<form:option id="countryNone" value="-1">---Държава---</form:option>
 													<form:options items="${countriesList}" itemValue="id" itemLabel="country" />
@@ -98,7 +98,7 @@
 											</div>
 
 											<div class="form-group">
-												<form:label path="city.id" cssClass="control-label">City</form:label>
+												<form:label path="city.id" cssClass="control-label">Град</form:label>
 												<form:select id="cityId" path="city.id" required="required" cssClass="form-control">
 													<form:option id="cityNone" value="-1">---изберете държава---</form:option>
 													<%-- 													<form:options items="${citiesList}" itemValue="id" itemLabel="city" /> --%>
@@ -106,7 +106,7 @@
 											</div>
 
 											<div class="form-group">
-												<form:label path="address" cssClass="control-label">Address</form:label>
+												<form:label path="address" cssClass="control-label">Адрес</form:label>
 												<form:input id="address_street" path="address" cssClass="form-control" />
 											</div>
 										</div>
@@ -125,17 +125,17 @@
 											<h4>Дата</h4>
 										</div>
 										<div class="form-group col-md-4">
-											<form:label path="dateFrom" cssClass="control-label">Start date</form:label>
+											<form:label path="dateFrom" cssClass="control-label">Начална дата</form:label>
 											<form:input id="startDate" path="dateFrom" type="datetime-local"
 												cssClass="form-control date datepicker margin-top-none" placeholder="23/9/2013" />
 										</div>
 										<div class="form-group col-md-4">
-											<form:label path="dateTo" cssClass="control-label">End date</form:label>
+											<form:label path="dateTo" cssClass="control-label">Крайна дата</form:label>
 											<form:input id="dateTo" path="dateTo" type="datetime-local"
 												cssClass="form-control date datepicker margin-top-none" placeholder="23/9/2013" />
 										</div>
 										<div class="form-group col-md-4">
-											<form:label path="deadline" cssClass="control-label">Deadline</form:label>
+											<form:label path="deadline" cssClass="control-label">Краен срок за кандидатстване</form:label>
 											<form:input id="deadline" path="deadline" type="datetime-local"
 												cssClass="form-control date datepicker margin-top-none" placeholder="23/9/2013" />
 										</div>
@@ -149,22 +149,22 @@
 										</div>
 										<div class="col-md-6">
 											<div class="form-group">
-												<form:label path="maxParticipants" cssClass="control-label">Maximum participants</form:label>
+												<form:label path="maxParticipants" cssClass="control-label">Максимум участници</form:label>
 												<form:input id="maxParticipants" path="maxParticipants" type="number" min="0" max="500"
 													cssClass="form-control" />
 											</div>
 											<div class="form-group">
-												<form:label path="website" cssClass="control-label">Website</form:label>
+												<form:label path="website" cssClass="control-label">Уеб сайт</form:label>
 												<form:input id="website" path="website" placeholder="http://" cssClass="form-control" />
 											</div>
 											<div class="form-group">
-												<form:label path="facebook" cssClass="control-label">Facebook</form:label>
+												<form:label path="facebook" cssClass="control-label">Фейсбук</form:label>
 												<form:input id="facebook" path="facebook" cssClass="form-control" />
 											</div>
 										</div>
 										<div class="col-md-6">
 											<div class="form-group">
-												<form:label path="applicationFormRequire" cssClass="control-label">Require applications?</form:label>
+												<form:label path="applicationFormRequire" cssClass="control-label">Изисква аппликационна форма?</form:label>
 												<form:checkbox id="applicationFormRequire" path="applicationFormRequire" cssClass="form-control" />
 											</div>
 											<form:select id="formId" path="form.name"  cssClass="form-control">
@@ -173,7 +173,7 @@
 											</form:select>
 										</div>
 										<div class="form-group col-md-12">
-											<form:label path="additionalInfo" cssClass="control-label">Additional information</form:label>
+											<form:label path="additionalInfo" cssClass="control-label">Допълнителна информация</form:label>
 											<form:textarea id="additionalInfo" path="additionalInfo" cssClass="col-md-12 form-control" rows="5" />
 										</div>
 									</div>

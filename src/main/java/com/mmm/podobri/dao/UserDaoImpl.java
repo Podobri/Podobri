@@ -49,4 +49,18 @@ public class UserDaoImpl
         User user = (User)getCurrentSession().createQuery("from User where email = ?").setParameter(0, email).uniqueResult();
         return user;
     }
+    
+    public List<User> findAllOrganizations()
+    {
+        List<User> all = findAll();
+        List<User> organizations = new ArrayList<User>();
+        for (User user : all)
+        {
+            if (user.getOrganization() != null)
+            {
+                organizations.add(user);
+            }
+        }
+        return organizations;
+    }
 }

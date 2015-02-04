@@ -1,11 +1,14 @@
 package com.mmm.podobri.dao;
 
+import java.util.List;
+
 import com.mmm.podobri.model.User;
 
 public interface UserDao extends BaseDao<User>
 {
 	public User findByUserName(String username);
 	public User findByEmail(String email);
+	public List<User> findAllOrganizations();
 //	void changePassword(UserModel user, String password);
 //    void deleteUser(Long userId);
 //    boolean eMailAddressExists(String eMailAddress, Long userToExclude);

@@ -6,6 +6,8 @@ import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -86,10 +88,7 @@ public class FormServiceImpl
 
     public void saveForm(String content, String name)
     {
-        // Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        // String username = auth.getName(); //get logged in username
-        String username = "organization";
-        User currentUser = userService.findByUserName(username);
+        User currentUser = getCurrentUser();
         Organization organization = currentUser.getOrganization();
         OrganizationsForm form = new OrganizationsForm();
         form.setForm(content);
@@ -120,9 +119,8 @@ public class FormServiceImpl
 
     private User getCurrentUser()
     {
-        // Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        // String username = auth.getName(); //get logged in username
-        String username = "organization";
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        String username = auth.getName(); // get logged in username
         User currentUser = userService.findByUserName(username);
         return currentUser;
     }

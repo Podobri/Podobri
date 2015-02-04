@@ -1018,6 +1018,21 @@ legend {
 	padding: 0px;
 }
 
+.quickSearchAbsolute {
+	position: absolute;
+		color: #fff!important;
+	width: 80%;
+	left: 10%;
+	background: rgba(0, 0, 0, 0.5);
+}
+.quick-search {
+	color: #fff!important;
+	width: 80%;
+	margin-left: 10%;
+	background: rgba(0, 0, 0, 0.5);
+}
+.quickSearchAbsolute h2, .quick-search h2,.quickSearchAbsolute h3, .quick-search h3 {color:#fff!important;}
+
 @
 keyframes scaleUp { 0% {
 	opacity: 0;
@@ -1027,16 +1042,34 @@ keyframes scaleUp { 0% {
 100%
 {
 opacity
+
+
+
+
 :
+
+
  
+
+
 1;
 transform
-:
- 
-scale
-(1);
 
-  
+
+
+
+:
+
+
+ 
+
+
+scale
+
+
+
+
+(1);
 }
 }
 @
@@ -1048,16 +1081,34 @@ scale
 100%
 {
 opacity
+
+
+
+
 :
+
+
  
+
+
 1;
 -moz-transform
-:
- 
-scale
-(1);
 
-  
+
+
+
+:
+
+
+ 
+
+
+scale
+
+
+
+
+(1);
 }
 }
 @
@@ -1069,16 +1120,34 @@ scale
 100%
 {
 opacity
+
+
+
+
 :
+
+
  
+
+
 1;
 -webkit-transform
-:
- 
-scale
-(1);
 
-  
+
+
+
+:
+
+
+ 
+
+
+scale
+
+
+
+
+(1);
 }
 }
 @
@@ -1090,16 +1159,34 @@ scale
 100%
 {
 opacity
+
+
+
+
 :
+
+
  
+
+
 1;
 -ms-transform
-:
- 
-scale
-(1);
 
-  
+
+
+
+:
+
+
+ 
+
+
+scale
+
+
+
+
+(1);
 }
 }
 @
@@ -1110,15 +1197,33 @@ scale
 100%
 {
 opacity
+
+
+
+
 :
+
+
  
+
+
 1;
 -o-transform
-:
- 
-scale
-(1);
 
-  
+
+
+
+:
+
+
+ 
+
+
+scale
+
+
+
+
+(1);
 }
 }

@@ -10,10 +10,10 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
-import javax.validation.Valid;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
@@ -24,13 +24,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.mmm.podobri.bo.EventViewWrapper;
 import com.mmm.podobri.controller.databinding.ActivityEditor;
 import com.mmm.podobri.controller.databinding.LanguageEditor;
 import com.mmm.podobri.model.Event;
 import com.mmm.podobri.model.Role.UsersRoles;
 import com.mmm.podobri.model.User;
 import com.mmm.podobri.service.UserService;
-import com.mmm.podobri.util.EventViewWrapper;
 
 
 @Controller
@@ -56,17 +56,17 @@ public class UsersController
     public ModelAndView usersHome()
     {
         final ModelAndView model = new ModelAndView("users/users");
-        model.addObject("users", userService.findAll());
+        model.addObject("users", userService.findAllOrganizations());
         return model;
     }
-    
+
+
     @RequestMapping(value = "/myProfile", method = RequestMethod.GET)
     public ModelAndView userHome()
     {
         final ModelAndView model = new ModelAndView("users/usersView");
-//        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-//      String username = auth.getName(); //get logged in username
-        String username = "test";
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        String username = auth.getName(); // get logged in username
         final User user = userService.findByUserName(username);
         List<Event> myEvents = userService.getMyEvents();
         model.addObject("user", user);
@@ -100,7 +100,7 @@ public class UsersController
     {
         final ModelAndView model = new ModelAndView("users/users");
         userService.update(user);
-        model.addObject("users", userService.findAll());
+        model.addObject("users", userService.findAllOrganizations());
         return model;
     }
 
@@ -110,7 +110,7 @@ public class UsersController
     {
         final ModelAndView model = new ModelAndView("users/users");
         userService.deleteById(id);
-        model.addObject("users", userService.findAll());
+        model.addObject("users", userService.findAllOrganizations());
         return model;
     }
 
@@ -134,7 +134,7 @@ public class UsersController
         }
         final ModelAndView model = new ModelAndView("users/users");
         userService.registerNewUser(user, UsersRoles.ROLE_INDIVIDUAL);
-        model.addObject("users", userService.findAll());
+        model.addObject("users", userService.findAllOrganizations());
         return model;
     }
 
@@ -149,7 +149,8 @@ public class UsersController
         userService.registerNewUser(user, UsersRoles.ROLE_ORGANIZATION);
         return "redirect:/users/";
     }
-    
+
+
     private ModelAndView loadSelects(ModelAndView model)
     {
         model.addObject("countries", userService.getDaoUtils().getAllCountries());

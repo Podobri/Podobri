@@ -11,11 +11,16 @@ import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
+import com.mmm.podobri.bo.EditParticipants;
+import com.mmm.podobri.bo.EventsFilter;
+import com.mmm.podobri.bo.MailTemplate;
 import com.mmm.podobri.dao.DaoUtils;
 import com.mmm.podobri.dao.EventDao;
 import com.mmm.podobri.model.City;
@@ -30,10 +35,7 @@ import com.mmm.podobri.model.OpportunityCategory;
 import com.mmm.podobri.model.OrganizationsForm;
 import com.mmm.podobri.model.Sponsor;
 import com.mmm.podobri.model.User;
-import com.mmm.podobri.util.EditParticipants;
-import com.mmm.podobri.util.EventsFilter;
 import com.mmm.podobri.util.FileUploadUtil;
-import com.mmm.podobri.util.MailTemplate;
 
 
 @Service("eventService")
@@ -129,77 +131,92 @@ public class EventServiceImpl
         {
 
         }
-        
 
-        for (EventsProgram ep : event.getEventsPrograms())
+        if (event.getEventsPrograms() != null)
         {
-            ep.setEvent(event);
+            for (EventsProgram ep : event.getEventsPrograms())
+            {
+                ep.setEvent(event);
+            }
         }
 
-        for (Lector l : event.getLectors())
+        if (event.getLectors() != null)
         {
-            if (l != null)
+            for (Lector l : event.getLectors())
             {
-                CommonsMultipartFile pictureFile = l.getPictureFile();
-                if (pictureFile != null)
+                if (l != null)
                 {
-                    String imageName = FileUploadUtil.processImages(pictureFile, true, true);
-                    l.setPicture(imageName);
+                    CommonsMultipartFile pictureFile = l.getPictureFile();
+                    if (pictureFile != null)
+                    {
+                        String imageName = FileUploadUtil.processImages(pictureFile, true, true);
+                        l.setPicture(imageName);
+                    }
                 }
             }
         }
 
-        for (Sponsor s : event.getSponsors())
+        if (event.getSponsors() != null)
         {
-            if (s != null)
+            for (Sponsor s : event.getSponsors())
             {
-                CommonsMultipartFile pictureFile = s.getPictureFile();
-                if (pictureFile != null)
+                if (s != null)
                 {
-                    String imageName = FileUploadUtil.processImages(pictureFile, true, false);
-                    s.setPicture(imageName);
+                    CommonsMultipartFile pictureFile = s.getPictureFile();
+                    if (pictureFile != null)
+                    {
+                        String imageName = FileUploadUtil.processImages(pictureFile, true, false);
+                        s.setPicture(imageName);
+                    }
                 }
             }
         }
-        
+
         CommonsMultipartFile pictureFile = event.getPictureFile();
-        String imageName = FileUploadUtil.processImages(pictureFile, false, true);
-        event.setPicture(imageName);
-        
+        if(pictureFile != null)
+        {
+            String imageName = FileUploadUtil.processImages(pictureFile, false, true);
+            event.setPicture(imageName);
+        }
+
         DaoUtils daoUtils = getDaoUtils();
-        
+
         byte opportunityCaregoryId = event.getOpportunityCategory().getId();
         OpportunityCategory opportunityCategory = daoUtils.getOpportunityCategoryById(opportunityCaregoryId);
         event.setOpportunityCategory(opportunityCategory);
-        
+
         byte opportunityId = event.getOpportunity().getId();
         Opportunity opportunity = daoUtils.getOpportunityById(opportunityId);
         event.setOpportunity(opportunity);
-        
+
         byte costTypeId = event.getEventCostType().getId();
         EventCostType eventCostType = daoUtils.getEventCostTypeById(costTypeId);
         event.setEventCostType(eventCostType);
-        
+
         byte countryId = event.getCountry().getId();
         Country country = daoUtils.getCountryById(countryId);
         event.setCountry(country);
-        
+
         int cityId = event.getCity().getId();
         City city = daoUtils.getCityById(cityId);
         event.setCity(city);
-        
+
         String formName = event.getForm().getName();
         if (formName != null && !formName.isEmpty())
         {
             OrganizationsForm form = formService.getForm(formName);
             event.setForm(form);
         }
-        
+        else
+        {
+            event.setForm(null);
+        }
+
         event.setStatus(EventStatus.INCOMING.getStatus());
         Date currentDate = new Date();
         event.setCreated(currentDate);
         event.setModified(currentDate);
-        User user = userService.findOne(1);
+        User user = userService.findOne(getCurrentUser().getId());
         event.setUser(user);
         save(event);
         return event;
@@ -314,13 +331,12 @@ public class EventServiceImpl
         List<OrganizationsForm> organizationForms = formService.getOrganizationForms();
         return organizationForms;
     }
-    
+
 
     private User getCurrentUser()
     {
-        // Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        // String username = auth.getName(); //get logged in username
-        String username = "test";
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        String username = auth.getName(); // get logged in username
         User currentUser = userService.findByUserName(username);
         return currentUser;
     }

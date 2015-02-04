@@ -26,23 +26,18 @@ body {
 	width: 50%;
 }
 
-.notVisible { 
-		
-	/* Theoretically for IE 8 & 9 (more valid) */	
+.notVisible {
+	/* Theoretically for IE 8 & 9 (more valid) */
 	/* ...but not required as filter works too */
 	/* should come BEFORE filter */
-	-ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=0)"; 
-	
+	-ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
 	/* This works in IE 8 & 9 too */
 	/* ... but also 5, 6, 7 */
-	filter: alpha(opacity=0);
-	
+	filter: alpha(opacity = 0);
 	/* Older than Firefox 0.9 */
-	-moz-opacity:0;
-	
+	-moz-opacity: 0;
 	/* Safari 1.x (pre WebKit!) */
 	-khtml-opacity: 0;
-    
 	/* Modern!
 	/* Firefox 0.9+, Safari 2?, Chrome any?
 	/* Opera 9+, IE 9+ */
@@ -158,6 +153,7 @@ textarea {
 	background: #82b1ea;
 	overflow: hidden;
 	padding: 0 5px;
+	
 }
 
 #eventsFilterPanel .wr {
@@ -172,12 +168,17 @@ textarea {
 }
 
 #eventsFilterPanel span {
-	color: #fff;
+	color: #000;
 	height: 100%;
 	vertical-align: middle;
 	margin-bottom: 0px;
 	display: inline;
 	font-weight: normal;
+}
+
+#eventsFilterForm label {
+	font-family: verdana;
+	color: #fff;
 }
 
 #eventsFilterPanel .btn {
@@ -192,15 +193,39 @@ textarea {
 }
 
 #filteredEventsMessage {
-	background-color: #648fc3;
+	color: #FFF;
+	background-color: rgba(82, 182, 236, 1);
+	text-indent: 20px;
+	padding: 5px
+}
+
+#EventViewShortDescription {
+	color: #000;
 }
 
 #events .eventItemInfoLabel {
-	color: #52b6ec;
+	color: #4D4F54;
+	border-radius: 5px;
+	font-size: 11px;
+	rgba
+	(153,
+	151,
+	151,
+	0.5);
 }
 
-#events .eventItemInfoLabel {
-	color: #fff;
+#EventViewFullDescription p a button:first {
+	margin-bottom: 20px;
+}
+
+#EventViewOrganizator .eventItemInfo {
+	font-size: 19px;
+	color: red;
+}
+
+.eventItemInfo {
+	font-size: 12px;
+	color: red;
 }
 
 .eventItem h4 {
@@ -306,6 +331,11 @@ textarea {
 	text-align: center;
 }
 
+.social-links img:hover {
+	background: #EDF6F6;
+	s
+}
+
 .uploadEventPictureSection {
 	height: 200px;
 	z-index: 125;
@@ -319,8 +349,7 @@ textarea {
 	z-index: 122;
 }
 
-#uploadEventPicture input
-{
+#uploadEventPicture input {
 	cursor: pointer;
 	color: transparent;
 	width: 100%;
@@ -469,7 +498,7 @@ textarea {
 }
 
 #events p {
-	padding:5px;
+	padding: 5px;
 	margin-bottom: 0px;
 }
 
@@ -485,8 +514,15 @@ textarea {
 	opacity: 1;
 }
 
-#formsBuilder iframe{
+#formsBuilder iframe {
 	width: 100%;
 	height: 650px;
 	overflow: hidden;
+}
+
+#loginFormContent {
+	background: #E0F9F9;
+	padding: 0px 50px;
+	border: 5px solid rgba(0, 0, 0, 0.5);
+	border-radius: 10px;
 }

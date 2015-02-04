@@ -142,7 +142,7 @@
 										<input id="tos" type="checkbox" required="required">
 									</div>
 									<div class="text-left col-md-6">
-										<span> I've read the </span> <a href="#">Terms and Condition</a>
+										<span> Съгласен съм с </span> <a href="#">общите условия</a>
 									</div>
 									<div class="text-center col-md-4">
 										<button id="registerIndividual" class="btn btn-success btn-lg" type="submit">РЕГИСТРАЦИЯ</button>
@@ -187,7 +187,7 @@
 
 								<div class="row">
 									<div class="form-group col-md-12">
-										<form:select id="organizationType" path="organization.organizationsType.id" cssClass="form-control">
+										<form:select id="organizationType" path="organization.organizationsType.id" cssClass="form-control" required="required">
 											<form:option id="organizationType" value="-1">---Тип на организацията---</form:option>
 											<form:options items="${organizationTypes}" itemValue="id" itemLabel="type" />
 										</form:select>
@@ -197,7 +197,7 @@
 								<div class="row">
 									<div class="form-group col-md-12">
 										<form:label path="activities">Сфера</form:label>
-										<form:select id="activitiesCompany" path="activities" cssClass="form-control">
+										<form:select id="activitiesCompany" path="activities" cssClass="form-control" required="required">
 											<form:options items="${activitiesList}" itemValue="id" itemLabel="type" />
 										</form:select>
 									</div>
@@ -205,14 +205,14 @@
 
 								<div class="row">
 									<div class="form-group col-md-6">
-										<form:select id="countryIdOrganization" path="userInfo.country.id" cssClass="form-control">
+										<form:select id="countryIdOrganization" path="userInfo.country.id" cssClass="form-control" required="required">
 											<form:option id="countryNone" value="-1">---Държава---</form:option>
 											<form:options items="${countries}" itemValue="id" itemLabel="country" />
 										</form:select>
 									</div>
 
 									<div class="form-group col-md-6">
-										<form:select id="cityIdOrganization" path="userInfo.city.id" cssClass="form-control">
+										<form:select id="cityIdOrganization" path="userInfo.city.id" cssClass="form-control" required="required">
 											<form:option id="cityNone" value="-1">---Град---</form:option>
 											<%-- 											<form:options items="${cities}" itemValue="id" itemLabel="city" /> --%>
 										</form:select>

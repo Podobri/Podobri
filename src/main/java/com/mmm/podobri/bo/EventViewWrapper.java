@@ -3,7 +3,7 @@
  *
  * created at 24.01.2015 ã. by Mariyan
  */
-package com.mmm.podobri.util;
+package com.mmm.podobri.bo;
 
 
 import java.util.ArrayList;
@@ -12,6 +12,7 @@ import java.util.List;
 
 import com.mmm.podobri.model.Event;
 import com.mmm.podobri.service.EventService.EventStatus;
+import com.mmm.podobri.util.CalendarUtil;
 
 
 public class EventViewWrapper

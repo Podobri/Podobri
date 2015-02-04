@@ -19,9 +19,9 @@
 			<div class="col-md-3 col-md-offset-1">
 				<h4>За "По-добри"</h4>
 				<p>
-					Създадена през 2014 организацията, Sapien augue lobortis nunc, in vehicula ante ante vitae orci. Sed euismod,
-					tellus quis commodo suscipit, nisl erat vulputate nunc, aliquam viverra elit nibh a urna. Donec diam lacus, mollis
-					sit amet porttitor sed, blandit at lectus. <a href="#">Read more</a>
+					Създадена през 2014 организацията, Създадена през 2014 организацията. Създадена през 2014 организацията,
+					Създадена през 2014 организацията, Създадена през 2014 организацията. Създадена през 2014 организацията,
+					Създадена през 2014 организацията, Създадена през 2014 организацията. <a href="#">Read more</a>
 				</p>
 			</div>
 			<div class="col-md-3 col-md-offset-1">
@@ -29,9 +29,9 @@
 				<p>Абонирайте се за новини и нови събития</p>
 				<form name="SubscibeEmail" action="Subscribe">
 					<div class="input-group">
-						<input id="emailForSubscribe" type="text" class="form-control" placeholder="email address"> <span
+						<input id="emailForSubscribe" type="text" class="form-control" placeholder="email"> <span
 							class="input-group-btn">
-							<button class="btn btn-warning" type="button"><span class="glyphicon glyphicon-ok"></span>Subscribe</button>
+							<button class="btn btn-warning" type="button"><span class="glyphicon glyphicon-ok"></span>Абонирай</button>
 						</span>
 					</div>
 				</form>

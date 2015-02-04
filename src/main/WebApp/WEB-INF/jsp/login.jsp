@@ -1,14 +1,14 @@
 <!DOCTYPE html>
 <%@taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 <%@ taglib uri="http://java.sun.com/jstl/core_rt" prefix="c"%>
-<c:url var="imgURL" value="resources/images/" />
+<c:url var="imgURL" value="resources/images/" /> 
 <html>
 <jsp:include page="layout/head.jsp" />
 <body>
 	<div class="container">
 		<jsp:include page="layout/menu.jsp" />
 		<div id="content">
-			<div id="loginFormContent" class="col-md-4 col-md-offset-4">
+			<div id="loginFormContent" class="col-md-6 col-md-offset-3">
 				<h3 class="thin text-center">Вход в системата</h3>
 				<p class="text-center text-muted">
 					<span> Нямате профил? </span><a href="${pageContext.request.contextPath}/users/register">Регистрирай се</a>.
@@ -23,13 +23,13 @@
 				<form method="post" action="${pageContext.request.contextPath}/j_spring_security_check?targetUrl=${targetUrl}">
 					<div class="row">
 						<div class="top-margin">
-							<input type="text" class="form-control" name="j_username" placeholder="email/username">
+							<input type="text" class="form-control" name="j_username" placeholder="email/потребителско име" required="required">
 						</div>
 					</div>
 					<br />
 					<div class="row">
 						<div class="top-margin">
-							<input type="password" class="form-control" name="j_password" placeholder="password">
+							<input type="password" class="form-control" name="j_password" placeholder="парола" required="required">
 						</div>
 						<div id="forgettenPassword">
 							<b> <a data-toggle="modal" data-target="#forgottenPassword" href="">Забравена парола?</a></b>

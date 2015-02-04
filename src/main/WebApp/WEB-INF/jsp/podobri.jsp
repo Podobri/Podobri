@@ -1,6 +1,7 @@
 <%@taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 <%@ taglib uri="http://java.sun.com/jstl/core_rt" prefix="c"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<%@taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 <c:url var="imgURL" value="resources/images/" />
 <!DOCTYPE html>
 <html>
@@ -13,19 +14,58 @@
 				<div class="row">
 					<div id="slide">
 						<section id="main-slider" class="carousel">
-							<div class="carousel-inner">
-								<c:forEach var="teaminfo" items="${teaminfos}" varStatus="status">
-									<div class="item ${status.first ? 'active' : '' }">
-										<div class="container">
-											<div class="carousel-content">
-												<a data-toggle="modal" data-target="#${teaminfo.firstname}" href="">
-													<h1>${teaminfo.fullname}</h1>
-												</a>
-												<p class="lead">${teaminfo.position}</p>
+							<div class="quick-search col-md-12">
+								<div class="big-title">
+									<h2><spring:message code="quickSearchTitle" /></h2>
+								</div>
+								<div class="mini-title">
+									<h3><spring:message code="quickSearchSubTitle" /></h3>
+								</div>
+								<div class="form">
+									<form>
+										<div class="quick-search-inputs col-md-9">
+											<div class="col-md-6">
+												<select name="searchingFor" class="form-control">
+													<option value="" selected="selected"><spring:message code="quickSearchWhat" /></option>
+												</select>
+											</div>
+											<div class="col-md-6">
+												<select name="searchingType" class="form-control">
+													<option value="" selected="selected"><spring:message code="quickSearchType" /></option>
+												</select>
+											</div>
+											<div class="col-md-6">
+												<select name="searchingDetails" class="form-control">
+													<option value="" selected="selected"><spring:message code="quickSearchDetails" /></option>
+												</select>
+											</div>
+											<div class="col-md-6">
+												<select name="searchingSphere" class="form-control">
+													<option value="" selected="selected"><spring:message code="quickSearchActivity" /></option>
+												</select>
 											</div>
 										</div>
-									</div>
-								</c:forEach>
+										<div class="quick-search-find col-md-3">
+											<input type="submit" class="form-control" value="<spring:message code="quickSearchSearch" />" />
+										</div>
+									</form>
+								</div>
+							</div>
+							
+							
+							<div class="carousel-inner">
+<%-- 								<c:forEach var="teaminfo" items="${teaminfos}" varStatus="status"> --%>
+<%-- 									<div class="item ${status.first ? 'active' : '' }"> --%>
+<!-- 										<div class="container"> -->
+<!-- 											<div class="carousel-content"> -->
+<!-- 												<a data-toggle="modal" data-target="#${teaminfo.firstname}" href=""> -->
+<%-- 													<h1>${teaminfo.fullname}</h1> --%>
+<!-- 												</a> -->
+<%-- 												<p class="lead">${teaminfo.position}</p> --%>
+<!-- 											</div> -->
+<!-- 										</div> -->
+<!-- 									</div> -->
+<%-- 								</c:forEach> --%>
 							</div>
 
 							<a class="prev" href="#main-slider" data-slide="prev"> <i class="icon-angle-left"></i></a> <a class="next"

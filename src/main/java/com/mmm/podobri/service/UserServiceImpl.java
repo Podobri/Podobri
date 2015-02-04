@@ -9,8 +9,11 @@ import java.util.List;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.encoding.Md5PasswordEncoder;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.GrantedAuthorityImpl;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -53,12 +56,12 @@ public class UserServiceImpl
         {
             user = userDao.findByEmail(username);
         }
-        
+
         if (user == null)
         {
             throw new UsernameNotFoundException("Cannot find user with given credentials");
         }
-        
+
         List<GrantedAuthority> authorities = buildUserAuthority(user.getRoles());
         return new org.springframework.security.core.userdetails.User(user.getUsername(),
                                                                       user.getPassword(),
@@ -180,6 +183,11 @@ public class UserServiceImpl
             organization.setName(user.getUsername());
             organization.setUser(user);
         }
+        
+        Md5PasswordEncoder encoder = new Md5PasswordEncoder();
+        String password = user.getPassword();
+        String cryptedPassword = encoder.encodePassword(password, "");
+        user.setPassword(cryptedPassword);
 
         save(user);
     }
@@ -188,11 +196,17 @@ public class UserServiceImpl
     @Override
     public List<Event> getMyEvents()
     {
-        // Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        // String username = auth.getName(); //get logged in username
-        String username = "test";
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        String username = auth.getName(); // get logged in username
         User user = findByUserName(username);
         List<Event> events = eventService.findEventsByParticipant(user);
         return events;
+    }
+
+
+    @Override
+    public List<User> findAllOrganizations()
+    {
+        return userDao.findAllOrganizations();
     }
 }

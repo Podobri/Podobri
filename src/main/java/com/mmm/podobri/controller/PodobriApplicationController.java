@@ -1,4 +1,4 @@
-package com.mmm.podobri.main;
+package com.mmm.podobri.controller;
 
 
 import java.util.ArrayList;
@@ -9,10 +9,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.mmm.podobri.bo.EventViewWrapper;
+import com.mmm.podobri.bo.TeamInfo;
 import com.mmm.podobri.model.Event;
 import com.mmm.podobri.service.EventService;
 import com.mmm.podobri.service.UserService;
-import com.mmm.podobri.util.EventViewWrapper;
 
 
 @Controller
@@ -67,9 +68,9 @@ public class PodobriApplicationController
         ourTeam.add(new TeamInfo("Mariyan",
                                  "Valchev",
                                  "Developer",
-                                 "+359 894 379 714",
-                                 "m.valchev@seeburger.com",
-                                 "Mariyan gruadate his engeneering degree in TU-Sofia in 2014. He is master of Computer science. He works as Java Developer at SEEBURGER INFORMATIC AD.He has over 2.5 years professional experience as developer."));
+                                 "+359 894 379 ***",
+                                 "m.valchev@gmail.com",
+                                 "Mariyan gruadate his engeneering degree in TU-Sofia in 2014. He is master of Computer science. He works as Java Developer at ****** AD.He has over 2.5 years professional experience as developer."));
         ourTeam.add(new TeamInfo("Stefan",
                                  "Valchev",
                                  "Developer",

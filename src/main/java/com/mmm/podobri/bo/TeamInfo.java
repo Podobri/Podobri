@@ -3,7 +3,7 @@
  *
  * created at 11.01.2015 ã. by Mariyan 
  */
-package com.mmm.podobri.main;
+package com.mmm.podobri.bo;
 
 
 public class TeamInfo

@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@taglib uri="http://www.springframework.org/tags" prefix="spring"%>
+<%@ taglib uri="http://www.springframework.org/security/tags" prefix="security"%>
 <%@ taglib uri="http://java.sun.com/jstl/core_rt" prefix="c"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <c:url var="imgURL" value="/resources/images/" />
@@ -14,7 +15,7 @@
 				<div class="row">
 					<div id="actualEventsTitle">
 						<h3>
-							<strong>Actual Events</strong>
+							<strong>Актуални събития</strong>
 						</h3>
 					</div>
 				</div>
@@ -40,7 +41,7 @@
 											<fieldset>
 												<div class="row">
 													<div class="form-group col-md-4">
-														<form:label path="categoryId" cssClass="control-label">Category</form:label>
+														<form:label path="categoryId" cssClass="control-label">Категория</form:label>
 														<form:select id="opportunityCategoryId" path="categoryId" cssClass="form-control">
 															<form:option id="opportunityCategoryNone" value="-1">---Категория---</form:option>
 															<form:options items="${categoriesList}" itemValue="id" itemLabel="category" />
@@ -48,7 +49,7 @@
 													</div>
 
 													<div class="form-group col-md-4">
-														<form:label path="opportunityId" cssClass="control-label">Opportunity</form:label>
+														<form:label path="opportunityId" cssClass="control-label">Възможност</form:label>
 														<form:select id="opportunityId" path="opportunityId" cssClass="form-control">
 															<form:option id="opportunityNone" value="-1">---изберете категория---</form:option>
 															<%-- 															<form:options items="${opportunitiesList}" itemValue="id" itemLabel="opportunity" /> --%>
@@ -104,7 +105,7 @@
 
 													<div class="form-group col-md-4">
 														<button id="filterEvents" class="btn btn-success btn-lg" type="submit">
-															<span class="glyphicon glyphicon-search"></span>SEARCH
+															<span class="glyphicon glyphicon-search"></span>ТЪРСИ
 														</button>
 													</div>
 												</div>
@@ -126,9 +127,9 @@
 				</c:if>
 
 				<div class="row">
-					<div class="btn-group col-md-2 col-md-offset-10">
-						<a href="#" id="list" class="btn btn-default btn-sm"><span class="glyphicon glyphicon-th-list"> </span>List</a> <a
-							href="#" id="grid" class="btn btn-default btn-sm"><span class="glyphicon glyphicon-th"></span>Grid</a>
+					<div class="btn-group col-md-3 col-md-offset-9">
+						<a href="#" id="list" class="btn btn-default btn-sm"><span class="glyphicon glyphicon-th-list"> </span>Списък</a> <a
+							href="#" id="grid" class="btn btn-default btn-sm"><span class="glyphicon glyphicon-th"></span>Решетка</a>
 					</div>
 				</div>
 
@@ -172,7 +173,7 @@
 										</span>
 									</p>
 									<p>
-										<span class="eventItemInfo"> Organizator: ${event.organizator} </span>
+										<span class="eventItemInfo"> Организатор: ${event.organizator} </span>
 									</p>
 								</div>
 							</div>
@@ -203,36 +204,32 @@
 											</div>
 										</div>
 										<div class="row">
-											<div id="EventViewShortDescription" class="col-md-7">${event.event.description}Thisissomesampletext.Thisis
-												some sample text.This is some sample text. This is some sample text. This is some sample text. This is some
-												sample text.This is some sample text. This is some sample text. This is some sample text. This is some
-												sample text.This is some sample text. This is some sample text. This is some sample text. This is some
-												sample text. This is some sample text. This is some sample text.This is some sample text. This is some
-												sample text. This is some sample text. This is some sample text.This is some sample text. This is some
-												sample text. This is some sample text. This is some sample text.This is some sample text. This is some
-												sample text. This is some sample text. This is some sample text. This is some sample text.</div>
+											<div id="EventViewShortDescription" class="col-md-7">${event.event.description}</div>
 											<div id="EventViewMoreInfo" class="col-md-5">
 												<div id="EventViewOrganizator" class="col-md-12">
 													<h4>ОРГАНИЗАТОР:</h4>
 													<span class="eventItemInfo">${event.organizator}</span>
 												</div>
-												<div id="EventViewIntendedFor" class="col-md-12">
-													<p>
-													<h4>ПРЕДНАЗНАЧЕНО ЗА:</h4>
-													<span class="eventItemInfoLabel label label-info">sportisti</span> <span
-														class="eventItemInfoLabel label label-info">uchenici</span> <span
-														class="eventItemInfoLabel label label-info">atlelti</span> <span
-														class="eventItemInfoLabel label label-info">deputati</span> <span
-														class="eventItemInfoLabel label label-info">text</span> <span class="eventItemInfoLabel label label-info">text</span>
-													<span class="eventItemInfoLabel label label-info">text</span>
-												</div>
+<!-- 												<div id="EventViewIntendedFor" class="col-md-12"> -->
+<!-- 													<p> -->
+<!-- 													<h4>ПРЕДНАЗНАЧЕНО ЗА:</h4> -->
+<!-- 													<span class="eventItemInfoLabel label label-info">спортисти</span> <span -->
+<!-- 														class="eventItemInfoLabel label label-info">uchenici</span> <span -->
+<!-- 														class="eventItemInfoLabel label label-info">atlelti</span> <span -->
+<!-- 														class="eventItemInfoLabel label label-info">deputati</span> <span -->
+<!-- 														class="eventItemInfoLabel label label-info">text</span> <span class="eventItemInfoLabel label label-info">text</span> -->
+<!-- 													<span class="eventItemInfoLabel label label-info">text</span> -->
+<!-- 												</div> -->
 												<div id="EventViewSocial" class="col-md-12 social-links">
 													<p>
-														<img alt="" src="${imgURL}thumblines/fb_32.png" /> <img alt="" src="${imgURL}thumblines/twitter_32.png" />
-														<img alt="" src="${imgURL}thumblines/linkedin_32.png" /> <img alt=""
-															src="${imgURL}thumblines/google_32.png" /> <img alt="" src="${imgURL}thumblines/skype_32.png" />
+														<img alt="" src="${imgURL}thumblines/fb_32.png" /> 
+														<img alt="" src="${imgURL}thumblines/twitter_32.png" />
+														<img alt="" src="${imgURL}thumblines/linkedin_32.png" /> 
+<%-- 														<img alt="" src="${imgURL}thumblines/google_32.png" />  --%>
+<%-- 														<img alt="" src="${imgURL}thumblines/skype_32.png" /> --%>
 													</p>
 												</div>
+												<security:authorize access="hasRole('ROLE_INDIVIDUAL')">
 												<div id="EventViewFullDescription" class="col-md-12">
 													<p>
 														<a href="${pageContext.request.contextPath}/events/viewEvent/${event.event.id}">
@@ -242,6 +239,7 @@
 														</a>
 													</p>
 												</div>
+												</security:authorize>
 											</div>
 										</div>
 									</div>

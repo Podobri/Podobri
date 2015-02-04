@@ -15,7 +15,7 @@
 					<input id="postAddress" type="hidden" value="${pageContext.request.contextPath}/forms/add" name="address">
 					<label for="formName">Име на формата:</label>
 					<input id="formName" type='text' required="required" />
-					<input id="formBuilderSubmit" type='submit' value="zapazi">
+					<input id="formBuilderSubmit" type='submit' value="ЗАПАЗИ">
 				</form>
 			</div>
 			<jsp:include page="../reklams.jsp" />
@@ -28,7 +28,9 @@
 		$('#formBuilderSubmit').click(
 				function(e) {
 					e.preventDefault();
-					var content = $('#formBuilderFrame').contents().find('.fb-response-fields').find('.actions-wrapper').html();
+					var responseFields = $('#formBuilderFrame').contents().find('.fb-response-fields');
+					responseFields.find('.actions-wrapper').remove();
+					var content = responseFields.html();
 					var address = $('#postAddress').val();
 					var formName = $('#formName').val();
 					$.ajax({ 

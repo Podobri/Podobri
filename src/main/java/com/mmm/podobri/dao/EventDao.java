@@ -7,7 +7,7 @@ package com.mmm.podobri.dao;
 
 import java.util.List;
 
-import com.mmm.podobri.util.EventsFilter;
+import com.mmm.podobri.bo.EventsFilter;
 import com.mmm.podobri.model.Event;
 import com.mmm.podobri.model.User;
 

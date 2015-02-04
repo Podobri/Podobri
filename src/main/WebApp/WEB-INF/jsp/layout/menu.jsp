@@ -21,37 +21,41 @@
 					<li><a href="${pageContext.request.contextPath}/about"><spring:message code="menuAbout" /></a></li>
 					<security:authorize access="isAuthenticated()">
 						<li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown"><span
-								class="glyphicon glyphicon-user pull-left"></span>&nbsp;&nbsp; <security:authentication property="principal.username" /> &nbsp;&nbsp;&nbsp;&nbsp;</a>
+								class="glyphicon glyphicon-user pull-left"></span>&nbsp;&nbsp; <security:authentication
+									property="principal.username" /> &nbsp;&nbsp;&nbsp;&nbsp;</a>
 							<ul class="dropdown-menu col-md-12">
-								<li><a href="${pageContext.request.contextPath}/users/myProfile">Моят профил <span
+								<li><a href="${pageContext.request.contextPath}/users/myProfile"><spring:message code="myProfile" /> <span
 										class="glyphicon glyphicon-cog pull-right"></span></a></li>
 								<li class="divider"></li>
-								<li><a href="${pageContext.request.contextPath}/events/createEvent">Създай събитие<span
-										class="glyphicon glyphicon-plus pull-right"></span></a></li>
-								<li class="divider"></li>
-								<li><a href="${pageContext.request.contextPath}/events/createInitiative">Създай инициатива<span
-										class="glyphicon glyphicon-plus pull-right"></span></a></li>
-								<li class="divider"></li>
-								<li><a href="${pageContext.request.contextPath}/events/myEvents">Моите събития<span
-										class="glyphicon glyphicon-list-alt pull-right"></span></a></li>
-								<li class="divider"></li>
 								<security:authorize access="hasRole('ROLE_ORGANIZATION')">
-									<li><a href="${pageContext.request.contextPath}/forms/create">Създай форма<span
+									<li><a href="${pageContext.request.contextPath}/events/createEvent"><spring:message code="createEvent" /><span
+											class="glyphicon glyphicon-plus pull-right"></span></a></li>
+									<li class="divider"></li>
+									<li><a href="${pageContext.request.contextPath}/events/myEvents"><spring:message code="myEvents" /><span
+											class="glyphicon glyphicon-list-alt pull-right"></span></a></li>
+									<li class="divider"></li>
+									<li><a href="${pageContext.request.contextPath}/forms/create"><spring:message code="createForm" /><span
+											class="glyphicon glyphicon-plus pull-right"></span></a></li>
+									<li class="divider"></li>
+									<li><a href="${pageContext.request.contextPath}/forms/viewForms"><spring:message code="myForms" /><span
+											class="glyphicon glyphicon-list-alt pull-right"></span></a></li>
+											<li class="divider"></li>
+								</security:authorize>
+								<security:authorize access="hasRole('ROLE_INDIVIDUAL')">
+									<li><a href="${pageContext.request.contextPath}/events/createInitiative"><spring:message code="createInitiative" /><span
 											class="glyphicon glyphicon-plus pull-right"></span></a></li>
 									<li class="divider"></li>
 								</security:authorize>
-								<li><a href="#">Messages <span class="badge pull-right"> 42 </span></a></li>
+								<li><a href="#"><spring:message code="messages" /> <span class="badge pull-right"> 12 </span></a></li>
 								<li class="divider"></li>
-								<li><a href="${pageContext.request.contextPath}/j_spring_security_logout">Sign Out <span
+								<li><a href="${pageContext.request.contextPath}/j_spring_security_logout"><spring:message code="logout" /> <span
 										class="glyphicon glyphicon-log-out pull-right"></span></a></li>
 							</ul></li>
 					</security:authorize>
-					<security:authorize access="isAnonymous()"> <!-- isAuthenticated() -->
-					
+					<security:authorize access="isAnonymous()">
+						<li><a href="${pageContext.request.contextPath}/login"><spring:message code="enter" /> <span
+								class="glyphicon glyphicon-log-in pull-left"></span></a></li>
 					</security:authorize>
-					<!-- 					<li><a data-toggle="modal" data-target="#login" href=""> <img alt="Enter profile" -->
-					<%-- 							src="${rootURL}/resources/images/profile.png" /> --%>
-					<!-- 					</a></li> -->
 					<li><a href="?lang=en"> <img alt="" src="${rootURL}/resources/images/en.png" /></a></li>
 					<li><a href="?lang=bg"> <img alt="" src="${rootURL}/resources/images/bg.png" /></a></li>
 				</ul>

@@ -30,7 +30,7 @@
 						<ul class="nav nav-tabs">
 							<li class="active"><a data-toggle="tab" href="#profileMyNotifications"><span>Новини и известия</span></a></li>
 							<li><a data-toggle="tab" href="#profileEdit"><span>Редактиране на профил</span></a></li>
-							<li><a data-toggle="tab" href="#profileEdit"><span>Промяна на парола</span></a></li>
+							<li><a data-toggle="tab" href="#changePassword"><span>Промяна на парола</span></a></li>
 							<li><a data-toggle="tab" href="#profileMyEvents"><span>Моите събития</span></a></li>
 						</ul>
 					</div>
@@ -41,7 +41,7 @@
 						<div id="profileMyNotifications" class="tab-pane fade in active">
 							<div class="notify row">
 								<div class="notify-left col-md-2 text-center">
-									<a href=""> <img class="img-circle" alt="" src="${imgURL}/team1_128x128.jpg">
+									<a href=""> <img class="img-circle" alt="" src="${imgURL}team1_128x128.jpg">
 									</a>
 								</div>
 								<div class="notify-right col-md-10">
@@ -54,7 +54,7 @@
 
 							<div class="notify row">
 								<div class="notify-left col-md-2 text-center">
-									<a href=""> <img class="img-circle" alt="" src="${imgURL}/team1_128x128.jpg">
+									<a href=""> <img class="img-circle" alt="" src="${imgURL}team1_128x128.jpg">
 									</a>
 								</div>
 								<div class="notify-right col-md-10">
@@ -79,7 +79,7 @@
 
 							<div class="notify row">
 								<div class="notify-left col-md-2 center">
-									<a href=""> <img class="img-circle" alt="" src="${imgURL}/team1_128x128.jpg">
+									<a href=""> <img class="img-circle" alt="" src="${imgURL}team1_128x128.jpg">
 									</a>
 								</div>
 								<div class="notify-right col-md-10">
@@ -90,7 +90,7 @@
 								</div>
 							</div>
 						</div>
-						
+
 						<div id="profileEdit" class="tab-pane fade col-md-12">
 							<div class="row">
 								<div class="register_user_inputs ">
@@ -185,6 +185,16 @@
 
 										</fieldset>
 									</form:form>
+								</div>
+							</div>
+						</div>
+
+						<div id="changePassword" class="tab-pane fade col-md-8">
+							<div class="row">
+								<div class="form-group col-md-12">
+									<input id="lastName" type="password" placeholder="Стара парола" required="required" class="form-control" /> <input
+										id="lastName" type="password" placeholder="Нова парола" required="required" class="form-control" /> <input
+										id="lastName" type="password" placeholder="Повторете новата парола" required="required" class="form-control" />
 								</div>
 							</div>
 						</div>

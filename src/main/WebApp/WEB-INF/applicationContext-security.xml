@@ -15,6 +15,12 @@
 		<security:intercept-url pattern="/login" access="isAnonymous()" />
 		<security:intercept-url pattern="/users/register" access="permitAll" />
 		<security:intercept-url pattern="/users/register/**" access="permitAll" />
+		<security:intercept-url pattern="/about" access="permitAll" />
+		<security:intercept-url pattern="/users" access="permitAll" />
+		<security:intercept-url pattern="/users/ajax/**" access="permitAll" />
+		<security:intercept-url pattern="/events" access="permitAll" />
+		<security:intercept-url pattern="/events/search" access="permitAll" />
+		<security:intercept-url pattern="/events/createEvent" access="hasRole('ROLE_ORGANIZATION')" />
 		<security:intercept-url pattern="/j_spring_security_check" access="isAnonymous()" />
 		<security:intercept-url pattern="/error/**" access="permitAll" />
 		<security:intercept-url pattern="/**"

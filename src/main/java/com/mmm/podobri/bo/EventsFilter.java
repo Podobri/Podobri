@@ -3,7 +3,7 @@
  *
  * created at 21.01.2015 ã. by Mariyan
  */
-package com.mmm.podobri.util;
+package com.mmm.podobri.bo;
 
 import java.util.Date;
 import java.util.List;

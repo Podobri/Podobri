@@ -16,10 +16,10 @@ import org.hibernate.sql.JoinType;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.mmm.podobri.bo.EventsFilter;
 import com.mmm.podobri.model.Activity;
 import com.mmm.podobri.model.Event;
 import com.mmm.podobri.model.User;
-import com.mmm.podobri.util.EventsFilter;
 
 
 @Repository
