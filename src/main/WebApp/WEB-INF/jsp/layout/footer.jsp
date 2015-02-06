@@ -70,3 +70,4 @@
 <script src="${resURL}/js/jquery.datetimepicker.js"></script>
 <script src="${resURL}/js/main.js"></script>
 <script src="${resURL}/js/chosen.jquery.min.js"></script>
+<script src="${resURL}/js/verify.js"></script>

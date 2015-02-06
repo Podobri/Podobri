@@ -23,7 +23,7 @@
 				<form method="post" action="${pageContext.request.contextPath}/j_spring_security_check?targetUrl=${targetUrl}">
 					<div class="row">
 						<div class="top-margin">
-							<input type="text" class="form-control" name="j_username" placeholder="email/потребителско име" required="required">
+							<input type="text" class="form-control" name="j_username" placeholder="email/потребителско име" data-validate="required,alphaNumeric,min(4),max(70)">
 						</div>
 					</div>
 					<br />
@@ -32,7 +32,7 @@
 							<input type="password" class="form-control" name="j_password" placeholder="парола" required="required">
 						</div>
 						<div id="forgettenPassword">
-							<b> <a data-toggle="modal" data-target="#forgottenPassword" href="">Забравена парола?</a></b>
+							<b> <a data-toggle="modal" data-validate="required,alphaNumeric,min(4),max(40)" data-target="#forgottenPassword" href="">Забравена парола?</a></b>
 						</div>
 					</div>
 					<br />

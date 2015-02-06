@@ -37,13 +37,13 @@
 								<div class="row">
 									<!-- Text input-->
 									<div class="form-group col-md-6">
-										<form:input id="username" path="username" placeholder="потребителско име" required="required"
+										<form:input id="username" path="username" placeholder="потребителско име" data-validate="required,alphaNumeric,min(6),max(70)"
 											cssClass="form-control" />
 									</div>
 
 									<!-- Text input-->
 									<div class="form-group col-md-6">
-										<form:input id="email" path="email" type="email" placeholder="email" required="required"
+										<form:input id="email" path="email" type="email" placeholder="email" data-validate="required,email,min(6),max(70)"
 											cssClass="form-control" />
 									</div>
 								</div>
@@ -51,24 +51,24 @@
 								<div class="row">
 									<!-- Password input -->
 									<div class="form-group col-md-6">
-										<form:password id="password" path="password" placeholder="парола" required="required" cssClass="form-control" />
+										<form:password id="password" path="password" placeholder="парола" data-validate="required,alphaNumeric,min(6),max(40)" cssClass="form-control" />
 									</div>
 
 									<!-- Password input -->
 									<div class="form-group col-md-6">
 										<form:password id="paswordConfirm" path="confirmedPassword" placeholder="повторете паролата"
-											required="required" cssClass="form-control" />
+											data-validate="required,alphaNumeric,min(6),max(40)" cssClass="form-control" />
 									</div>
 								</div>
 
 								<div class="row">
 									<div class="form-group col-md-6">
-										<form:input id="firstName" path="individual.firstName" placeholder="име" required="required"
+										<form:input id="firstName" path="individual.firstName" placeholder="име" data-validate="required,alphaNumeric,min(4),max(30)"
 											cssClass="form-control" />
 									</div>
 
 									<div class="form-group col-md-6">
-										<form:input id="lastName" path="individual.lastName" placeholder="фамилия" required="required"
+										<form:input id="lastName" path="individual.lastName" placeholder="фамилия" data-validate="required,alphaNumeric,min(4),max(30)"
 											cssClass="form-control" />
 									</div>
 								</div>
@@ -164,24 +164,24 @@
 								<legend>Регистрация</legend>
 								<div class="row">
 									<div class="form-group col-md-6">
-										<form:input id="username" path="username" placeholder="име на организация" required="required"
+										<form:input id="username" path="username" placeholder="име на организация" data-validate="required,alphaNumeric,min(4),max(45)"
 											cssClass="form-control" />
 									</div>
 
 									<div class="form-group col-md-6">
-										<form:input id="email" path="email" type="email" placeholder="email" required="required"
+										<form:input id="email" path="email" type="email" placeholder="email" data-validate="required,email,min(4),max(30)"
 											cssClass="form-control" />
 									</div>
 								</div>
 
 								<div class="row">
 									<div class="form-group col-md-6">
-										<form:password id="password" path="password" placeholder="парола" required="required" cssClass="form-control" />
+										<form:password id="password" path="password" placeholder="парола" data-validate="required,alphaNumeric,min(4),max(30)" cssClass="form-control" />
 									</div>
 
 									<div class="form-group col-md-6">
 										<form:password id="paswordConfirm" path="confirmedPassword" placeholder="Повторете паролата"
-											required="required" cssClass="form-control" />
+											data-validate="required,alphaNumeric,min(4),max(30)" cssClass="form-control" />
 									</div>
 								</div>
 
@@ -221,7 +221,7 @@
 
 								<div class="row">
 									<div class="form-group col-md-12">
-										<form:input id="address" path="organization.address" placeholder="адрес" required="required"
+										<form:input id="address" path="organization.address" placeholder="адрес" data-validate="required,alphaNumeric,min(4),max(45)"
 											cssClass="form-control" />
 									</div>
 								</div>
