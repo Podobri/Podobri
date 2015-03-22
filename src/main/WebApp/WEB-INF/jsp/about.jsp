@@ -18,10 +18,10 @@
 				<div class="row">
 					<div id="aboutMenu" class="menuTabs">
 						<ul class="nav nav-tabs">
-							<li class="active"><a data-toggle="tab" href="#idea"><spring:message code="menuAboutIdea" /></a></li>
-							<li><a data-toggle="tab" href="#values"><spring:message code="menuAboutValues" /></a></li>
-							<li><a data-toggle="tab" href="#howWeWork"><spring:message code="menuAboutHowWeWork" /></a></li>
-							<li><a data-toggle="tab" href="#team"><spring:message code="menuAboutTeam" /></a></li>
+							<li class="active"><a data-toggle="tab" href="#idea"><spring:message code="aboutMenuIdea" /></a></li>
+							<li><a data-toggle="tab" href="#values"><spring:message code="aboutMenuValues" /></a></li>
+							<li><a data-toggle="tab" href="#howWeWork"><spring:message code="aboutMenuHowWeWork" /></a></li>
+							<li><a data-toggle="tab" href="#team"><spring:message code="aboutMenuOurTeam" /></a></li>
 						</ul>
 					</div>
 				</div>
@@ -31,7 +31,7 @@
 
 						<div id="idea" class="tab-pane fade in active">
 							<h3>
-								<spring:message code="menuAboutTheIdea" />
+								<spring:message code="aboutIdeaTitle" />
 							</h3>
 							<hr />
 							<p>This is some sample text. This is some sample text.This is some sample text. This is some sample text.
@@ -53,7 +53,7 @@
 
 						<div id="values" class="tab-pane fade">
 							<h3>
-								<spring:message code="menuAboutOurValues" />
+								<spring:message code="aboutValuesTitle" />
 							</h3>
 							<hr />
 							<p>This is some sample text. This is some sample text.This is some sample text. This is some sample text.
@@ -70,7 +70,7 @@
 
 						<div id="howWeWork" class="tab-pane fade">
 							<h3>
-								<spring:message code="menuAboutHowWeWorkSub" />
+								<spring:message code="aboutHowWeWorkTitle" />
 							</h3>
 							<hr />
 							<p>This is some sample text. This is some sample text.This is some sample text. This is some sample text.
@@ -87,7 +87,7 @@
 
 						<div id="team" class="tab-pane fade">
 							<h3>
-								<spring:message code="menuAboutTheTeam" />
+								<spring:message code="aboutOurTeamTitle" />
 							</h3>
 							<hr />
 

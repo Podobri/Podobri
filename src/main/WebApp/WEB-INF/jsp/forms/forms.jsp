@@ -12,14 +12,14 @@
 				<div class="row">
 					<div id="actual-events-label" class="col-md-10">
 						<h3>
-							<strong>Вашите форми</strong>
+							<strong><spring:message code="menuMyForms" /></strong>
 						</h3>
 						<hr />
 						<table id="forms-table" class="table table-striped table-bordered">
 							<thead>
 								<tr>
-									<th>Name</th>
-									<th>Created</th>
+									<th><spring:message code="formName" /></th>
+									<th><spring:message code="created" /></th>
 									<th></th>
 								</tr>
 							</thead>
@@ -30,7 +30,7 @@
 										<td>${form.created }</td>
 										<td><a target="_blank" href="${pageContext.request.contextPath}/forms/viewForm/${form.name}">
 												<button type="button" class="btn btn-info">
-													<span class="fa fa-eye">Преглед</span>
+													<span class="fa fa-eye"><spring:message code="viewBtn" /></span>
 												</button>
 										</a></td>
 									</tr>

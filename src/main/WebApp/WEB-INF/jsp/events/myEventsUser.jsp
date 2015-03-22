@@ -1,12 +1,13 @@
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
+<%@taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 <%@ taglib uri="http://java.sun.com/jstl/core_rt" prefix="c"%>
 <div id="profileMyEvents" class="tab-pane fade">
 	<div class="row">
 		<div id="myEvents" class="menuTabs col-md-5">
 			<ul class="nav nav-tabs">
-				<li class="active"><a data-toggle="tab" href="#myEventsIncoming">Предстоящи</a></li>
-				<li><a data-toggle="tab" href="#myEventsPast">Изминали</a></li>
-				<li><a data-toggle="tab" href="#myEventsAll">Всички</a></li>
+				<li class="active"><a data-toggle="tab" href="#myEventsIncoming"><spring:message code="myEventsUpcoming" /></a></li>
+				<li><a data-toggle="tab" href="#myEventsPast"><spring:message code="myEventsPast" /></a></li>
+				<li><a data-toggle="tab" href="#myEventsAll"><spring:message code="myEventsAll" /></a></li>
 			</ul>
 		</div>
 	</div>
@@ -17,11 +18,11 @@
 				<table class="myEventsTable table table-striped table-bordered">
 					<thead>
 						<tr>
-							<th>Title</th>
-							<th>Start date</th>
-							<th>Start time</th>
-							<th>Country</th>
-							<th>City</th>
+							<th><spring:message code="eventTitle" /></th>
+							<th><spring:message code="eventStart" /></th>
+							<th><spring:message code="eventEnd" /></th>
+							<th><spring:message code="country" /></th>
+							<th><spring:message code="city" /></th>
 							<th></th>
 						</tr>
 					</thead>
@@ -38,7 +39,7 @@
 										<div class="col-md-6">
 											<a href="${pageContext.request.contextPath}/events/viewEvent/${event.event.id}">
 												<button type="button" class="btn btn-info">
-													<span class="glyphicon glyphicon-search">Преглед</span>
+													<span class="glyphicon glyphicon-search"><spring:message code="viewBtn" /></span>
 												</button>
 											</a>
 										</div>
@@ -54,11 +55,11 @@
 				<table class="myEventsTable table table-striped table-bordered">
 					<thead>
 						<tr>
-							<th>Title</th>
-							<th>Created</th>
-							<th>Modified</th>
-							<th>Country</th>
-							<th>City</th>
+							<th><spring:message code="eventTitle" /></th>
+							<th><spring:message code="eventStart" /></th>
+							<th><spring:message code="eventEnd" /></th>
+							<th><spring:message code="country" /></th>
+							<th><spring:message code="city" /></th>
 							<th></th>
 						</tr>
 					</thead>
@@ -75,7 +76,7 @@
 										<div class="col-md-6">
 											<a href="${pageContext.request.contextPath}/events/viewEvent/${event.event.id}">
 												<button type="button" class="btn btn-info">
-													<span class="glyphicon glyphicon-search">Преглед</span>
+													<span class="glyphicon glyphicon-search"><spring:message code="viewBtn" /></span>
 												</button>
 											</a>
 										</div>
@@ -90,11 +91,11 @@
 				<table class="myEventsTable table table-striped table-bordered">
 					<thead>
 						<tr>
-							<th>Title</th>
-							<th>Created</th>
-							<th>Modified</th>
-							<th>Country</th>
-							<th>City</th>
+							<th><spring:message code="eventTitle" /></th>
+							<th><spring:message code="eventStart" /></th>
+							<th><spring:message code="eventEnd" /></th>
+							<th><spring:message code="country" /></th>
+							<th><spring:message code="city" /></th>
 							<th></th>
 						</tr>
 					</thead>
@@ -110,7 +111,7 @@
 									<div class="col-md-6">
 										<a href="${pageContext.request.contextPath}/events/viewEvent/${event.event.id}">
 											<button type="button" class="btn btn-info">
-												<span class="glyphicon glyphicon-search">Преглед</span>
+												<span class="glyphicon glyphicon-search"><spring:message code="viewBtn" /></span>
 											</button>
 										</a>
 									</div>

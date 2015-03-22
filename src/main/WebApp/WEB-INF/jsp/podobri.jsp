@@ -1,14 +1,18 @@
+<!DOCTYPE html>
 <%@taglib uri="http://www.springframework.org/tags" prefix="spring"%>
+<%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@ taglib uri="http://java.sun.com/jstl/core_rt" prefix="c"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 <c:url var="imgURL" value="resources/images/" />
-<!DOCTYPE html>
+<c:url var="images" value="/images/" />
+<c:url var="thumb128" value="/images/thumbnail128x128/" />
+<c:url var="thumb450" value="/images/thumbnail400x25/" />
 <html>
 <jsp:include page="layout/head.jsp" />
 <body>
 	<div class="container">
-		<jsp:include page="layout/menu.jsp" />
+<%-- 		<jsp:include page="layout/menu.jsp" /> --%>
 		<div id="content">
 			<div id="main" class="col-md-12">
 				<div class="row">
@@ -16,56 +20,68 @@
 						<section id="main-slider" class="carousel">
 							<div class="quick-search col-md-12">
 								<div class="big-title">
-									<h2><spring:message code="quickSearchTitle" /></h2>
+									<h2>
+										<spring:message code="quickSearchTitle" />
+									</h2>
 								</div>
 								<div class="mini-title">
-									<h3><spring:message code="quickSearchSubTitle" /></h3>
+									<h3>
+										<spring:message code="quickSearchSubTitle" />
+									</h3>
 								</div>
 								<div class="form">
-									<form>
+									<form:form id="eventsFilterForm" modelAttribute="eventsFilter" method="post"
+										action="${pageContext.request.contextPath}/events/search/main">
 										<div class="quick-search-inputs col-md-9">
 											<div class="col-md-6">
-												<select name="searchingFor" class="form-control">
-													<option value="" selected="selected"><spring:message code="quickSearchWhat" /></option>
-												</select>
+												<form:select id="opportunityCategoryId" path="categoryId" cssClass="form-control">
+													<form:option id="opportunityCategoryNone" value="-1">---<spring:message code="quickSearchWhat" />---</form:option>
+													<form:options items="${categoriesList}" itemValue="id" itemLabel="category" />
+												</form:select>
 											</div>
 											<div class="col-md-6">
-												<select name="searchingType" class="form-control">
-													<option value="" selected="selected"><spring:message code="quickSearchType" /></option>
-												</select>
+												<form:select id="opportunityId" path="opportunityId" cssClass="form-control">
+													<form:option id="opportunityNone" value="-1">---<spring:message code="quickSearchType" />---</form:option>
+													<form:options items="${opportunitiesList}" itemValue="id" itemLabel="opportunity" />
+												</form:select>
 											</div>
 											<div class="col-md-6">
-												<select name="searchingDetails" class="form-control">
-													<option value="" selected="selected"><spring:message code="quickSearchDetails" /></option>
-												</select>
+												<form:select id="eventCostTypesId" path="costTypeId" cssClass="form-control">
+													<form:option id="eventCostTypesNone" value="-1" selected="selected">
+														<spring:message code="financing" />
+													</form:option>
+													<form:options items="${costTypesList}" itemValue="id" itemLabel="cost" />
+												</form:select>
 											</div>
 											<div class="col-md-6">
-												<select name="searchingSphere" class="form-control">
-													<option value="" selected="selected"><spring:message code="quickSearchActivity" /></option>
-												</select>
+												<form:select id="activities" path="activities" multiple="false" cssClass="form-control">
+													<form:option id="activityNone" value="-1" selected="selected">
+														<spring:message code="quickSearchActivity" />
+													</form:option>
+													<form:options items="${activitiesList}" itemValue="id" itemLabel="type" />
+												</form:select>
 											</div>
 										</div>
 										<div class="quick-search-find col-md-3">
-											<input type="submit" class="form-control" value="<spring:message code="quickSearchSearch" />" />
+											<input type="submit" class="form-control btn btn-success" value="<spring:message code="quickSearchSearch" />" />
 										</div>
-									</form>
+									</form:form>
 								</div>
 							</div>
-							
-							
+
 							<div class="carousel-inner">
-<%-- 								<c:forEach var="teaminfo" items="${teaminfos}" varStatus="status"> --%>
-<%-- 									<div class="item ${status.first ? 'active' : '' }"> --%>
-<!-- 										<div class="container"> -->
-<!-- 											<div class="carousel-content"> -->
-<!-- 												<a data-toggle="modal" data-target="#${teaminfo.firstname}" href=""> -->
-<%-- 													<h1>${teaminfo.fullname}</h1> --%>
-<!-- 												</a> -->
-<%-- 												<p class="lead">${teaminfo.position}</p> --%>
-<!-- 											</div> -->
-<!-- 										</div> -->
-<!-- 									</div> -->
-<%-- 								</c:forEach> --%>
+								<%-- 								<c:forEach var="teaminfo" items="${teaminfos}" varStatus="status"> --%>
+								<%-- 									<div class="item ${status.first ? 'active' : '' }"> --%>
+								<!-- 										<div class="container"> -->
+								<!-- 											<div class="carousel-content"> -->
+								<!-- 												<a data-toggle="modal" data-target="#${teaminfo.firstname}" href=""> -->
+								<%-- 													<h1>${teaminfo.fullname}</h1> --%>
+								<!-- 												</a> -->
+								<%-- 												<p class="lead">${teaminfo.position}</p> --%>
+								<!-- 											</div> -->
+								<!-- 										</div> -->
+								<!-- 									</div> -->
+								<%-- 								</c:forEach> --%>
 							</div>
 
 							<a class="prev" href="#main-slider" data-slide="prev"> <i class="icon-angle-left"></i></a> <a class="next"
@@ -73,44 +89,6 @@
 						</section>
 					</div>
 					<!-- END slide -->
-
-					<c:forEach var="teaminfo" items="${teaminfos}">
-						<div class="modal fade col-md-12" id="${teaminfo.firstname}" tabindex="-1" aria-labelledby="myModalLabel"
-							aria-hidden="true">
-							<div class="modal-dialog modal-wide60">
-								<div class="modal-content col-md-10">
-									<div class="modal-header">
-										<button type="button" class="close" data-dismiss="modal" aria-hidden="true">X</button>
-										<h3>${teaminfo.fullname}</h3>
-										${teaminfo.position}
-									</div>
-									<div class="modal-body col-md-12">
-										<div class="AboutPictureSection col-md-5">
-											<a href="#x" class="thumbnail"> <img alt="View" src="${imgURL}/team1.jpg">
-											</a>
-										</div>
-										<div class="AboutInformationSection col-md-7">
-											<div class="AboutInformationText">
-												<p>${teaminfo.info}</p>
-											</div>
-											<div class="AboutInformationContacts">
-												<h2>
-													<a> Contact </a>
-												</h2>
-												<p class="icon-phone">
-													<a> ${teaminfo.phone} </a>
-												</p>
-												<br />
-												<p class="icon-envelope">
-													<a> ${teaminfo.email} </a>
-												</p>
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-					</c:forEach>
 				</div>
 
 				<div class="row">
@@ -130,15 +108,26 @@
 										<div class="item ${status.first ? 'active' : '' }">
 											<div class="row">
 												<c:forEach var="closestEvent" items="${closestEventGroup}" varStatus="status">
+													<c:choose>
+														<c:when test="${not empty closestEvent.event.picture}">
+															<c:set value="${thumb450}${closestEvent.event.picture}" var="picture" />
+														</c:when>
+														<c:otherwise>
+															<c:set value="${imgURL}thumb450.gif" var="picture" />
+														</c:otherwise>
+													</c:choose>
 													<div class="item col-md-4">
 														<div class="thumbnail">
 															<a data-toggle="modal" data-target="#eventView" href=""><img class="group list-group-image"
-																src="http://placehold.it/400x250/000/fff" alt="" /></a>
+																src="${picture }" alt="" /></a>
 															<div class="caption">
 																<a data-toggle="modal" data-target="#eventView" href="">
 																	<h4 class="group inner list-group-item-heading">${closestEvent.event.title }</h4>
 																</a>
-																<p>От : ${closestEvent.event.user.username }</p>
+																<p>
+																	<spring:message code="from" />
+																	: ${closestEvent.event.user.username }
+																</p>
 																<p class="thumbnail_footer">
 																	<span class="thumbnail_date"> <img alt="date" src="${imgURL}/thumblines/date.png">
 																		${closestEvent.dateFromDayOfMonth } ${closestEvent.dateFromMonth }
@@ -167,6 +156,10 @@
 		<jsp:include page="layout/footer.jsp" />
 	</div>
 	<!-- end main container -->
+	<script>
+// 	makeAjaxCall('opportunityCategoryId', 'getOpportunitiesByCategory',
+// 			'change', "opportunityId", "opportunity");
+	</script>
 </body>
 </html>
 

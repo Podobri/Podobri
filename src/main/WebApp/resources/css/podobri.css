@@ -288,7 +288,7 @@ textarea {
 }
 
 #eventViewFullPicture {
-	background-image: url(../images/aboutUs.png);
+	background-image: url(../images/Overlay.png);
 	/* 	width: 792px; */
 	height: 300px;
 }
@@ -310,7 +310,7 @@ textarea {
 }
 
 #pageWelcome {
-	background-image: url(../images/logo.jpg);
+	background-image: url(../images/Overlay.png);
 	width: 950px;
 	height: 300px;
 }

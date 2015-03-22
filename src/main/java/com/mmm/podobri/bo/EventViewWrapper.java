@@ -11,6 +11,7 @@ import java.util.Date;
 import java.util.List;
 
 import com.mmm.podobri.model.Event;
+import com.mmm.podobri.model.EventsParticipant;
 import com.mmm.podobri.service.EventService.EventStatus;
 import com.mmm.podobri.util.CalendarUtil;
 
@@ -46,7 +47,13 @@ public class EventViewWrapper
     public EventViewWrapper(final Event event)
     {
         this.event = event;
-        this.eventParticipantsSize = event.getEventsParticipants().size();
+        List<EventsParticipant> eventsParticipants = event.getEventsParticipants();
+        int size = 0;
+        if (eventsParticipants != null)
+        {
+            size = eventsParticipants.size();
+        }
+        this.eventParticipantsSize = size;
         this.country = event.getCountry().getCountry();
         this.city = event.getCity().getCity();
         this.category = event.getOpportunityCategory().getCategory();

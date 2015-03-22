@@ -135,6 +135,24 @@ public class EventsController
     }
 
 
+    @RequestMapping(value = "/search/main", method = RequestMethod.POST)
+    public ModelAndView searchEventsMain(@Valid @ModelAttribute("eventsFilter") EventsFilter searchCriteria, BindingResult result)
+    {
+        if (result.hasErrors())
+        {
+            // return model;
+        }
+        final ModelAndView m = new ModelAndView("events/events");
+        List<Event> filteredEvents = eventService.search(searchCriteria);
+        m.addObject("actualEvents", EventViewWrapper.buildEventViewWrapperList(filteredEvents));
+        String filteredEventsMessage = "Found " + filteredEvents.size() + " results";
+        m.addObject("filteredEventsMessage", filteredEventsMessage);
+        EventsFilter filter = new EventsFilter();
+        m.addObject("eventsFilter", filter);
+        return loadSelects(m);
+    }
+
+
     @RequestMapping(value = "/viewEvent/{id}", method = RequestMethod.GET)
     public ModelAndView viewEvent(@PathVariable Integer id)
     {
@@ -232,10 +250,54 @@ public class EventsController
     public ModelAndView apply(@PathVariable Integer id)
     {
         final Event event = eventService.findOne(id);
-        eventService.apply(event);
+        boolean apply = eventService.apply(event, null);
         final ModelAndView model = new ModelAndView("events/eventsView");
         EventViewWrapper eventWrapper = new EventViewWrapper(event);
         model.addObject("event", eventWrapper);
+        String applyResult;
+        if (apply)
+        {
+            applyResult = "You succesfull apply for the event";
+        }
+        else
+        {
+            applyResult = "You are already applied for this event";
+        }
+        model.addObject("applyResult", applyResult);
+        return model;
+    }
+
+
+    @RequestMapping(value = "/fillForm/{id}", method = RequestMethod.GET)
+    public ModelAndView applyWithForm(@PathVariable Integer id)
+    {
+        final ModelAndView model = new ModelAndView("forms/viewFormUser");
+        final Event event = eventService.findOne(id);
+        OrganizationsForm form = event.getForm();
+        model.addObject("formContent", form.getForm());
+        model.addObject("eventId", id);
+        return model;
+    }
+
+
+    @RequestMapping(value = "/applyForm", method = RequestMethod.POST)
+    public ModelAndView applyForm(@RequestParam("content") String content, @RequestParam("eventId") String eventId)
+    {
+        final Event event = eventService.findOne(Integer.parseInt(eventId));
+        boolean apply = eventService.apply(event, content);
+        final ModelAndView model = new ModelAndView("events/eventsView");
+        EventViewWrapper eventWrapper = new EventViewWrapper(event);
+        model.addObject("event", eventWrapper);
+        String applyResult;
+        if (apply)
+        {
+            applyResult = "You succesfull apply for the event";
+        }
+        else
+        {
+            applyResult = "You are already applied for this event";
+        }
+        model.addObject("applyResult", applyResult);
         return model;
     }
 
@@ -287,7 +349,8 @@ public class EventsController
         eventService.sendMailToParticipant(id, userId, template);
         return "redirect:/events/myEvents";
     }
-    
+
+
     @RequestMapping(value = "/generatePDF/{id}", method = RequestMethod.GET)
     public ModelAndView generatePDF(@PathVariable Integer id)
     {
@@ -296,7 +359,8 @@ public class EventsController
         model.addObject("event", event);
         return model;
     }
-    
+
+
     @RequestMapping(value = "/generateExcel/{id}", method = RequestMethod.GET)
     public ModelAndView generateExcel(@PathVariable Integer id)
     {

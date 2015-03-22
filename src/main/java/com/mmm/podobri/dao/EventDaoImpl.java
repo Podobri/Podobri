@@ -90,7 +90,10 @@ public class EventDaoImpl
             int t = 0;
             for (Activity a : activities)
             {
-                activityIds[t++] = a.getId();
+                if (a != null)
+                {
+                    activityIds[t++] = a.getId();
+                }
             }
             criteria.createAlias("eventsActivities",
                                  "event_activities",

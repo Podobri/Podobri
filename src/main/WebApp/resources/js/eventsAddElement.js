@@ -55,6 +55,7 @@ function addElement(programsSize, lectorsSize, sponsorsSize) {
 						$("#addProgramRow").before(inputSection);
 						programIndex++;
 					});
+	
 
 	$("#addLector")
 			.click(

@@ -223,10 +223,21 @@ public class EventServiceImpl
     }
 
 
-    public boolean apply(Event event)
+    public boolean apply(Event event, String appForm)
     {
         User currentUser = getCurrentUser();
+        for(EventsParticipant ep : event.getEventsParticipants())
+        {
+            if (ep.getUserId() == currentUser.getId())
+            {
+                return false;
+            }
+        }
         EventsParticipant participant = new EventsParticipant();
+        if (appForm != null && !appForm.isEmpty())
+        {
+            participant.setAppForm(appForm);
+        }
         event.addEventsParticipant(participant);
         currentUser.getIndividual().addEventsParticipant(participant);
         participant.setStatus(ApplyStatus.APPLIED.getStatus());

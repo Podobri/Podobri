@@ -11,25 +11,23 @@
 			<div id="users">
 				<div class="row">
 					<div id="actual-events-label" class="col-md-10">
-						<h3><strong>Организации</strong></h3>
+						<h3><strong><spring:message code="organizations" /></strong></h3>
 						<hr />
 						<table id="users-table"
 							class="table table-striped table-bordered">
 							<thead>
 								<tr>
-									<th>Потребителско име</th>
-									<th>Наименование</th>
-									<th>Email</th>
-									<th>Регистрирана</th>
-									<th>Държава</th>
-									<th>Град</th>
+									<th><spring:message code="organizationName" /></th>
+									<th><spring:message code="email" /></th>
+									<th><spring:message code="registered" /></th>
+									<th><spring:message code="country" /></th>
+									<th><spring:message code="city" /></th>
 <!-- 									<th></th> -->
 								</tr>
 							</thead>
 							<tbody>
 								<c:forEach var="user" items="${users}">
 									<tr>
-										<td>${user.username }</td>
 										<td>${user.organization.name }</td>
 										<td>${user.email }</td>
 										<td>${user.userInfo.created }</td>

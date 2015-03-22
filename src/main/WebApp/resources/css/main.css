@@ -531,6 +531,15 @@ a:hover, a:focus {
 	color: #fff;
 }
 
+#logo
+{
+	margin-right: 50px;
+	margin-left: 20px;
+	width: 200px;
+	height: 60px;
+	background: url(../images//logo.png) no-repeat 0 50%;
+}
+
 #logo img {
 	width: 100%;
 }
@@ -555,7 +564,7 @@ a:hover, a:focus {
 	margin-right: 50px;
 	margin-left: 20px;
 	width: 200px;
-	height: 78px;
+	height: 60px;
 	background: url(../images//logo.png) no-repeat 0 50%;
 }
 

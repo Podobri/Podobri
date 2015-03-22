@@ -3,6 +3,9 @@
 <%@taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 <%@ taglib uri="http://java.sun.com/jstl/core_rt" prefix="c"%>
 <c:url var="imgURL" value="/resources/images/" />
+<c:url var="images" value="/images/" />
+<c:url var="thumb128" value="/images/thumbnail128x128/" />
+<c:url var="thumb450" value="/images/thumbnail400x25/" />
 <html>
 <jsp:include page="../layout/head.jsp" />
 <body>
@@ -11,7 +14,10 @@
 		<div id="content">
 			<div id="eventViewFull" class="col-md-10">
 				<div class="row">
-					<div id="eventViewFullPicture">
+					<c:if test="${not empty event.event.picture}">
+						<c:set value="background-image: url(${images}${event.event.picture })" var="picture" />
+					</c:if>
+					<div id="eventViewFullPicture" style="${not empty picture ? picture : '' }">
 						<div class="col-md-12">
 							<div id="eventFullViewDate" class="col-md-2">
 								<div id="eventFullViewDateNo">
@@ -35,7 +41,8 @@
 								<a href="${pageContext.request.contextPath}/events/apply/${event.event.id}">
 									<button type="button" class="btn btn-primary btn-lg">
 										<div class="col-md-6">
-											<span id="eventApply" class="glyphicon glyphicon-ok-sign"></span> КАНДИДАТСТВАЙ
+											<span id="eventApply" class="glyphicon glyphicon-ok-sign"></span>
+											<spring:message code="eventApplyBtn" />
 										</div>
 									</button>
 								</a>
@@ -55,43 +62,51 @@
 				<div class="row">
 					<div id="eventViewFullMenu" class="menuTabs">
 						<ul class="nav nav-tabs">
-							<li class="active"><a data-toggle="tab" href="#eventInformation">За събитието</a></li>
-							<li><a data-toggle="tab" href="#eventProgram">Програма</a></li>
-							<li><a data-toggle="tab" href="#eventLectors">Лектори</a></li>
-							<li><a data-toggle="tab" href="#eventSponsors">Спонсори</a></li>
+							<li class="active"><a data-toggle="tab" href="#eventInformation"><spring:message code="eventMenuAbout" /></a></li>
+							<li><a data-toggle="tab" href="#eventProgram"><spring:message code="eventMenuProgram" /></a></li>
+							<li><a data-toggle="tab" href="#eventLectors"><spring:message code="eventMenuLectors" /></a></li>
+							<li><a data-toggle="tab" href="#eventSponsors"><spring:message code="eventMenuSponsors" /></a></li>
 						</ul>
 					</div>
 				</div>
+
+				<c:if test="${not empty applyResult}">
+					<div class="alert alert-danger">${applyResult}</div>
+				</c:if>
 
 				<div class="row">
 					<div id="eventViewFullMenuContent" class="tab-content">
 						<div id="eventInformation" class="tab-pane fade in active">
 							<p>
-								<label>Категория:</label><span> ${event.category }</span> <br /> <label>Сфери на дейност:</label>
+								<label><spring:message code="category" />:</label><span> ${event.category }</span> <br /> <label><spring:message
+										code="activity" />:</label>
 								<c:forEach varStatus="status" var="eventActivity" items="${event.event.activities}">
 									<span> ${eventActivity.type } <c:if test="${!status.last}">,</c:if>
 									</span>
 								</c:forEach>
 							</p>
 							<p>
-								<label>Начало:</label><span> ${event.event.dateFrom }</span> <br /> <label>Край:</label><span>
-									${event.event.dateTo }</span> <br /> <label>Краен срок за кандидатстване:</label><span> ${event.event.deadline }</span>
+								<label><spring:message code="eventStart" />:</label><span> ${event.event.dateFrom }</span> <br /> <label><spring:message
+										code="eventEnd" />:</label><span> ${event.event.dateTo }</span> <br /> <label><spring:message
+										code="eventDeadline" />:</label><span> ${event.event.deadline }</span>
 							</p>
 							<p>
-								<label>Разходи за събитието:</label><span> ${event.costType }</span> <br /> <label>Организатор:</label><span>
-									<u>${event.organizator } </u>
+								<label><spring:message code="eventExpenses" />:</label><span> ${event.costType }</span> <br /> <label><spring:message
+										code="eventOrganizer" />:</label><span> <u>${event.organizator } </u>
 								</span>
 							</p>
 							<p>
-								<label>Описание:</label><span> ${event.event.description }</span>
+								<label><spring:message code="description" />:</label><span> ${event.event.description }</span>
 							</p>
 							<p>
-								<label>Допълнителна информация:</label><span> ${event.event.additionalInfo } </span> <br /> <label>Брой
-									участници:</label><span> ${event.eventParticipantsSize } </span> <br /> <label>Уеб сайт:</label><span> <a
-									href="${event.event.website}">${event.event.website }</a>
-								</span> <br /> <label>Фейсбук:</label><span> <a href="${event.event.facebook}">${event.event.facebook }</a></span> <br />
-								<label>Набира съорганизатори? </label><span> ${event.event.recruitCoorganizators ? 'Да' : 'Не'  }</span> <br />
-								<label>Изисква аппликационна форма? </label><span>${event.event.applicationFormRequire ? 'Да' : 'Не' } </span>
+								<label><spring:message code="eventAdditionalInfo" />:</label><span> ${event.event.additionalInfo } </span> <br />
+								<label><spring:message code="eventParticipants" />:</label><span> ${event.eventParticipantsSize } </span> <br />
+								<label><spring:message code="website" />:</label><span> <a href="${event.event.website}">${event.event.website }</a>
+								</span> <br /> <label><spring:message code="facebook" />:</label><span> <a href="${event.event.facebook}">${event.event.facebook }</a></span>
+								<br /> <label><spring:message code="eventGainingOrganizers" /> </label><span>
+									${event.event.recruitCoorganizators ? '<spring:message code="yes" />' : '<spring:message code="no" />'  }</span> <br />
+								<label><spring:message code="requireApplicationForm" /> </label><span>${event.event.applicationFormRequire ? '<spring:message code="yes" />' : '<spring:message code="no" />' }
+								</span>
 							</p>
 						</div>
 
@@ -100,9 +115,9 @@
 								<table class="table table-bordered table-striped">
 									<thead>
 										<tr>
-											<th>Тема</th>
-											<th>Начало</th>
-											<th>Край</th>
+											<th><spring:message code="subject" /></th>
+											<th><spring:message code="eventStart" /></th>
+											<th><spring:message code="eventEnd" /></th>
 										</tr>
 									</thead>
 									<tbody>
@@ -139,7 +154,7 @@
 								<div id="${lector.id}" class="eventLector">
 									<div class="media">
 										<div class="media-left">
-											<a href="#"> <img class="media-object" src="${lector.picture}" alt="...">
+											<a href="#"> <img class="media-object" src="${thumb128}${lector.picture}" alt="...">
 											</a>
 										</div>
 										<div class="media-body">
@@ -156,7 +171,7 @@
 							<c:forEach items="${event.event.sponsors}" var="sponsor">
 								<div class="col-md-3">
 									<div class="col-md-12 text-center">
-										<img class="img-circle" alt="" src="${sponsor.picture}" />
+										<img class="img-circle" alt="" src="${thumb128}${sponsor.picture}" />
 									</div>
 									<div class="col-md-12 text-center">
 										<h3>${sponsor.name}</h3>

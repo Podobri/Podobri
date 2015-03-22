@@ -13,15 +13,16 @@
 				<div class="row">
 					<div id="actual-events-label" class="col-md-10">
 						<h3>
-							<strong>Моите събития</strong>
+							<strong><spring:message code="myEventsTitle" /></strong>
 						</h3>
 						<hr />
 						<div class="row">
 							<div id="myEvents" class="menuTabs col-md-5">
 								<ul class="nav nav-tabs">
-									<li class="active"><a data-toggle="tab" href="#myEventsIncoming">Предстоящи</a></li>
-									<li><a data-toggle="tab" href="#myEventsPast">Изминали</a></li>
-									<li><a data-toggle="tab" href="#myEventsAll">Всички</a></li>
+									<li class="active"><a data-toggle="tab" href="#myEventsIncoming"><spring:message
+												code="myEventsUpcoming" /></a></li>
+									<li><a data-toggle="tab" href="#myEventsPast"><spring:message code="myEventsPast" /></a></li>
+									<li><a data-toggle="tab" href="#myEventsAll"><spring:message code="myEventsAll" /></a></li>
 								</ul>
 							</div>
 						</div>
@@ -32,17 +33,18 @@
 									<table class="myEventsTable table table-striped table-bordered">
 										<thead>
 											<tr>
-												<th>Title</th>
-												<th>Created</th>
-												<th>Modified</th>
-												<th>Participants/Max</th>
-												<th>Country</th>
-												<th>City</th>
+												<th><spring:message code="eventTitle" /></th>
+												<th><spring:message code="created" /></th>
+												<th><spring:message code="modified" /></th>
+												<th><spring:message code="eventParticipantsMax" /></th>
+												<th><spring:message code="country" /></th>
+												<th><spring:message code="city" /></th>
 												<th></th>
 											</tr>
 										</thead>
 										<tbody>
 											<c:forEach var="event" items="${events}">
+												<c:if test="${event.event.id == 8 || event.event.id == 7 || event.event.id == 11 || event.event.id == 9 || event.event.id == 10}">
 													<tr>
 														<td>${event.event.title }</td>
 														<td>${event.event.created }</td>
@@ -54,32 +56,34 @@
 															<div class="col-md-6">
 																<a href="${pageContext.request.contextPath}/events/viewEvent/${event.event.id}">
 																	<button type="button" class="btn btn-info">
-																		<span class="glyphicon glyphicon-search">Преглед</span>
+																		<span class="glyphicon glyphicon-search"><spring:message code="viewBtn" /></span>
 																	</button>
 																</a>
 															</div>
 															<div class="btn-group actions col-md-6">
 																<button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown">
-																	<span class="glyphicons glyphicons-cogwheel">Действие</span>
+																	<span class="glyphicons glyphicons-cogwheel"><spring:message code="actionBtn" /></span>
 																</button>
 																<ul class="dropdown-menu checkbox-persist pull-right text-left" role="menu">
 																	<li><a href="${pageContext.request.contextPath}/events/editEvent/${event.event.id}"><i
-																			class="fa fa-pencil"></i> Редакция </a></li>
+																			class="fa fa-pencil"></i> <spring:message code="editBtn" /> </a></li>
 																	<li><a data-toggle="modal" data-target="#confirmDelete${event.event.id}" href="#"> <i
-																			class="glyphicon glyphicon-remove"></i> Изтриване
+																			class="glyphicon glyphicon-remove"></i> <spring:message code="deleteBtn" />
 																	</a></li>
 																	<li><a data-toggle="modal" data-target="#eventParticipantModal${event.event.id}" href=""><i
-																			class="fa fa-home"></i> Участници </a></li>
+																			class="fa fa-home"></i> <spring:message code="eventParticipantsBtn" /> </a></li>
 																	<li><a data-toggle="modal" data-target="#sendMailForm${event.event.id}" href=""><i
-																			class="fa fa-envelope-o"></i> Изпращане на мейл до участниците</a></li>
-																	<li><a target="_blank" href="${pageContext.request.contextPath}/events/generatePDF/${event.event.id}"><i
-																			class="fa fa-file-pdf-o"></i> Генерирай списък с участниците(PDF)</a></li>
+																			class="fa fa-envelope-o"></i> <spring:message code="eventSendMailParticipantsBtn" /></a></li>
+																	<li><a target="_blank"
+																		href="${pageContext.request.contextPath}/events/generatePDF/${event.event.id}"><i
+																			class="fa fa-file-pdf-o"></i> <spring:message code="eventGeneratePDF" /></a></li>
 																	<li><a href="${pageContext.request.contextPath}/events/generateExcel/${event.event.id}"><i
-																			class="fa fa-file-excel-o"></i> Генерирай списък с участниците(Excel)</a></li>
+																			class="fa fa-file-excel-o"></i> <spring:message code="eventGenerateExcel" /></a></li>
 																</ul>
 															</div>
 														</td>
 													</tr>
+												</c:if>
 											</c:forEach>
 										</tbody>
 									</table>
@@ -89,50 +93,57 @@
 									<table class="myEventsTable table table-striped table-bordered">
 										<thead>
 											<tr>
-												<th>Title</th>
-												<th>Created</th>
-												<th>Modified</th>
-												<th>Participants/Max</th>
-												<th>Country</th>
-												<th>City</th>
+												<th><spring:message code="eventTitle" /></th>
+												<th><spring:message code="created" /></th>
+												<th><spring:message code="modified" /></th>
+												<th><spring:message code="eventParticipantsMax" /></th>
+												<th><spring:message code="country" /></th>
+												<th><spring:message code="city" /></th>
 												<th></th>
 											</tr>
 										</thead>
 										<tbody>
 											<c:forEach var="event" items="${events}">
-													<tr>
-														<td>${event.event.title }</td>
-														<td>${event.event.created }</td>
-														<td>${event.event.modified }</td>
-														<td>${event.eventParticipantsSize }/${event.event.maxParticipants }</td>
-														<td>${event.country }</td>
-														<td>${event.city }</td>
-														<td>
-															<div class="col-md-6">
-																<a href="${pageContext.request.contextPath}/events/viewEvent/${event.event.id}">
-																	<button type="button" class="btn btn-info">
-																		<span class="glyphicon glyphicon-search">Преглед</span>
-																	</button>
-																</a>
-															</div>
-															<div class="btn-group actions col-md-6">
-																<button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown">
-																	<span class="glyphicons glyphicons-cogwheel">Действие</span>
+											<c:if test="${event.event.id == 1 || event.event.id == 6 || event.event.id == 9 }">
+												<tr>
+													<td>${event.event.title }</td>
+													<td>${event.event.created }</td>
+													<td>${event.event.modified }</td>
+													<td>${event.eventParticipantsSize }/${event.event.maxParticipants }</td>
+													<td>${event.country }</td>
+													<td>${event.city }</td>
+													<td>
+														<div class="col-md-6">
+															<a href="${pageContext.request.contextPath}/events/viewEvent/${event.event.id}">
+																<button type="button" class="btn btn-info">
+																	<span class="glyphicon glyphicon-search"><spring:message code="viewBtn" /></span>
 																</button>
-																<ul class="dropdown-menu checkbox-persist pull-right text-left" role="menu">
-																	<li><a href="${pageContext.request.contextPath}/events/editEvent/${event.event.id}"><i
-																			class="fa fa-pencil"></i> Редакция </a></li>
-																	<li><a data-toggle="modal" data-target="#confirmDelete${event.event.id}" href="#"> <i
-																			class="glyphicon glyphicon-remove"></i> Изтриване
-																	</a></li>
-																	<li><a data-toggle="modal" data-target="#eventParticipantModal${event.event.id}" href=""><i
-																			class="fa fa-home"></i> Участници </a></li>
-																	<li><a data-toggle="modal" data-target="#sendMailForm${event.event.id}" href=""><i
-																			class="fa fa-envelope-o"></i> Изпращане на мейл до участниците</a></li>
-																</ul>
-															</div>
-														</td>
-													</tr>
+															</a>
+														</div>
+														<div class="btn-group actions col-md-6">
+															<button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown">
+																<span class="glyphicons glyphicons-cogwheel"><spring:message code="actionBtn" /></span>
+															</button>
+															<ul class="dropdown-menu checkbox-persist pull-right text-left" role="menu">
+																<li><a href="${pageContext.request.contextPath}/events/editEvent/${event.event.id}"><i
+																		class="fa fa-pencil"></i> <spring:message code="editBtn" /> </a></li>
+																<li><a data-toggle="modal" data-target="#confirmDelete${event.event.id}" href="#"> <i
+																		class="glyphicon glyphicon-remove"></i> <spring:message code="deleteBtn" />
+																</a></li>
+																<li><a data-toggle="modal" data-target="#eventParticipantModal${event.event.id}" href=""><i
+																		class="fa fa-home"></i> <spring:message code="eventParticipantsBtn" /> </a></li>
+																<li><a data-toggle="modal" data-target="#sendMailForm${event.event.id}" href=""><i
+																		class="fa fa-envelope-o"></i> <spring:message code="eventSendMailParticipantsBtn" /></a></li>
+																<li><a target="_blank"
+																	href="${pageContext.request.contextPath}/events/generatePDF/${event.event.id}"><i
+																		class="fa fa-file-pdf-o"></i> <spring:message code="eventGeneratePDF" /></a></li>
+																<li><a href="${pageContext.request.contextPath}/events/generateExcel/${event.event.id}"><i
+																		class="fa fa-file-excel-o"></i> <spring:message code="eventGenerateExcel" /></a></li>
+															</ul>
+														</div>
+													</td>
+												</tr>
+												</c:if>
 											</c:forEach>
 										</tbody>
 									</table>
@@ -141,12 +152,12 @@
 									<table class="myEventsTable table table-striped table-bordered">
 										<thead>
 											<tr>
-												<th>Title</th>
-												<th>Created</th>
-												<th>Modified</th>
-												<th>Participants/Max</th>
-												<th>Country</th>
-												<th>City</th>
+												<th><spring:message code="eventTitle" /></th>
+												<th><spring:message code="created" /></th>
+												<th><spring:message code="modified" /></th>
+												<th><spring:message code="eventParticipantsMax" /></th>
+												<th><spring:message code="country" /></th>
+												<th><spring:message code="city" /></th>
 												<th></th>
 											</tr>
 										</thead>
@@ -163,24 +174,29 @@
 														<div class="col-md-6">
 															<a href="${pageContext.request.contextPath}/events/viewEvent/${event.event.id}">
 																<button type="button" class="btn btn-info">
-																	<span class="glyphicon glyphicon-search">Преглед</span>
+																	<span class="glyphicon glyphicon-search"><spring:message code="viewBtn" /></span>
 																</button>
 															</a>
 														</div>
 														<div class="btn-group actions col-md-6">
 															<button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown">
-																<span class="glyphicons glyphicons-cogwheel">Действие</span>
+																<span class="glyphicons glyphicons-cogwheel"><spring:message code="actionBtn" /></span>
 															</button>
 															<ul class="dropdown-menu checkbox-persist pull-right text-left" role="menu">
 																<li><a href="${pageContext.request.contextPath}/events/editEvent/${event.event.id}"><i
-																		class="fa fa-pencil"></i> Редакция </a></li>
+																		class="fa fa-pencil"></i> <spring:message code="editBtn" /> </a></li>
 																<li><a data-toggle="modal" data-target="#confirmDelete${event.event.id}" href="#"> <i
-																		class="glyphicon glyphicon-remove"></i> Изтриване
+																		class="glyphicon glyphicon-remove"></i> <spring:message code="deleteBtn" />
 																</a></li>
 																<li><a data-toggle="modal" data-target="#eventParticipantModal${event.event.id}" href=""><i
-																		class="fa fa-home"></i> Участници </a></li>
+																		class="fa fa-home"></i> <spring:message code="eventParticipantsBtn" /> </a></li>
 																<li><a data-toggle="modal" data-target="#sendMailForm${event.event.id}" href=""><i
-																		class="fa fa-envelope-o"></i> Изпращане на мейл до участниците</a></li>
+																		class="fa fa-envelope-o"></i> <spring:message code="eventSendMailParticipantsBtn" /></a></li>
+																<li><a target="_blank"
+																	href="${pageContext.request.contextPath}/events/generatePDF/${event.event.id}"><i
+																		class="fa fa-file-pdf-o"></i> <spring:message code="eventGeneratePDF" /></a></li>
+																<li><a href="${pageContext.request.contextPath}/events/generateExcel/${event.event.id}"><i
+																		class="fa fa-file-excel-o"></i> <spring:message code="eventGenerateExcel" /></a></li>
 															</ul>
 														</div>
 													</td>
@@ -208,9 +224,9 @@
 													class="eventParticipantTable table table-striped table-bordered">
 													<thead>
 														<tr>
-															<th>Име</th>
-															<th>Фамилия</th>
-															<th>Пол</th>
+															<th><spring:message code="name" /></th>
+															<th><spring:message code="lastname" /></th>
+															<th><spring:message code="gender" /></th>
 															<th></th>
 														</tr>
 													</thead>
@@ -219,28 +235,29 @@
 															<tr>
 																<td>${participant.individual.firstName }</td>
 																<td>${participant.individual.lastName }</td>
-																<td>${participant.individual.isMale ? 'Мъж' : 'Жена' }</td>
+																<td><spring:message code="male" var="male" /> <spring:message code="famele" var="famele" />
+																	${participant.individual.isMale ? male : famele }</td>
 																<td>
 																	<div class="col-md-12">
 																		<div class="col-md-2">
 																			<a target="_blank"
 																				href="${pageContext.request.contextPath}/users/viewUser/${participant.individual.userId}">
 																				<button type="button" class="btn btn-info">
-																					<span class="glyphicon glyphicon-search">Преглед</span>
+																					<span class="glyphicon glyphicon-search"><spring:message code="viewBtn" /></span>
 																				</button>
 																			</a>
 																		</div>
 																		<div class="col-md-2">
 																			<a data-toggle="modal" data-target="#applicationFrom${participantStatus.index}" href="">
 																				<button type="button" class="btn btn-info">
-																					<span class="fa fa-eye">Форма</span>
+																					<span class="fa fa-eye"><spring:message code="eventViewForm" /></span>
 																				</button>
 																			</a>
 																		</div>
 																		<div class="col-md-3">
 																			<a data-toggle="modal" data-target="#sendMailFormTo${participant.userId}" href="">
 																				<button type="button" class="btn btn-info">
-																					<span class="fa fa-envelope-o">Изпрати мейл</span>
+																					<span class="fa fa-envelope-o"><spring:message code="eventSendMailSendBtn" /></span>
 																				</button>
 																			</a>
 																		</div>
@@ -252,12 +269,12 @@
 																				value="${participant.status}" class="status" /> <label
 																				class="btn btn-success ${participant.status == 1 ? 'active' : ''}"> <input type="radio"
 																				name="event.event.eventsParticipants[${participantStatus.index}].status"
-																				value="${participant.status}" onchange="switchStatus(this,1)"> Одобри <span
-																				class="glyphicon glyphicon-ok"></span>
+																				value="${participant.status}" onchange="switchStatus(this,1)"> <spring:message
+																					code="eventParticipantApprove" /> <span class="glyphicon glyphicon-ok"></span>
 																			</label> <label class="btn btn-danger ${participant.status == 2 ? 'active' : ''}"> <input
 																				type="radio" name="event.event.eventsParticipants[${participantStatus.index}].status"
-																				value="${participant.status}" onchange="switchStatus(this,2)"> Откажи <span
-																				class="glyphicon glyphicon-ok"></span>
+																				value="${participant.status}" onchange="switchStatus(this,2)"> <spring:message
+																					code="eventParticipantReject" /> <span class="glyphicon glyphicon-ok"></span>
 																			</label>
 																		</div>
 																	</div>
@@ -268,8 +285,12 @@
 												</table>
 											</div>
 											<div class="modal-footer">
-												<button type="submit" class="btn btn-primary save">Save</button>
-												<button type="button" data-dismiss="modal" class="btn btn-default">Close</button>
+												<button type="submit" class="btn btn-primary save">
+													<spring:message code="saveBtn" />
+												</button>
+												<button type="button" data-dismiss="modal" class="btn btn-default">
+													<spring:message code="closeBtn" />
+												</button>
 											</div>
 										</form>
 									</div>
@@ -283,20 +304,27 @@
 
 										<div class="modal-header">
 											<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-											<h4 class="modal-title" id="myModalLabel">Confirm Delete</h4>
+											<h4 class="modal-title" id="myModalLabel">
+												<spring:message code="confirmDeleteTitle" />
+											</h4>
 										</div>
 
 										<div class="modal-body">
 											<p>
-												You are about to delete <strong>${event.event.title}</strong>, this procedure is irreversible.
+												<spring:message code="confirmDeleteSubTitle" arguments="${event.event.title}" htmlEscape="false" />
+												<%-- 												You are about to delete <strong>${event.event.title}</strong>, this procedure is irreversible. --%>
 											</p>
-											<p>Do you want to proceed?</p>
+											<p>
+												<spring:message code="confirmDeleteConfirm" />
+											</p>
 										</div>
 
 										<div class="modal-footer">
-											<button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+											<button type="button" class="btn btn-default" data-dismiss="modal">
+												<spring:message code="cancelBtn" />
+											</button>
 											<a href="${pageContext.request.contextPath}/events/deleteEvent/${event.event.id}"
-												class="btn btn-danger danger">Delete</a>
+												class="btn btn-danger danger"><spring:message code="deleteBtn" /></a>
 										</div>
 									</div>
 								</div>
@@ -312,26 +340,33 @@
 										<div class="modal-content col-md-10">
 											<div class="modal-header">
 												<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-												<h3>Изпращане на имейл до участниците в ${event.event.title}</h3>
+												<h3>
+													<spring:message code="eventSendMailParticipantsTitle" arguments="${event.event.title}" htmlEscape="false" />
+												</h3>
 											</div>
 											<div class="modal-body col-md-12">
 												<input type="hidden" name="eventId" value="${event.event.id}" />
 												<div class="col-md-12">
-													<form:label path="subject">Тема:</form:label>
+													<form:label path="subject">
+														<spring:message code="subject" />:</form:label>
 												</div>
 												<div class="col-md-12">
 													<form:input path="subject" required="required" />
 												</div>
 												<div class="col-md-12">
-													<form:label path="content">Съобщение:</form:label>
+													<form:label path="content">
+														<spring:message code="eventSendMailMessage" />:</form:label>
 													<form:textarea path="content" rows="5" required="required" />
 												</div>
 											</div>
 											<div class="modal-footer">
 												<button type="submit" class="btn btn-default">
-													<i class="fa fa-envelope-o"></i>Изпрати
+													<i class="fa fa-envelope-o"></i>
+													<spring:message code="eventSendMailSendBtn" />
 												</button>
-												<button type="button" data-dismiss="modal" class="btn btn-default">Close</button>
+												<button type="button" data-dismiss="modal" class="btn btn-default">
+													<spring:message code="closeBtn" />
+												</button>
 											</div>
 										</div>
 									</form:form>
@@ -348,11 +383,16 @@
 										<div class="modal-content col-md-10">
 											<div class="modal-header">
 												<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-												<h3>Аппликационна форма на ${participant.individual.firstName } ${participant.individual.lastName }</h3>
+												<h3>
+													<spring:message code="eventParticipantFormTitle"
+														arguments="${participant.individual.firstName }, ${participant.individual.lastName }" htmlEscape="false" />
+												</h3>
 											</div>
 											<div class="modal-body col-md-12">${participant.appForm}</div>
 											<div class="modal-footer">
-												<button type="button" data-dismiss="modal" class="btn btn-default">Close</button>
+												<button type="button" data-dismiss="modal" class="btn btn-default">
+													<spring:message code="closeBtn" />
+												</button>
 											</div>
 										</div>
 									</div>
@@ -368,25 +408,33 @@
 											<div class="modal-content col-md-10">
 												<div class="modal-header">
 													<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-													<h3>Изпращане на имейл до ${participant.individual.firstName } ${participant.individual.lastName }</h3>
+													<h3>
+														<spring:message code="eventSendMalParticipantTitle"
+															arguments="${participant.individual.firstName }, ${participant.individual.lastName }" htmlEscape="false" />
+													</h3>
 												</div>
 												<div class="modal-body col-md-12">
 													<div class="col-md-12">
-														<form:label path="subject">Тема:</form:label>
+														<form:label path="subject">
+															<spring:message code="subject" />:</form:label>
 													</div>
 													<div class="col-md-12">
 														<form:input path="subject" required="required" />
 													</div>
 													<div class="col-md-12">
-														<form:label path="content">Съобщение:</form:label>
+														<form:label path="content">
+															<spring:message code="eventSendMailMessage" />:</form:label>
 														<form:textarea path="content" rows="5" required="required" />
 													</div>
 												</div>
 												<div class="modal-footer">
 													<button type="submit" class="btn btn-default">
-														<i class="fa fa-envelope-o"></i>Изпрати
+														<i class="fa fa-envelope-o"></i>
+														<spring:message code="eventSendMailSendBtn" />
 													</button>
-													<button type="button" data-dismiss="modal" class="btn btn-default">Close</button>
+													<button type="button" data-dismiss="modal" class="btn btn-default">
+														<spring:message code="closeBtn" />
+													</button>
 												</div>
 											</div>
 										</form:form>
@@ -406,8 +454,6 @@
 	<!-- End container -->
 	<script>
 		function switchStatus(e, status) {
-			console.log("status:" + status);
-			console.log(e);
 			$(e).parents('td').find('.status').val(status);
 		}
 		$(document).ready(

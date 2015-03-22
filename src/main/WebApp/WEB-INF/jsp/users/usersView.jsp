@@ -1,7 +1,7 @@
 <%@taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@ taglib uri="http://java.sun.com/jstl/core_rt" prefix="c"%>
-<c:url var="imgURL" value="resources/images/" />
+<c:url var="imgURL" value="/resources/images/" />
 <!DOCTYPE html">
 <html>
 <jsp:include page="../layout/head.jsp" />
@@ -13,14 +13,14 @@
 				<div class="row">
 					<div id="userProfilePageTitle">
 						<h3>
-							<strong>Начална страница</strong>
+							<strong><spring:message code="mainPage" /></strong>
 						</h3>
 					</div>
 				</div>
 				<div class="row">
 					<div id="pageWelcome" class="center col-md-12">
 						<h1 class="pull-down">
-							<span>Здравейте, ${user.individual != null ? user.individual.fullName : user.organization.name }</span>
+							<span><spring:message code="welcome" /> ${user.individual != null ? user.individual.fullName : user.organization.name }</span>
 						</h1>
 					</div>
 				</div>
@@ -28,10 +28,11 @@
 				<div class="row">
 					<div id="eventViewFullMenu" class="menuTabs">
 						<ul class="nav nav-tabs">
-							<li class="active"><a data-toggle="tab" href="#profileMyNotifications"><span>Новини и известия</span></a></li>
-							<li><a data-toggle="tab" href="#profileEdit"><span>Редактиране на профил</span></a></li>
-							<li><a data-toggle="tab" href="#changePassword"><span>Промяна на парола</span></a></li>
-							<li><a data-toggle="tab" href="#profileMyEvents"><span>Моите събития</span></a></li>
+							<li class="active"><a data-toggle="tab" href="#profileMyNotifications"><span><spring:message
+											code="newsAndNotifies" /></span></a></li>
+							<li><a data-toggle="tab" href="#profileEdit"><span><spring:message code="profileEdit" /></span></a></li>
+							<li><a data-toggle="tab" href="#changePassword"><span><spring:message code="changePassword" /></span></a></li>
+							<li><a data-toggle="tab" href="#profileMyEvents"><span><spring:message code="menuMyEvents" /></span></a></li>
 						</ul>
 					</div>
 				</div>
@@ -100,24 +101,32 @@
 										<fieldset>
 
 											<!-- Form Name -->
-											<legend>Редактиране</legend>
+											<legend>
+												<spring:message code="editing" />
+											</legend>
 											<div class="row">
 												<div class="form-group col-md-6">
-													<form:input id="firstName" path="individual.firstName" placeholder="име" required="required"
-														cssClass="form-control" />
+													<spring:message code="name" var="namePlacholder" />
+													<form:input id="firstName" path="individual.firstName" placeholder="${namePlaceholder }"
+														required="required" cssClass="form-control" />
 												</div>
 
 												<div class="form-group col-md-6">
-													<form:input id="lastName" path="individual.lastName" placeholder="фамилия" required="required"
-														cssClass="form-control" />
+													<spring:message code="lastname" var="lastnamePlacholder" />
+													<form:input id="lastName" path="individual.lastName" placeholder="${lastnamePlacholder }"
+														required="required" cssClass="form-control" />
 												</div>
 											</div>
 
 											<div class="row">
 												<div class="form-group col-md-6">
 													<form:select id="gender" path="individual.isMale" cssClass="form-control">
-														<form:option id="famele" value="false">Жена</form:option>
-														<form:option id="male" value="true">Мъж</form:option>
+														<form:option id="famele" value="false">
+															<spring:message code="famele" />
+														</form:option>
+														<form:option id="male" value="true">
+															<spring:message code="male" />
+														</form:option>
 													</form:select>
 												</div>
 
@@ -131,14 +140,14 @@
 											<div class="row">
 												<div class="form-group col-md-6">
 													<form:select id="country" path="userInfo.country.id" cssClass="form-control">
-														<form:option id="countryNone" value="-1">---Държава---</form:option>
+														<form:option id="countryNone" value="-1">---<spring:message code="country" />---</form:option>
 														<form:options items="${countries}" itemValue="id" itemLabel="country" />
 													</form:select>
 												</div>
 
 												<div class="form-group col-md-6">
 													<form:select id="city" path="userInfo.city.id" cssClass="form-control">
-														<form:option id="cityNone" value="-1">---Град---</form:option>
+														<form:option id="cityNone" value="-1">---<spring:message code="city" />---</form:option>
 														<form:options items="${cities}" itemValue="id" itemLabel="city" />
 													</form:select>
 												</div>
@@ -147,7 +156,7 @@
 											<div class="row">
 												<div class="form-group col-md-12">
 													<form:select id="educations" path="individual.education.id" cssClass="form-control">
-														<form:option id="educationNone" value="-1">---Образование---</form:option>
+														<form:option id="educationNone" value="-1">---<spring:message code="education" />---</form:option>
 														<form:options items="${educations}" itemValue="id" itemLabel="education" />
 													</form:select>
 												</div>
@@ -155,14 +164,18 @@
 
 											<div class="row">
 												<div class="form-group col-md-6">
-													<form:label path="activities">Интереси</form:label>
+													<form:label path="activities">
+														<spring:message code="activityUser" />
+													</form:label>
 													<form:select id="activitiesUser" path="activities" multiple="true" cssClass="form-control">
 														<form:options items="${activitiesList}" itemValue="id" itemLabel="type" />
 													</form:select>
 												</div>
 
 												<div class="form-group col-md-6">
-													<form:label path="individual.languages">Езици</form:label>
+													<form:label path="individual.languages">
+														<spring:message code="languages" />
+													</form:label>
 													<form:select id="languages" path="individual.languages" multiple="true" cssClass="form-control">
 														<form:options items="${languages}" itemValue="id" itemLabel="language" />
 													</form:select>
@@ -172,14 +185,17 @@
 											<div class="row">
 												<div class="form-group col-md-12">
 													<label class="control-label" for="description"></label>
-													<form:textarea id="description" path="userInfo.description" placeholder="описание за себе си" rows="5"
-														cols="78" cssClass="form-control" />
+													<spring:message code="userDescription" var="userDescriptionPlaceholder" />
+													<form:textarea id="description" path="userInfo.description" placeholder="${userDescriptionPlaceholder }"
+														rows="5" cols="78" cssClass="form-control" />
 												</div>
 											</div>
 
 											<div class="row">
 												<div class="text-center">
-													<button id="registerIndividual" class="btn btn-success btn-lg" type="submit">ЗАПАЗИ ПРОМЕНИТЕ</button>
+													<button id="registerIndividual" class="btn btn-success btn-lg" type="submit">
+														<spring:message code="saveBtn" />
+													</button>
 												</div>
 											</div>
 
@@ -192,9 +208,16 @@
 						<div id="changePassword" class="tab-pane fade col-md-8">
 							<div class="row">
 								<div class="form-group col-md-12">
-									<input id="lastName" type="password" placeholder="Стара парола" required="required" class="form-control" /> <input
-										id="lastName" type="password" placeholder="Нова парола" required="required" class="form-control" /> <input
-										id="lastName" type="password" placeholder="Повторете новата парола" required="required" class="form-control" />
+									<spring:message code="oldPassword" var="oldPassPlaceholder" />
+									<spring:message code="newPassword" var="newPassPlaceholder" />
+									<spring:message code="repeatNewPassword" var="rePassPlaceholder" />
+									<input id="lastName" type="password" placeholder="${oldPassPlaceholder }" required="required"
+										class="form-control" /> <input id="lastName" type="password" placeholder="${newPassPlaceholder }"
+										required="required" class="form-control" /> <input id="lastName" type="password"
+										placeholder="${rePassPlaceholder }" required="required" class="form-control" />
+									<button type="submit" class="btn btn-primary save">
+										<spring:message code="saveBtn" />
+									</button>
 								</div>
 							</div>
 						</div>

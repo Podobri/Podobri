@@ -11,53 +11,53 @@
 				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
 					<span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span>
 				</button>
-				<a class="navbar-brand" href="${rootURL}"><img src="${rootURL}/resources/images/logo.jpg" alt="Podobri"></a>
+				<a href="${rootURL}"><img src="${rootURL}/resources/images/logo.jpg" alt="Podobri"></a>
 			</div>
 			<div class="navbar-collapse collapse">
 				<ul class="nav navbar-nav pull-right">
 					<li><a href="${pageContext.request.contextPath}/"><spring:message code="menuHome" /></a></li>
 					<li><a href="${pageContext.request.contextPath}/events"><spring:message code="menuEvents" /></a></li>
-					<li><a href="${pageContext.request.contextPath}/users"><spring:message code="menuUsers" /></a></li>
+					<li><a href="${pageContext.request.contextPath}/users"><spring:message code="menuOrganizations" /></a></li>
 					<li><a href="${pageContext.request.contextPath}/about"><spring:message code="menuAbout" /></a></li>
 					<security:authorize access="isAuthenticated()">
 						<li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown"><span
 								class="glyphicon glyphicon-user pull-left"></span>&nbsp;&nbsp; <security:authentication
 									property="principal.username" /> &nbsp;&nbsp;&nbsp;&nbsp;</a>
 							<ul class="dropdown-menu col-md-12">
-								<li><a href="${pageContext.request.contextPath}/users/myProfile"><spring:message code="myProfile" /> <span
+								<li><a href="${pageContext.request.contextPath}/users/myProfile"><spring:message code="menuMyProfile" /> <span
 										class="glyphicon glyphicon-cog pull-right"></span></a></li>
 								<li class="divider"></li>
 								<security:authorize access="hasRole('ROLE_ORGANIZATION')">
-									<li><a href="${pageContext.request.contextPath}/events/createEvent"><spring:message code="createEvent" /><span
+									<li><a href="${pageContext.request.contextPath}/events/createEvent"><spring:message code="menuCreateEvent" /><span
 											class="glyphicon glyphicon-plus pull-right"></span></a></li>
 									<li class="divider"></li>
-									<li><a href="${pageContext.request.contextPath}/events/myEvents"><spring:message code="myEvents" /><span
+									<li><a href="${pageContext.request.contextPath}/events/myEvents"><spring:message code="menuMyEvents" /><span
 											class="glyphicon glyphicon-list-alt pull-right"></span></a></li>
 									<li class="divider"></li>
-									<li><a href="${pageContext.request.contextPath}/forms/create"><spring:message code="createForm" /><span
+									<li><a href="${pageContext.request.contextPath}/forms/create"><spring:message code="menuCreateForm" /><span
 											class="glyphicon glyphicon-plus pull-right"></span></a></li>
 									<li class="divider"></li>
-									<li><a href="${pageContext.request.contextPath}/forms/viewForms"><spring:message code="myForms" /><span
+									<li><a href="${pageContext.request.contextPath}/forms/viewForms"><spring:message code="menuMyForms" /><span
 											class="glyphicon glyphicon-list-alt pull-right"></span></a></li>
 											<li class="divider"></li>
 								</security:authorize>
 								<security:authorize access="hasRole('ROLE_INDIVIDUAL')">
-									<li><a href="${pageContext.request.contextPath}/events/createInitiative"><spring:message code="createInitiative" /><span
+									<li><a href="${pageContext.request.contextPath}/events/createInitiative"><spring:message code="menuCreateInitiative" /><span
 											class="glyphicon glyphicon-plus pull-right"></span></a></li>
 									<li class="divider"></li>
 								</security:authorize>
-								<li><a href="#"><spring:message code="messages" /> <span class="badge pull-right"> 12 </span></a></li>
-								<li class="divider"></li>
-								<li><a href="${pageContext.request.contextPath}/j_spring_security_logout"><spring:message code="logout" /> <span
+<%-- 								<li><a href="#"><spring:message code="menuMessages" /> <span class="badge pull-right"> 12 </span></a></li> --%>
+<!-- 								<li class="divider"></li> -->
+								<li><a href="${pageContext.request.contextPath}/j_spring_security_logout"><spring:message code="menuSignOut" /> <span
 										class="glyphicon glyphicon-log-out pull-right"></span></a></li>
 							</ul></li>
 					</security:authorize>
 					<security:authorize access="isAnonymous()">
-						<li><a href="${pageContext.request.contextPath}/login"><spring:message code="enter" /> <span
+						<li><a href="${pageContext.request.contextPath}/login"><spring:message code="menuSignIn" /> <span
 								class="glyphicon glyphicon-log-in pull-left"></span></a></li>
 					</security:authorize>
-					<li><a href="?lang=en"> <img alt="" src="${rootURL}/resources/images/en.png" /></a></li>
-					<li><a href="?lang=bg"> <img alt="" src="${rootURL}/resources/images/bg.png" /></a></li>
+					<li><a href="?lang=en"> <img alt="<spring:message code="menuLanguageEn" />" src="${rootURL}/resources/images/en.png" /></a></li>
+					<li><a href="?lang=bg"> <img alt="<spring:message code="menuLanguageBg" />" src="${rootURL}/resources/images/bg.png" /></a></li>
 				</ul>
 			</div>
 		</div>

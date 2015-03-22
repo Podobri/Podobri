@@ -1,4 +1,5 @@
 <%@ taglib uri="http://java.sun.com/jstl/core_rt" prefix="c"%>
+<%@taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 <c:url var="rootURL" value="/" />
 <c:url var="resURL" value="/resources" />
 <footer>
@@ -17,7 +18,7 @@
 	<div class="row">
 		<div id="footer-contacts">
 			<div class="col-md-3 col-md-offset-1">
-				<h4>За "По-добри"</h4>
+				<h4><spring:message code="footerAboutTitle" /></h4>
 				<p>
 					Създадена през 2014 организацията, Създадена през 2014 организацията. Създадена през 2014 организацията,
 					Създадена през 2014 организацията, Създадена през 2014 организацията. Създадена през 2014 организацията,
@@ -25,21 +26,21 @@
 				</p>
 			</div>
 			<div class="col-md-3 col-md-offset-1">
-				<h4>НОВИНИ И АБОНАМЕНТ</h4>
-				<p>Абонирайте се за новини и нови събития</p>
+				<h4><spring:message code="footerNewsTitle" /></h4>
+				<p><spring:message code="footerNewsSubTitle" /></p>
 				<form name="SubscibeEmail" action="Subscribe">
 					<div class="input-group">
 						<input id="emailForSubscribe" type="text" class="form-control" placeholder="email"> <span
 							class="input-group-btn">
-							<button class="btn btn-warning" type="button"><span class="glyphicon glyphicon-ok"></span>Абонирай</button>
+							<button class="btn btn-warning" type="button"><span class="glyphicon glyphicon-ok"></span><spring:message code="footerSubscribeBtn" /></button>
 						</span>
 					</div>
 				</form>
 			</div>
 			<div class="col-md-3 col-md-offset-1">
-				<h4>СВЪРЖЕТЕ СЕ С НАС</h4>
+				<h4><spring:message code="footerContactUsTitle" /></h4>
 				<p>
-					Сдружение "По-добри"<br> <i class="icon-map-marker"></i> ул. Васил Левски 21, София 1000 <br> <i
+					<spring:message code="footerPodobriTitle" /><br> <i class="icon-map-marker"></i> <spring:message code="footerAddress" /><br> <i
 						class="icon-envelope"></i> podobri@gmail.com <br> <i class="icon-phone"></i> +359 888 999 911
 				</p>
 				<p class="social-links">

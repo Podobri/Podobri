@@ -5,6 +5,9 @@
 <%@ taglib uri="http://java.sun.com/jstl/core_rt" prefix="c"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <c:url var="imgURL" value="/resources/images/" />
+<c:url var="images" value="/images/" />
+<c:url var="thumb128" value="/images/thumbnail128x128/" />
+<c:url var="thumb450" value="/images/thumbnail400x25/" />
 <html>
 <jsp:include page="../layout/head.jsp" />
 <body>
@@ -15,7 +18,7 @@
 				<div class="row">
 					<div id="actualEventsTitle">
 						<h3>
-							<strong>Актуални събития</strong>
+							<strong><spring:message code="eventsActualTitle" /></strong>
 						</h3>
 					</div>
 				</div>
@@ -28,7 +31,8 @@
 								<a data-toggle="collapse" data-parent="#accordion" href="#eventsFilterPanel">
 									<button type="button" class="btn btn-primary btn-lg btn-block">
 										<div class="col-md-2">
-											<span id="filterChevron" class="glyphicon glyphicon-chevron-down"></span> ФИЛТЪР
+											<span id="filterChevron" class="glyphicon glyphicon-chevron-down"></span>
+											<spring:message code="filter" />
 										</div>
 									</button>
 								</a>
@@ -41,23 +45,30 @@
 											<fieldset>
 												<div class="row">
 													<div class="form-group col-md-4">
-														<form:label path="categoryId" cssClass="control-label">Категория</form:label>
+														<form:label path="categoryId" cssClass="control-label">
+															<spring:message code="category" />
+														</form:label>
 														<form:select id="opportunityCategoryId" path="categoryId" cssClass="form-control">
-															<form:option id="opportunityCategoryNone" value="-1">---Категория---</form:option>
+															<form:option id="opportunityCategoryNone" value="-1">---<spring:message code="category" />---</form:option>
 															<form:options items="${categoriesList}" itemValue="id" itemLabel="category" />
 														</form:select>
 													</div>
 
 													<div class="form-group col-md-4">
-														<form:label path="opportunityId" cssClass="control-label">Възможност</form:label>
+														<form:label path="opportunityId" cssClass="control-label">
+															<spring:message code="opportunity" />
+														</form:label>
 														<form:select id="opportunityId" path="opportunityId" cssClass="form-control">
-															<form:option id="opportunityNone" value="-1">---изберете категория---</form:option>
+															<form:option id="opportunityNone" value="-1">---<spring:message
+																	code="eventChoiceCategoryLbl" />---</form:option>
 															<%-- 															<form:options items="${opportunitiesList}" itemValue="id" itemLabel="opportunity" /> --%>
 														</form:select>
 													</div>
 
 													<div class="form-group col-md-4">
-														<form:label path="activities" cssClass="control-label">Сфера</form:label>
+														<form:label path="activities" cssClass="control-label">
+															<spring:message code="activity" />
+														</form:label>
 														<form:select id="activities" path="activities" multiple="true" cssClass="form-control">
 															<form:options items="${activitiesList}" itemValue="id" itemLabel="type" />
 														</form:select>
@@ -66,23 +77,29 @@
 
 												<div class="row">
 													<div class="form-group col-md-4">
-														<form:label path="countryId" cssClass="control-label">Държава</form:label>
+														<form:label path="countryId" cssClass="control-label">
+															<spring:message code="country" />
+														</form:label>
 														<form:select id="countryId" path="countryId" cssClass="form-control">
-															<form:option id="countryNone" value="-1">---Държава---</form:option>
+															<form:option id="countryNone" value="-1">---<spring:message code="country" />---</form:option>
 															<form:options items="${countriesList}" itemValue="id" itemLabel="country" />
 														</form:select>
 													</div>
 
 													<div class="form-group col-md-4">
-														<form:label path="cityId" cssClass="control-label">Град</form:label>
+														<form:label path="cityId" cssClass="control-label">
+															<spring:message code="city" />
+														</form:label>
 														<form:select id="cityId" path="cityId" cssClass="form-control">
-															<form:option id="cityNone" value="-1">---изберете държава---</form:option>
+															<form:option id="cityNone" value="-1">---<spring:message code="choiceCountryLbl" />---</form:option>
 															<%-- 															<form:options items="${citiesList}" itemValue="id" itemLabel="city" /> --%>
 														</form:select>
 													</div>
 
 													<div class="form-group col-md-4">
-														<form:label path="costTypeId" cssClass="control-label">Финансиране</form:label>
+														<form:label path="costTypeId" cssClass="control-label">
+															<spring:message code="financing" />
+														</form:label>
 														<form:select id="eventCostTypesId" path="costTypeId" cssClass="form-control">
 															<form:options items="${costTypesList}" itemValue="id" itemLabel="cost" />
 														</form:select>
@@ -92,20 +109,25 @@
 												<div class="row">
 													<div class="control-group col-md-4">
 														<div class="controls">
-															<form:label path="startDate" cssClass="control-label">Започва на</form:label>
+															<form:label path="startDate" cssClass="control-label">
+																<spring:message code="startDate" />
+															</form:label>
 															<form:input id="startDate" path="startDate" type="date"
 																cssClass="form-control date datepicker margin-top-none" placeholder="23/9/2013" />
 														</div>
 													</div>
 													<div class="form-group col-md-4">
-														<form:label path="deadline" cssClass="control-label">Краен срок за кандидатстване</form:label>
+														<form:label path="deadline" cssClass="control-label">
+															<spring:message code="deadlineApplying" />
+														</form:label>
 														<form:input id="deadline" path="deadline" type="date"
 															cssClass="form-control date datepicker margin-top-none" placeholder="23/9/2013" />
 													</div>
 
 													<div class="form-group col-md-4">
 														<button id="filterEvents" class="btn btn-success btn-lg" type="submit">
-															<span class="glyphicon glyphicon-search"></span>ТЪРСИ
+															<span class="glyphicon glyphicon-search"></span>
+															<spring:message code="filterSearchBtn" />
 														</button>
 													</div>
 												</div>
@@ -128,17 +150,28 @@
 
 				<div class="row">
 					<div class="btn-group col-md-3 col-md-offset-9">
-						<a href="#" id="list" class="btn btn-default btn-sm"><span class="glyphicon glyphicon-th-list"> </span>Списък</a> <a
-							href="#" id="grid" class="btn btn-default btn-sm"><span class="glyphicon glyphicon-th"></span>Решетка</a>
+						<a href="#" id="list" class="btn btn-default btn-sm"><span class="glyphicon glyphicon-th-list"> </span> <spring:message
+								code="listView" /></a> <a href="#" id="grid" class="btn btn-default btn-sm"><span
+							class="glyphicon glyphicon-th"></span> <spring:message code="gridView" /></a>
 					</div>
 				</div>
 
 				<div id="events" class="row list-group">
 					<c:forEach var="event" items="${actualEvents}">
+						<c:choose>
+							<c:when test="${not empty event.event.picture}">
+								<c:set value="${thumb450}${event.event.picture}" var="picture" />
+								<c:set value="${images}${event.event.picture}" var="pictureFull" />
+							</c:when>
+							<c:otherwise>
+								<c:set value="${imgURL}thumb450.gif" var="picture" />
+								<c:set value="${imgURL}Overlay.png" var="pictureFull" />
+							</c:otherwise>
+						</c:choose>
 						<div id="eventItem${event.event.id}" class="item col-md-4">
 							<div class="thumbnail">
 								<a data-toggle="modal" data-target="#eventItemModal${event.event.id}" href=""><img
-									class="group list-group-image" src="http://placehold.it/400x250/000/fff" alt="" /></a>
+									class="group list-group-image" src="${picture}" alt="" /></a>
 								<div class="caption">
 									<a data-toggle="modal" data-target="#eventItemModal${event.event.id}" href="">
 										<h4 class="group inner list-group-item-heading">${event.event.title}</h4>
@@ -173,7 +206,8 @@
 										</span>
 									</p>
 									<p>
-										<span class="eventItemInfo"> Организатор: ${event.organizator} </span>
+										<span class="eventItemInfo"> <spring:message code="eventOrganizer" />: ${event.organizator}
+										</span>
 									</p>
 								</div>
 							</div>
@@ -190,7 +224,7 @@
 									<div class="modal-body">
 										<div class="row">
 											<div id="EventViewPictureSection">
-												<a href="#x" class="thumbnail"> <img alt="" src="${imgURL}team1.jpg" />
+												<a href="#x" class="thumbnail"> <img alt="" src="${pictureFull}" />
 												</a>
 											</div>
 										</div>
@@ -207,38 +241,44 @@
 											<div id="EventViewShortDescription" class="col-md-7">${event.event.description}</div>
 											<div id="EventViewMoreInfo" class="col-md-5">
 												<div id="EventViewOrganizator" class="col-md-12">
-													<h4>ОРГАНИЗАТОР:</h4>
+													<h4>
+														<spring:message code="eventOrganizerUpper" />
+														:
+													</h4>
 													<span class="eventItemInfo">${event.organizator}</span>
 												</div>
-<!-- 												<div id="EventViewIntendedFor" class="col-md-12"> -->
-<!-- 													<p> -->
-<!-- 													<h4>ПРЕДНАЗНАЧЕНО ЗА:</h4> -->
-<!-- 													<span class="eventItemInfoLabel label label-info">спортисти</span> <span -->
-<!-- 														class="eventItemInfoLabel label label-info">uchenici</span> <span -->
-<!-- 														class="eventItemInfoLabel label label-info">atlelti</span> <span -->
-<!-- 														class="eventItemInfoLabel label label-info">deputati</span> <span -->
-<!-- 														class="eventItemInfoLabel label label-info">text</span> <span class="eventItemInfoLabel label label-info">text</span> -->
-<!-- 													<span class="eventItemInfoLabel label label-info">text</span> -->
-<!-- 												</div> -->
+												<!-- 												<div id="EventViewIntendedFor" class="col-md-12"> -->
+												<!-- 													<p> -->
+												<!-- 													<h4><spring:message code="eventIntendedFor" />:</h4> -->
+												<!-- 													<span class="eventItemInfoLabel label label-info">спортисти</span> <span -->
+												<!-- 														class="eventItemInfoLabel label label-info">uchenici</span> <span -->
+												<!-- 														class="eventItemInfoLabel label label-info">atlelti</span> <span -->
+												<!-- 														class="eventItemInfoLabel label label-info">deputati</span> <span -->
+												<!-- 														class="eventItemInfoLabel label label-info">text</span> <span class="eventItemInfoLabel label label-info">text</span> -->
+												<!-- 													<span class="eventItemInfoLabel label label-info">text</span> -->
+												<!-- 												</div> -->
 												<div id="EventViewSocial" class="col-md-12 social-links">
 													<p>
-														<img alt="" src="${imgURL}thumblines/fb_32.png" /> 
-														<img alt="" src="${imgURL}thumblines/twitter_32.png" />
-														<img alt="" src="${imgURL}thumblines/linkedin_32.png" /> 
-<%-- 														<img alt="" src="${imgURL}thumblines/google_32.png" />  --%>
-<%-- 														<img alt="" src="${imgURL}thumblines/skype_32.png" /> --%>
+														<img alt="" src="${imgURL}thumblines/fb_32.png" /> <img alt="" src="${imgURL}thumblines/twitter_32.png" />
+														<img alt="" src="${imgURL}thumblines/linkedin_32.png" />
+														<%-- 														<img alt="" src="${imgURL}thumblines/google_32.png" />  --%>
+														<%-- 														<img alt="" src="${imgURL}thumblines/skype_32.png" /> --%>
 													</p>
 												</div>
 												<security:authorize access="hasRole('ROLE_INDIVIDUAL')">
-												<div id="EventViewFullDescription" class="col-md-12">
-													<p>
-														<a href="${pageContext.request.contextPath}/events/viewEvent/${event.event.id}">
-															<button type="button" class="btn btn-primary btn-lg btn-block">ПЪЛНО ОПИСАНИЕ</button>
-														</a> <a href="${pageContext.request.contextPath}/events/apply/${event.event.id}">
-															<button type="button" class="btn btn-warning btn-lg btn-block">КАНДИДАТСТВАЙ</button>
-														</a>
-													</p>
-												</div>
+													<div id="EventViewFullDescription" class="col-md-12">
+														<p>
+															<a href="${pageContext.request.contextPath}/events/viewEvent/${event.event.id}">
+																<button type="button" class="btn btn-primary btn-lg btn-block">
+																	<spring:message code="eventFullDescriptionBtn" />
+																</button>
+															</a> <a href="${pageContext.request.contextPath}/events/apply/${event.event.id}">
+																<button type="button" class="btn btn-warning btn-lg btn-block">
+																	<spring:message code="eventApplyBtn" />
+																</button>
+															</a>
+														</p>
+													</div>
 												</security:authorize>
 											</div>
 										</div>

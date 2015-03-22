@@ -172,7 +172,6 @@ public class UserServiceImpl
             Education education = getDaoUtils().getEducationById(individual.getEducation().getId());
             individual.setEducation(education);
             individual.setUser(user);
-            ;
         }
         else if (userRole.equals(UsersRoles.ROLE_ORGANIZATION))
         {

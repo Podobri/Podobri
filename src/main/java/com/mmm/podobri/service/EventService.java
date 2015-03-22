@@ -86,7 +86,7 @@ public interface EventService
     public Event createNewEvent(Event event);
 
 
-    public boolean apply(Event event);
+    public boolean apply(Event event, String appForm);
 
 
     public List<Event> getMyEvents();
