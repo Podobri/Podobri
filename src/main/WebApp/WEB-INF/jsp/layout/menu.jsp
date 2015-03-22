@@ -11,7 +11,7 @@
 				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
 					<span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span>
 				</button>
-				<a href="${rootURL}"><img src="${rootURL}/resources/images/logo.jpg" alt="Podobri"></a>
+				<a class="nav-logo" href="${rootURL}"><img src="${rootURL}/resources/images/logo.jpg" alt="Podobri"></a>
 			</div>
 			<div class="navbar-collapse collapse">
 				<ul class="nav navbar-nav pull-right">

@@ -12,85 +12,83 @@
 <jsp:include page="layout/head.jsp" />
 <body>
 	<div class="container">
-<%-- 		<jsp:include page="layout/menu.jsp" /> --%>
+		<jsp:include page="layout/menu.jsp" />
 		<div id="content">
 			<div id="main" class="col-md-12">
-				<div class="row">
-					<div id="slide">
-						<section id="main-slider" class="carousel">
-							<div class="quick-search col-md-12">
-								<div class="big-title">
-									<h2>
-										<spring:message code="quickSearchTitle" />
-									</h2>
+				<div id="main-slider" class="row">
+					<div class="quick-search col-md-12">
+						<div class="big-title">
+							<h2>
+								<spring:message code="quickSearchTitle" />
+							</h2>
+						</div>
+						<div class="mini-title">
+							<h3>
+								<spring:message code="quickSearchSubTitle" />
+							</h3>
+						</div>
+						<div class="form">
+							<form:form id="eventsFilterForm" modelAttribute="eventsFilter" method="post"
+								action="${pageContext.request.contextPath}/events/search/main">
+								<div class="quick-search-inputs col-md-9">
+									<div class="col-md-6">
+										<form:select id="opportunityCategoryId" path="categoryId" cssClass="form-control">
+											<form:option id="opportunityCategoryNone" value="-1">---<spring:message code="quickSearchWhat" />---</form:option>
+											<form:options items="${categoriesList}" itemValue="id" itemLabel="category" />
+										</form:select>
+									</div>
+									<div class="col-md-6">
+										<form:select id="opportunityId" path="opportunityId" cssClass="form-control">
+											<form:option id="opportunityNone" value="-1">---<spring:message code="quickSearchType" />---</form:option>
+											<form:options items="${opportunitiesList}" itemValue="id" itemLabel="opportunity" />
+										</form:select>
+									</div>
+									<div class="col-md-6">
+										<form:select id="eventCostTypesId" path="costTypeId" cssClass="form-control">
+											<form:option id="eventCostTypesNone" value="-1" selected="selected">
+												<spring:message code="financing" />
+											</form:option>
+											<form:options items="${costTypesList}" itemValue="id" itemLabel="cost" />
+										</form:select>
+									</div>
+									<div class="col-md-6">
+										<form:select id="activities" path="activities" multiple="false" cssClass="form-control">
+											<form:option id="activityNone" value="-1" selected="selected">
+												<spring:message code="quickSearchActivity" />
+											</form:option>
+											<form:options items="${activitiesList}" itemValue="id" itemLabel="type" />
+										</form:select>
+									</div>
 								</div>
-								<div class="mini-title">
-									<h3>
-										<spring:message code="quickSearchSubTitle" />
-									</h3>
+								<div class="quick-search-find col-md-3">
+									<input type="submit" class="form-control btn btn-success" value="<spring:message code="quickSearchSearch" />" />
 								</div>
-								<div class="form">
-									<form:form id="eventsFilterForm" modelAttribute="eventsFilter" method="post"
-										action="${pageContext.request.contextPath}/events/search/main">
-										<div class="quick-search-inputs col-md-9">
-											<div class="col-md-6">
-												<form:select id="opportunityCategoryId" path="categoryId" cssClass="form-control">
-													<form:option id="opportunityCategoryNone" value="-1">---<spring:message code="quickSearchWhat" />---</form:option>
-													<form:options items="${categoriesList}" itemValue="id" itemLabel="category" />
-												</form:select>
-											</div>
-											<div class="col-md-6">
-												<form:select id="opportunityId" path="opportunityId" cssClass="form-control">
-													<form:option id="opportunityNone" value="-1">---<spring:message code="quickSearchType" />---</form:option>
-													<form:options items="${opportunitiesList}" itemValue="id" itemLabel="opportunity" />
-												</form:select>
-											</div>
-											<div class="col-md-6">
-												<form:select id="eventCostTypesId" path="costTypeId" cssClass="form-control">
-													<form:option id="eventCostTypesNone" value="-1" selected="selected">
-														<spring:message code="financing" />
-													</form:option>
-													<form:options items="${costTypesList}" itemValue="id" itemLabel="cost" />
-												</form:select>
-											</div>
-											<div class="col-md-6">
-												<form:select id="activities" path="activities" multiple="false" cssClass="form-control">
-													<form:option id="activityNone" value="-1" selected="selected">
-														<spring:message code="quickSearchActivity" />
-													</form:option>
-													<form:options items="${activitiesList}" itemValue="id" itemLabel="type" />
-												</form:select>
-											</div>
-										</div>
-										<div class="quick-search-find col-md-3">
-											<input type="submit" class="form-control btn btn-success" value="<spring:message code="quickSearchSearch" />" />
-										</div>
-									</form:form>
-								</div>
-							</div>
+							</form:form>
+						</div>
+					</div>
+					<!-- end quick-search -->
+					<div class="carousel">
+						<div class="carousel-inner">
+							<%-- 								<c:forEach var="teaminfo" items="${teaminfos}" varStatus="status"> --%>
+							<%-- 									<div class="item ${status.first ? 'active' : '' }"> --%>
+							<!-- 										<div class="container"> -->
+							<!-- 											<div class="carousel-content"> -->
+							<!-- 												<a data-toggle="modal" data-target="#${teaminfo.firstname}" href=""> -->
+							<%-- 													<h1>${teaminfo.fullname}</h1> --%>
+							<!-- 												</a> -->
+							<%-- 												<p class="lead">${teaminfo.position}</p> --%>
+							<!-- 											</div> -->
+							<!-- 										</div> -->
+							<!-- 									</div> -->
+							<%-- 								</c:forEach> --%>
+						</div>
 
-							<div class="carousel-inner">
-								<%-- 								<c:forEach var="teaminfo" items="${teaminfos}" varStatus="status"> --%>
-								<%-- 									<div class="item ${status.first ? 'active' : '' }"> --%>
-								<!-- 										<div class="container"> -->
-								<!-- 											<div class="carousel-content"> -->
-								<!-- 												<a data-toggle="modal" data-target="#${teaminfo.firstname}" href=""> -->
-								<%-- 													<h1>${teaminfo.fullname}</h1> --%>
-								<!-- 												</a> -->
-								<%-- 												<p class="lead">${teaminfo.position}</p> --%>
-								<!-- 											</div> -->
-								<!-- 										</div> -->
-								<!-- 									</div> -->
-								<%-- 								</c:forEach> --%>
-							</div>
-
-							<a class="prev" href="#main-slider" data-slide="prev"> <i class="icon-angle-left"></i></a> <a class="next"
-								href="#main-slider" data-slide="next"> <i class="icon-angle-right"></i></a>
-						</section>
+						<a class="prev" href="#main-slider" data-slide="prev"> <i class="icon-angle-left"></i></a> <a class="next"
+							href="#main-slider" data-slide="next"> <i class="icon-angle-right"></i></a>
 					</div>
 					<!-- END slide -->
 				</div>
-
+				
 				<div class="row">
 					<div id="closestEvents col-md-offset-1 col-md-10">
 						<div class="well">
@@ -150,6 +148,7 @@
 					</div>
 					<!-- END closesEvents -->
 				</div>
+				
 				<jsp:include page="mainCalendar.jsp" />
 			</div>
 		</div>
@@ -157,8 +156,8 @@
 	</div>
 	<!-- end main container -->
 	<script>
-// 	makeAjaxCall('opportunityCategoryId', 'getOpportunitiesByCategory',
-// 			'change', "opportunityId", "opportunity");
+		// 	makeAjaxCall('opportunityCategoryId', 'getOpportunitiesByCategory',
+		// 			'change', "opportunityId", "opportunity");
 	</script>
 </body>
 </html>

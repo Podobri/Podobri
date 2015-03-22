@@ -200,11 +200,13 @@
 											${event.dateFromTime }
 										</span>
 									</p>
+									<security:authorize access="hasRole('ROLE_ADMINISTRATOR')">
 									<p>
 										<span class="eventItemInfo"> <img alt="" src="${imgURL}thumblines/views_24x24.png" />
 											${event.eventParticipantsSize}
 										</span>
 									</p>
+									</security:authorize>
 									<p>
 										<span class="eventItemInfo"> <spring:message code="eventOrganizer" />: ${event.organizator}
 										</span>
@@ -230,11 +232,12 @@
 										</div>
 										<div class="row">
 											<div id="EventViewMainInfo">
-												<img alt="" src="${imgURL}thumblines/location_24x24.png" /> ${event.country }, ${event.city },
-												${event.event.address } <br /> <img alt="" src="${imgURL}thumblines/calendar_24x24.png" />
-												${event.dateFromDayOfMonth } ${event.dateFromMonth } <img alt="" src="${imgURL}thumblines/time_24x24.png" />
-												${event.dateFromTime } <img alt="" src="${imgURL}thumblines/views_24x24.png" />
-												${event.eventParticipantsSize}
+												<img alt="" src="${imgURL}thumblines/location_24x24.png" /> ${event.country }, ${event.city }, ${event.event.address } 
+												<img alt="" src="${imgURL}thumblines/calendar_24x24.png" /> ${event.dateFromDayOfMonth } ${event.dateFromMonth } 
+												<img alt="" src="${imgURL}thumblines/time_24x24.png" /> ${event.dateFromTime } 
+												<security:authorize access="hasRole('ROLE_ADMINISTRATOR')">
+												<img alt="" src="${imgURL}thumblines/views_24x24.png" /> ${event.eventParticipantsSize}
+												</security:authorize>
 											</div>
 										</div>
 										<div class="row">

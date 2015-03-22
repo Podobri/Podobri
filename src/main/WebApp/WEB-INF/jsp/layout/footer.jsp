@@ -17,7 +17,7 @@
 
 	<div class="row">
 		<div id="footer-contacts">
-			<div class="col-md-3 col-md-offset-1">
+			<div class="col-md-3 ">
 				<h4><spring:message code="footerAboutTitle" /></h4>
 				<p>
 					Създадена през 2014 организацията, Създадена през 2014 организацията. Създадена през 2014 организацията,
@@ -25,7 +25,7 @@
 					Създадена през 2014 организацията, Създадена през 2014 организацията. <a href="#">Read more</a>
 				</p>
 			</div>
-			<div class="col-md-3 col-md-offset-1">
+			<div class="col-md-3 ">
 				<h4><spring:message code="footerNewsTitle" /></h4>
 				<p><spring:message code="footerNewsSubTitle" /></p>
 				<form name="SubscibeEmail" action="Subscribe">
@@ -37,23 +37,39 @@
 					</div>
 				</form>
 			</div>
-			<div class="col-md-3 col-md-offset-1">
+			<div class="col-md-2">
+				<div class="col-md-12">
+					<h4 class="align-center"><spring:message code="titlePodobri" /></h4>
+				</div>
+				<ul class="col-md-12">
+					<li><h5><a href="${pageContext.request.contextPath}/"><spring:message code="menuHome" /></a></h5></li>
+					<li><h5><a href="${pageContext.request.contextPath}/events"><spring:message code="menuEvents" /></a></h5></li>
+					<li><h5><a href="${pageContext.request.contextPath}/users"><spring:message code="menuOrganizations" /></a></h5></li>
+					<li><h5><a href="${pageContext.request.contextPath}/about"><spring:message code="menuAbout" /></a></h5></li>
+					<li><h5><a href="${pageContext.request.contextPath}/about/tos"><spring:message code="footerToS" /></a></h5></li>
+				</ul>
+			</div>
+			<div class="col-md-4">
 				<h4><spring:message code="footerContactUsTitle" /></h4>
 				<p>
 					<spring:message code="footerPodobriTitle" /><br> <i class="icon-map-marker"></i> <spring:message code="footerAddress" /><br> <i
 						class="icon-envelope"></i> podobri@gmail.com <br> <i class="icon-phone"></i> +359 888 999 911
 				</p>
 				<p class="social-links">
-					<a href="http://facebook.com" target="_blank"> <img alt="Facebook"
-						src="${rootURL}/resources/images/social/fb.png" />
-					</a> <a href="http://twitter.com" target="_blank"> <img alt="Twitter"
-						src="${rootURL}/resources/images/social/twitter.png" />
-					</a> <a href="http://skype.com" target="_blank"> <img alt="Skype"
-						src="${rootURL}/resources/images/social/skype.png" />
-					</a> <a href="http://plus.google.com" target="_blank"> <img alt="Google+"
-						src="${rootURL}/resources/images/social/googleplus.png" />
-					</a> <a href="http://linkedin.com" target="_blank"> <img alt="LinkedIn"
-						src="${rootURL}/resources/images/social/linkedin.png" />
+					<a href="http://facebook.com" target="_blank"> 
+						<img alt="Facebook" src="${rootURL}/resources/images/social/fb.png" />
+					</a> 
+					<a href="http://twitter.com" target="_blank"> 
+						<img alt="Twitter" src="${rootURL}/resources/images/social/twitter.png" />
+					</a> 
+					<a href="http://skype.com" target="_blank"> 
+						<img alt="Skype" src="${rootURL}/resources/images/social/skype.png" />
+					</a> 
+					<a href="http://plus.google.com" target="_blank"> 
+						<img alt="Google+" src="${rootURL}/resources/images/social/googleplus.png" />
+					</a> 
+					<a href="http://linkedin.com" target="_blank"> 
+						<img alt="LinkedIn" src="${rootURL}/resources/images/social/linkedin.png" />
 					</a>
 				</p>
 			</div>
@@ -63,6 +79,8 @@
 		<div id="copyright" class="col-md-12">Podobri 2015 &copy; All rights reserved</div>
 	</div>
 </footer>
+<script>
+</script>
 <script src="${resURL}/js/bootstrap.min.js"></script>
 <script src="${resURL}/js/jquery.dataTables.js"></script>
 <script src="${resURL}/js/jquery.isotope.min.js"></script>

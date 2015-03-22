@@ -47,11 +47,12 @@ a:hover, a:focus {
 
 #main-slider {
 	background-image: url(../images/slider-bg.jpg);
+	height: 500px;
 	background-attachment: fixed;
 	background-size: cover;
 	background-position: 50% 50%;
 	background-repeat: no-repeat;
-	padding: 70px 0;
+	padding: 15% 0;
 	color: #fff;
 }
 
@@ -531,17 +532,9 @@ a:hover, a:focus {
 	color: #fff;
 }
 
-#logo
-{
-	margin-right: 50px;
-	margin-left: 20px;
-	width: 200px;
-	height: 60px;
-	background: url(../images//logo.png) no-repeat 0 50%;
-}
-
 #logo img {
-	width: 100%;
+	width: 80%;
+	height: 60px;
 }
 
 .navbar-default {
@@ -560,12 +553,9 @@ a:hover, a:focus {
 	border-radius: 0 0 0 5px;
 }
 
-.navbar-default .navbar-brand {
+.navbar-default .nav-logo {
 	margin-right: 50px;
 	margin-left: 20px;
-	width: 200px;
-	height: 60px;
-	background: url(../images//logo.png) no-repeat 0 50%;
 }
 
 .navbar-default .navbar-nav {
@@ -698,6 +688,16 @@ textarea#message {
 	background: #82b1ea;
 	display: inline-block;
 	color: #fff;
+}
+
+#footer-contacts ul a
+{
+	color: #fff;
+}
+
+#footer-contacts ul a:hover
+{
+	text-decoration: underline;
 }
 
 #footer-contacts h4 {
@@ -1029,18 +1029,23 @@ legend {
 
 .quickSearchAbsolute {
 	position: absolute;
-		color: #fff!important;
+	color: #fff !important;
 	width: 80%;
 	left: 10%;
 	background: rgba(0, 0, 0, 0.5);
 }
+
 .quick-search {
-	color: #fff!important;
+	color: #fff !important;
 	width: 80%;
 	margin-left: 10%;
 	background: rgba(0, 0, 0, 0.5);
 }
-.quickSearchAbsolute h2, .quick-search h2,.quickSearchAbsolute h3, .quick-search h3 {color:#fff!important;}
+
+.quickSearchAbsolute h2, .quick-search h2, .quickSearchAbsolute h3,
+	.quick-search h3 {
+	color: #fff !important;
+}
 
 @
 keyframes scaleUp { 0% {
@@ -1055,10 +1060,14 @@ opacity
 
 
 
+
+
 :
 
 
+
  
+
 
 
 1;
@@ -1067,13 +1076,19 @@ transform
 
 
 
+
+
 :
+
 
 
  
 
 
+
 scale
+
+
 
 
 
@@ -1094,10 +1109,14 @@ opacity
 
 
 
+
+
 :
 
 
+
  
+
 
 
 1;
@@ -1106,13 +1125,19 @@ opacity
 
 
 
+
+
 :
+
 
 
  
 
 
+
 scale
+
+
 
 
 
@@ -1133,10 +1158,14 @@ opacity
 
 
 
+
+
 :
 
 
+
  
+
 
 
 1;
@@ -1145,13 +1174,19 @@ opacity
 
 
 
+
+
 :
+
 
 
  
 
 
+
 scale
+
+
 
 
 
@@ -1172,10 +1207,14 @@ opacity
 
 
 
+
+
 :
 
 
+
  
+
 
 
 1;
@@ -1184,13 +1223,19 @@ opacity
 
 
 
+
+
 :
+
 
 
  
 
 
+
 scale
+
+
 
 
 
@@ -1210,10 +1255,14 @@ opacity
 
 
 
+
+
 :
 
 
+
  
+
 
 
 1;
@@ -1222,13 +1271,19 @@ opacity
 
 
 
+
+
 :
+
 
 
  
 
 
+
 scale
+
+
 
 
 
