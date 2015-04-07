@@ -10,18 +10,25 @@ import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.TransactionStatus;
 import org.springframework.transaction.support.TransactionCallback;
 import org.springframework.transaction.support.TransactionTemplate;
+import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.mmm.podobri.bo.EventViewWrapper;
 import com.mmm.podobri.bo.EventsFilter;
 import com.mmm.podobri.bo.TeamInfo;
+import com.mmm.podobri.controller.databinding.ActivityEditor;
 import com.mmm.podobri.dao.DaoUtils;
 import com.mmm.podobri.model.Activity;
+import com.mmm.podobri.model.City;
+import com.mmm.podobri.model.Country;
+import com.mmm.podobri.model.Education;
 import com.mmm.podobri.model.Event;
 import com.mmm.podobri.model.EventCostType;
 import com.mmm.podobri.model.Opportunity;
 import com.mmm.podobri.model.OpportunityCategory;
+import com.mmm.podobri.model.OrganizationsType;
 import com.mmm.podobri.service.EventService;
 import com.mmm.podobri.service.UserService;
 
@@ -29,16 +36,21 @@ import com.mmm.podobri.service.UserService;
 @Controller
 public class PodobriApplicationController
 {
-    public final List<OpportunityCategory> categoriesList = new ArrayList<OpportunityCategory>();
-    public final List<Opportunity> opportunitiesList = new ArrayList<Opportunity>();
-    public final List<Activity> activitiesList = new ArrayList<Activity>();
-    public final List<EventCostType> costTypesList = new ArrayList<EventCostType>();
-    
+    public final static List<OpportunityCategory> categoriesList = new ArrayList<OpportunityCategory>();
+    public final static List<Opportunity> opportunitiesList = new ArrayList<Opportunity>();
+    public final static List<Activity> activitiesList = new ArrayList<Activity>();
+    public final static List<EventCostType> costTypesList = new ArrayList<EventCostType>();
+    public final static List<Education> educations = new ArrayList<Education>();
+    public final static List<Country> countries = new ArrayList<Country>();
+    public final static List<City> cities = new ArrayList<City>();
+    public final static List<OrganizationsType> organizationTypes = new ArrayList<OrganizationsType>();
+
     @Autowired
     UserService userService;
 
     @Autowired
     EventService eventService;
+
 
     @Autowired
     public void init(PlatformTransactionManager transactionManager)
@@ -55,12 +67,24 @@ public class PodobriApplicationController
                     opportunitiesList.addAll(daoUtils.getAllOpportunities());
                     activitiesList.addAll(daoUtils.getAllActivities());
                     costTypesList.addAll(daoUtils.getAllEventCostTypes());
+                    educations.addAll(daoUtils.getAllEducations());
+                    countries.addAll(daoUtils.getAllCountries());
+                    cities.addAll(daoUtils.getAllCities());
+                    organizationTypes.addAll(daoUtils.getAllOrganizationTypes());
                 }
                 return null;
             }
         });
     }
-    
+
+
+    @InitBinder
+    public void initBinder(WebDataBinder binder)
+    {
+        binder.registerCustomEditor(List.class, "activities", new ActivityEditor(List.class, userService.getDaoUtils()));
+    }
+
+
     @RequestMapping(value = {"", "/"})
     public ModelAndView podobri()
     {
@@ -122,13 +146,18 @@ public class PodobriApplicationController
                                  "Dimiter is electrician engeneer.He complete his degree in TU-Sofia in 2014. He works as software developer from more than 2 years. His prefered program language is Java with smaller such. Now he works for Rila Solution."));
         return ourTeam;
     }
-    
+
+
     private ModelAndView loadSelects(ModelAndView model)
     {
         model.addObject("categoriesList", categoriesList);
         model.addObject("opportunitiesList", opportunitiesList);
         model.addObject("activitiesList", activitiesList);
         model.addObject("costTypesList", costTypesList);
+        model.addObject("educations", educations);
+        model.addObject("countries", countries);
+        model.addObject("cities", cities);
+        model.addObject("organizationTypes", organizationTypes);
         return model;
     }
 }

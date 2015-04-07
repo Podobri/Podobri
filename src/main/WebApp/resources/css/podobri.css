@@ -538,3 +538,14 @@ textarea {
 	border: 5px solid rgba(0, 0, 0, 0.5);
 	border-radius: 10px;
 }
+
+#main .quick-search a:after
+{
+}
+
+.chosen-container
+{
+    width: 100%!important;
+}
+/* .inative { display: none;} */
+/* .active { display: block; } */

@@ -6,6 +6,15 @@
 <title>Podobri</title>
 <script src="${resURL}/js/jquery-1.11.1.min.js"></script>
 <script src="${resURL}/js/jquery-ui.js"></script>
+<script src="${resURL}/js/bootstrap.min.js"></script>
+<script src="${resURL}/js/jquery.dataTables.js"></script>
+<script src="${resURL}/js/jquery.isotope.min.js"></script>
+<script src="${resURL}/js/jquery.prettyPhoto.js"></script>
+<script src="${resURL}/js/jquery.flexisel.js"></script>
+<script src="${resURL}/js/jquery.datetimepicker.js"></script>
+<script src="${resURL}/js/chosen.jquery.min.js"></script>
+<script src="${resURL}/js/main.js"></script>
+<script src="${resURL}/js/verify.js"></script>
 <link rel="stylesheet" href='http://fonts.googleapis.com/css?family=Lato:100,300,400,700,900,100italic,400italic' />
 <link rel="stylesheet" href='http://fonts.googleapis.com/css?family=Advent+Pro:100' />
 <link rel="stylesheet" href="${resURL}/css/bootstrap.min.css" media="screen">

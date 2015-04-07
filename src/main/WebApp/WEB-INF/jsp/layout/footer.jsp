@@ -16,7 +16,7 @@
 	</div>
 
 	<div class="row">
-		<div id="footer-contacts">
+		<div id="footer-contacts" class="col-md-12">
 			<div class="col-md-3 ">
 				<h4><spring:message code="footerAboutTitle" /></h4>
 				<p>
@@ -79,14 +79,3 @@
 		<div id="copyright" class="col-md-12">Podobri 2015 &copy; All rights reserved</div>
 	</div>
 </footer>
-<script>
-</script>
-<script src="${resURL}/js/bootstrap.min.js"></script>
-<script src="${resURL}/js/jquery.dataTables.js"></script>
-<script src="${resURL}/js/jquery.isotope.min.js"></script>
-<script src="${resURL}/js/jquery.prettyPhoto.js"></script>
-<script src="${resURL}/js/jquery.flexisel.js"></script>
-<script src="${resURL}/js/jquery.datetimepicker.js"></script>
-<script src="${resURL}/js/main.js"></script>
-<script src="${resURL}/js/chosen.jquery.min.js"></script>
-<script src="${resURL}/js/verify.js"></script>

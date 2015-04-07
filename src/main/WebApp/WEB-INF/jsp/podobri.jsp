@@ -1,9 +1,10 @@
 <!DOCTYPE html>
 <%@taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
+<%@ taglib uri="http://www.springframework.org/security/tags" prefix="security"%>
+<%@taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 <%@ taglib uri="http://java.sun.com/jstl/core_rt" prefix="c"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
-<%@taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 <c:url var="imgURL" value="resources/images/" />
 <c:url var="images" value="/images/" />
 <c:url var="thumb128" value="/images/thumbnail128x128/" />
@@ -88,7 +89,7 @@
 					</div>
 					<!-- END slide -->
 				</div>
-				
+
 				<div class="row">
 					<div id="closestEvents col-md-offset-1 col-md-10">
 						<div class="well">
@@ -131,9 +132,12 @@
 																		${closestEvent.dateFromDayOfMonth } ${closestEvent.dateFromMonth }
 																	</span> <span class="thumbnail_location"> <img alt="location" src="${imgURL}/thumblines/location.png">
 																		${closestEvent.event.city.city }
-																	</span> <span class="thumbnail_views"> <img alt="views" src="${imgURL}/thumblines/views.png">
-																		${closestEvent.eventParticipantsSize}
 																	</span>
+																	<security:authorize access="hasRole('ROLE_ADMINISTRATOR')"> 
+																		<span class="thumbnail_views"> 
+																			<img alt="views" src="${imgURL}/thumblines/views.png"> ${closestEvent.eventParticipantsSize}
+																		</span>
+																	</security:authorize>
 																</p>
 															</div>
 														</div>

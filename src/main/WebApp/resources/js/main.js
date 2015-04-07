@@ -91,7 +91,8 @@ $(document).ready(
 
 						}
 					});
-			$('#activitiesCompany').next('div').css('width', "100%");
+			
+//			$('#activitiesCompany').next('div').css('width', "100%");
 		});
 
 // $(document).ready(function setTagsManager(id) {

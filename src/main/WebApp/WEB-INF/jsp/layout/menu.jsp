@@ -53,7 +53,10 @@
 							</ul></li>
 					</security:authorize>
 					<security:authorize access="isAnonymous()">
-						<li><a href="${pageContext.request.contextPath}/login"><spring:message code="menuSignIn" /> <span
+						<li>
+						<a data-toggle="modal" data-target="#login" href="">
+<%-- 						<a href="${pageContext.request.contextPath}/login"> --%>
+						<spring:message code="menuSignIn" /> <span
 								class="glyphicon glyphicon-log-in pull-left"></span></a></li>
 					</security:authorize>
 					<li><a href="?lang=en"> <img alt="<spring:message code="menuLanguageEn" />" src="${rootURL}/resources/images/en.png" /></a></li>
@@ -61,6 +64,6 @@
 				</ul>
 			</div>
 		</div>
-		<%-- 		<jsp:include page="login.jsp" /> --%>
 	</div>
+	<jsp:include page="../loginModal.jsp" />
 </header>
