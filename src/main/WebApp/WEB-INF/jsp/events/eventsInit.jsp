@@ -24,7 +24,7 @@
 				</div>
 
 				<div class="row">
-					<div id="createNewEvent">
+					<div id="create-new-event">
 						<form:errors path="event.*" />
 						<form:form id="createEventForm" modelAttribute="event" method="post"
 							action="${pageContext.request.contextPath}/events/createInitiativeSubmit">
@@ -210,7 +210,7 @@
 															rows="5"></textarea>
 													</div>
 													<div class="form-group">
-														<span class="addElement">Добави елемент...</span>
+														<span class="add-element">Добави елемент...</span>
 													</div>
 												</div>
 											</div>
@@ -228,7 +228,7 @@
 				</div>
 			</div>
 			<!-- End createEvent -->
-			<jsp:include page="../reklams.jsp" />
+			<jsp:include page="../ads.jsp" />
 		</div>
 		<!-- End main content -->
 		<jsp:include page="../layout/footer.jsp" />

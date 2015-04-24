@@ -5,15 +5,15 @@
 <html>
 <jsp:include page="../layout/head.jsp" />
 <body>
-	<div class="container">
-		<jsp:include page="../layout/menu.jsp" />
-		<div id="content">
-			<div class="col-md-10">
-				${formContent}
-			</div>
-			<jsp:include page="../reklams.jsp" />
-		</div> <!-- End main content -->
-		<jsp:include page="../layout/footer.jsp" />
-	</div> <!-- End container -->
+  <div class="container">
+    <jsp:include page="../layout/menu.jsp" />
+    <div id="content">
+      <div class="col-md-10">${formContent}</div>
+      <jsp:include page="../ads.jsp" />
+    </div>
+    <!-- End main content -->
+    <jsp:include page="../layout/footer.jsp" />
+  </div>
+  <!-- End container -->
 </body>
 </html>

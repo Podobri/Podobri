@@ -204,7 +204,7 @@ public class UserServiceImpl
 
 
     @Override
-    public List<User> findAllOrganizations()
+    public List<Organization> findAllOrganizations()
     {
         return userDao.findAllOrganizations();
     }

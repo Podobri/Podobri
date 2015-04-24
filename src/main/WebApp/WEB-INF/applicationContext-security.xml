@@ -19,6 +19,8 @@
 		<security:intercept-url pattern="/about" access="permitAll" />
 		<security:intercept-url pattern="/users" access="permitAll" />
 		<security:intercept-url pattern="/users/ajax/**" access="permitAll" />
+		<security:intercept-url pattern="/organizations" access="permitAll" />
+		<security:intercept-url pattern="/organizations/ajax/**" access="permitAll" />
 		<security:intercept-url pattern="/**/ajax/**" access="permitAll" />
 		<security:intercept-url pattern="/events" access="permitAll" />
 		<security:intercept-url pattern="/events/search" access="permitAll" />

@@ -18,7 +18,7 @@ public class FormDaoImpl
 {
     public FormDaoImpl()
     {
-        setClazz(OrganizationsForm.class);
+        super(OrganizationsForm.class);
     }
     
     @Override

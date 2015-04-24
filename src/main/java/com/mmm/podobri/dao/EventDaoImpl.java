@@ -31,7 +31,7 @@ public class EventDaoImpl
 
     public EventDaoImpl()
     {
-        setClazz(Event.class);
+        super(Event.class);
     }
 
 

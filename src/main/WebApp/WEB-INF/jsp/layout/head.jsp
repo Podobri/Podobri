@@ -26,7 +26,6 @@
 <link rel="stylesheet" href="${resURL}/css/jquery-ui.theme.min.css" media="screen">
 <link rel="stylesheet" href="${resURL}/css/jquery-ui.structure.min.css" media="screen">
 <link rel="stylesheet" href="${resURL}/css/jquery.datetimepicker.css" media="screen">
-<link rel="stylesheet" href="${resURL}/css/main.css" media="screen">
 <link rel="stylesheet" href="${resURL}/css/podobri.css" media="screen">
 <link rel="stylesheet" href="${resURL}/css/calendar_style.css" media="screen">
 <link rel="stylesheet" href="${resURL}/css/chosen.min.css" media="screen">

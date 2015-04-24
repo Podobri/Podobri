@@ -6,20 +6,14 @@
 package com.mmm.podobri.bo;
 
 import java.util.Date;
-import java.util.List;
-
-import com.mmm.podobri.model.Activity;
 
 
-public class EventsFilter
+public class EventsFilter extends Filter
 {
     private byte categoryId;
     private byte opportunityId;
-    private List<Activity> activities;
     private Date startDate;
     private Date deadline;
-    private byte countryId;
-    private int cityId;
     private byte costTypeId;
 
     public EventsFilter()
@@ -51,18 +45,6 @@ public class EventsFilter
     }
 
 
-    public List<Activity> getActivities()
-    {
-        return activities;
-    }
-
-
-    public void setActivities(List<Activity> activities)
-    {
-        this.activities = activities;
-    }
-
-
     public Date getStartDate()
     {
         return startDate;
@@ -84,30 +66,6 @@ public class EventsFilter
     public void setDeadline(Date deadline)
     {
         this.deadline = deadline;
-    }
-
-
-    public byte getCountryId()
-    {
-        return countryId;
-    }
-
-
-    public void setCountryId(byte countryId)
-    {
-        this.countryId = countryId;
-    }
-
-
-    public int getCityId()
-    {
-        return cityId;
-    }
-
-
-    public void setCityId(int cityId)
-    {
-        this.cityId = cityId;
     }
 
 

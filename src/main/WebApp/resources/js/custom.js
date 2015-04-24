@@ -22,7 +22,7 @@ $(document).ready(function() {
         }
     });
         // Add Placeholder text to datatables filter bar
-    $('.dataTables_filter input').attr("placeholder", "Въведи тук....");
+    $('.dataTables_filter input').attr("placeholder", "пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ....");
     // Manually Init Chosen on Datatables Filters
     $("select[name='datatable_length']").chosen();	
     // Init Xeditable Plugin
@@ -72,11 +72,11 @@ function setDataTable(id, aTargets, displayLenght)
 	    'aButtons': [
 		{
 		    'sExtends': 'copy',
-		    'sButtonText': 'Копирай',
+		    'sButtonText': 'пїЅпїЅпїЅпїЅпїЅпїЅпїЅ',
 		    'mColumns': 'all'},
 		{
 		    'sExtends': 'print',
-		    'sButtonText': 'Печат',
+		    'sButtonText': 'пїЅпїЅпїЅпїЅпїЅ',
 		    'mColumns': 'all'}
 	    ]
 	}
@@ -169,7 +169,7 @@ function ajaxSendRequest(button,formID,functionName)
 	$.ajax ({
 	    type: "POST",
 	    url: base_url+"ajax",
-	    data: {function: functionName, data: data},
+	    data: { function: functionName, data: data },
 	    success: function(data) {
                 //console.log(data);
 		location.reload();

@@ -7,6 +7,7 @@ import java.util.List;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.mmm.podobri.model.Organization;
 import com.mmm.podobri.model.User;
 
 
@@ -20,7 +21,7 @@ public class UserDaoImpl
 
     public UserDaoImpl()
     {
-        setClazz(User.class);
+        super(User.class);
     }
 
 
@@ -50,15 +51,17 @@ public class UserDaoImpl
         return user;
     }
     
-    public List<User> findAllOrganizations()
+    
+    @Override
+    public List<Organization> findAllOrganizations()
     {
         List<User> all = findAll();
-        List<User> organizations = new ArrayList<User>();
+        List<Organization> organizations = new ArrayList<Organization>();
         for (User user : all)
         {
             if (user.getOrganization() != null)
             {
-                organizations.add(user);
+                organizations.add(user.getOrganization());
             }
         }
         return organizations;

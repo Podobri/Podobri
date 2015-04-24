@@ -10,9 +10,9 @@
 	<div class="container">
 		<jsp:include page="../layout/menu.jsp" />
 		<div id="content">
-			<div id="createEvent" class="col-md-10">
+			<div id="create-event" class="col-md-10">
 				<div class="row">
-					<div id="createEventTitle">
+					<div id="create-event-title">
 						<h3>
 							<strong><spring:message code="createEventTitle" /></strong>
 						</h3>
@@ -22,17 +22,17 @@
 
 
 				<div class="row">
-					<div id="createNewEvent">
+					<div id="create-new-event">
 						<form:errors path="event.*" />
-						<form:form id="createEventForm" modelAttribute="event" method="post" enctype="multipart/form-data"
+						<form:form id="create-event-form" modelAttribute="event" method="post" enctype="multipart/form-data"
 							action="${pageContext.request.contextPath}/events/createEventSubmit">
 							<fieldset>
 								<div class="row">
 									<div class="row">
-										<div id="uploadEventPicture" class="uploadEventPictureSection">
-											<form:input type="file" path="pictureFile" class="notVisible" />
-											<div id="uploadEventPicturePhoto"></div>
-											<div id="uploadEventPictureLabel">
+										<div id="upload-event-picture" class="upload-event-picture-section">
+											<form:input type="file" path="pictureFile" class="not-visible" />
+											<div id="upload-event-picture-photo"></div>
+											<div id="upload-event-picture-label">
 												<spring:message code="uploadImage" />
 											</div>
 										</div>
@@ -75,9 +75,9 @@
 												<form:label path="opportunityCategory.id" cssClass="control-label">
 													<spring:message code="category" />
 												</form:label>
-												<form:select id="opportunityCategoryId" path="opportunityCategory.id" required="required"
+												<form:select id="opportunity-category" path="opportunityCategory.id" required="required"
 													cssClass="form-control">
-													<form:option id="opportunityCategoryNone" value="-1">---<spring:message code="category" />---</form:option>
+													<form:option id="opportunity-category-none" value="-1">---<spring:message code="category" />---</form:option>
 													<form:options items="${categoriesList}" itemValue="id" itemLabel="category" />
 												</form:select>
 											</div>
@@ -85,16 +85,15 @@
 												<form:label path="opportunity.id" cssClass="control-label">
 													<spring:message code="opportunity" />
 												</form:label>
-												<form:select id="opportunityId" path="opportunity.id" required="required" cssClass="form-control">
-													<form:option id="opportunityNone" value="-1">---<spring:message code="eventChoiceCategoryLbl" />---</form:option>
-													<%-- 													<form:options items="${opportunitiesList}" itemValue="id" itemLabel="opportunity" /> --%>
+												<form:select id="opportunity" path="opportunity.id" required="required" cssClass="form-control">
+													<form:option id="opportunity-none" value="-1">---<spring:message code="eventChoiceCategoryLbl" />---</form:option>
 												</form:select>
 											</div>
 											<div class="form-group">
 												<form:label path="eventCostType" cssClass="control-label">
 													<spring:message code="financing" />
 												</form:label>
-												<form:select id="eventCostType" path="eventCostType.id" cssClass="form-control">
+												<form:select id="event-cost-type" path="eventCostType.id" cssClass="form-control">
 													<form:options items="${costTypesList}" itemValue="id" itemLabel="cost" />
 												</form:select>
 											</div>
@@ -114,8 +113,8 @@
 												<form:label path="country.id" cssClass="control-label">
 													<spring:message code="country" />
 												</form:label>
-												<form:select id="countryId" path="country.id" required="required" cssClass="form-control">
-													<form:option id="countryNone" value="-1">---<spring:message code="country" />---</form:option>
+												<form:select id="country" path="country.id" required="required" cssClass="form-control">
+													<form:option id="country-none" value="-1">---<spring:message code="country" />---</form:option>
 													<form:options items="${countriesList}" itemValue="id" itemLabel="country" />
 												</form:select>
 											</div>
@@ -124,9 +123,8 @@
 												<form:label path="city.id" cssClass="control-label">
 													<spring:message code="city" />
 												</form:label>
-												<form:select id="cityId" path="city.id" required="required" cssClass="form-control">
-													<form:option id="cityNone" value="-1">---<spring:message code="choiceCountryLbl" />---</form:option>
-													<%-- 													<form:options items="${citiesList}" itemValue="id" itemLabel="city" /> --%>
+												<form:select id="city" path="city.id" required="required" cssClass="form-control">
+													<form:option id="city-none" value="-1">---<spring:message code="choiceCountryLbl" />---</form:option>
 												</form:select>
 											</div>
 
@@ -138,7 +136,7 @@
 													data-validate="required,alphaNumeric,min(4),max(45)" />
 											</div>
 										</div>
-										<div id="googleMaps" class="col-md-6">
+										<div id="google-maps" class="col-md-6">
 											<div id="map-canvas" style="height: 320px"></div>
 											<br /> <input id="address_lat" class="form-control " type="hidden" placeholder="" name="address_lat"
 												value=""> <input id="address_lon" class="form-control " type="hidden" placeholder=""
@@ -158,14 +156,14 @@
 											<form:label path="dateFrom" cssClass="control-label">
 												<spring:message code="eventStartDate" />
 											</form:label>
-											<form:input id="startDate" path="dateFrom" type="datetime-local"
+											<form:input id="start-date" path="dateFrom" type="datetime-local"
 												cssClass="form-control date datepicker margin-top-none" placeholder="23/9/2013" />
 										</div>
 										<div class="form-group col-md-4">
 											<form:label path="dateTo" cssClass="control-label">
 												<spring:message code="eventEndDate" />
 											</form:label>
-											<form:input id="dateTo" path="dateTo" type="datetime-local"
+											<form:input id="date-to" path="dateTo" type="datetime-local"
 												cssClass="form-control date datepicker margin-top-none" placeholder="23/9/2013" />
 										</div>
 										<div class="form-group col-md-4">
@@ -190,7 +188,7 @@
 												<form:label path="maxParticipants" cssClass="control-label">
 													<spring:message code="eventParticipants" />
 												</form:label>
-												<form:input id="maxParticipants" path="maxParticipants" type="text" placeholer="type number"
+												<form:input id="max-participants" path="maxParticipants" type="text" placeholer="type number"
 													cssClass="form-control" data-validate="number,rangeVal(0,500)" />
 											</div>
 											<div class="form-group">
@@ -211,10 +209,10 @@
 												<form:label path="applicationFormRequire" cssClass="control-label">
 													<spring:message code="requireApplicationForm" />
 												</form:label>
-												<form:checkbox id="applicationFormRequire" path="applicationFormRequire" cssClass="form-control" />
+												<form:checkbox id="application-form-require" path="applicationFormRequire" cssClass="form-control" />
 											</div>
-											<form:select id="formId" path="form.name" cssClass="form-control">
-												<form:option id="formNone" value="">---<spring:message code="choiceApplicationForm" />---</form:option>
+											<form:select id="form" path="form.name" cssClass="form-control">
+												<form:option id="form-none" value="">---<spring:message code="choiceApplicationForm" />---</form:option>
 												<form:options items="${forms}" itemValue="name" itemLabel="name" />
 											</form:select>
 										</div>
@@ -222,22 +220,22 @@
 											<form:label path="additionalInfo" cssClass="control-label">
 												<spring:message code="eventAdditionalInfo" />
 											</form:label>
-											<form:textarea id="additionalInfo" path="additionalInfo" cssClass="col-md-12 form-control" rows="5" />
+											<form:textarea id="additional-info" path="additionalInfo" cssClass="col-md-12 form-control" rows="5" />
 										</div>
 									</div>
 								</div>
 
 								<div class="row">
 									<div class="panel-heading">
-										<h4 id="programTitle">
+										<h4 id="program-title">
 											<spring:message code="eventProgram" />
 										</h4>
 									</div>
 								</div>
 								<spring:message code="subject" var="programSubject" />
 								<div class="row">
-									<div id="addProgramRow" class="form-group">
-										<button id="addProgram" type="button" class="btn btn-success">
+									<div id="add-program-row" class="form-group">
+										<button id="add-program" type="button" class="btn btn-success">
 											<span class="glyphicon glyphicon-plus"></span>
 											<spring:message code="eventAddElementBtn" />
 										</button>
@@ -246,15 +244,15 @@
 
 								<div class="row">
 									<div class="panel-heading">
-										<h4 id="lectorsTitle">
+										<h4 id="lectors-title">
 											<spring:message code="eventLectors" />
 										</h4>
 									</div>
 								</div>
 
 								<div class="row">
-									<div id="addLectorRow" class="form-group">
-										<button id="addLector" type="button" class="btn btn-success">
+									<div id="add-lector-row" class="form-group">
+										<button id="add-lector" type="button" class="btn btn-success">
 											<span class="glyphicon glyphicon-plus"></span>
 											<spring:message code="eventAddElementBtn" />
 										</button>
@@ -263,15 +261,15 @@
 
 								<div class="row">
 									<div class="panel-heading">
-										<h4 id="sponsorsTitle">
+										<h4 id="sponsors-title">
 											<spring:message code="eventSponsors" />
 										</h4>
 									</div>
 								</div>
 
 								<div class="row">
-									<div id="addSponsorRow" class="form-group">
-										<button id="addSponsor" type="button" class="btn btn-success">
+									<div id="add-sponsor-row" class="form-group">
+										<button id="add-sponsor" type="button" class="btn btn-success">
 											<span class="glyphicon glyphicon-plus"></span>
 											<spring:message code="eventAddElementBtn" />
 										</button>
@@ -280,7 +278,7 @@
 
 								<div class="row">
 									<div class="form-group text-center">
-										<button id="createEventSubmit" class="btn btn-success btn-lg" type="submit">
+										<button id="create-event-submit" class="btn btn-success btn-lg" type="submit">
 											<spring:message code="eventCreateEventBtn" />
 										</button>
 									</div>
@@ -291,7 +289,7 @@
 				</div>
 			</div>
 			<!-- End createEvent -->
-			<jsp:include page="../reklams.jsp" />
+			<jsp:include page="../ads.jsp" />
 		</div>
 		<!-- End main content -->
 		<jsp:include page="../layout/footer.jsp" />
@@ -301,10 +299,10 @@
 	<script src="/Podobri/resources/js/gmaps.js"></script>
 	<script src="/Podobri/resources/js/eventsAddElement.js"></script>
 	<script>
-		makeAjaxCall('countryId', 'getCitiesByCountry', 'change', "cityId",
+		makeAjaxCall('country', 'getCitiesByCountry', 'change', "city",
 				"city");
-		makeAjaxCall('opportunityCategoryId', 'getOpportunitiesByCategory',
-				'change', "opportunityId", "opportunity");
+		makeAjaxCall('opportunity-category', 'getOpportunitiesByCategory',
+				'change', "opportunity", "opportunity");
 		$(document).ready($(function() {
 			addElement(0, 0, 0);
 		}));

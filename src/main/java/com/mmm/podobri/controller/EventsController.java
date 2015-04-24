@@ -36,6 +36,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.mmm.podobri.bo.EditParticipants;
 import com.mmm.podobri.bo.EventViewWrapper;
 import com.mmm.podobri.bo.EventsFilter;
+import com.mmm.podobri.bo.Filter;
 import com.mmm.podobri.bo.MailTemplate;
 import com.mmm.podobri.controller.databinding.ActivityEditor;
 import com.mmm.podobri.dao.DaoUtils;
@@ -109,7 +110,7 @@ public class EventsController
     public ModelAndView eventsHome()
     {
         final ModelAndView model = new ModelAndView("events/events");
-        EventsFilter filter = new EventsFilter();
+        Filter filter = new EventsFilter();
         model.addObject("eventsFilter", filter);
         model.addObject("actualEvents", EventViewWrapper.buildEventViewWrapperList(eventService.findAll()));
         return loadSelects(model);

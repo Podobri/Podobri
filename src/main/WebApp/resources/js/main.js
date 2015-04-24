@@ -81,12 +81,12 @@ $(document).ready(function() {
 
 $(document).ready(
 		function() {
-			$('#register_titles').find('div').click(
+			$('#register-titles').find('div').click(
 					function() {
 						if (!$(this).hasClass('active')) {
 							$(this).parent().find('div').toggleClass(
 									'active inactive');
-							$('.register_user_inputs,.register_company_inputs')
+							$('.register-user-inputs, .register-company-inputs')
 									.toggleClass('hide');
 
 						}

@@ -10,26 +10,26 @@
 		<div id="content">
 			<div class="col-md-10">
 				<form action="${pageContext.request.contextPath}/events/applyForm" method="POST">
-					<input id="postAddress" type="hidden" value="${pageContext.request.contextPath}/events/applyForm" name="address">
-					<input id="eventId" type="hidden" value="${event.id }" name="eventId">
-					<div id="formContent">
+					<input id="post-address" type="hidden" value="${pageContext.request.contextPath}/events/applyForm" name="address">
+					<input id="event-id" type="hidden" value="${event.id }" name="eventId">
+					<div id="form-content">
 						<p>${formContent}</p>
 					</div>
-					<input id="applyBtn" type='submit' value="<spring:message code="saveBtn" />">
+					<input id="apply-submit" type='submit' value="<spring:message code="saveBtn" />">
 				</form>
 			</div>
-			<jsp:include page="../reklams.jsp" />
+			<jsp:include page="../ads.jsp" />
 		</div>
 		<!-- End main content -->
 		<jsp:include page="../layout/footer.jsp" />
 	</div>
 	<!-- End container -->
 	<script>
-		$('#applyBtn').click(function(e) {
+		$('#apply-submit').click(function(e) {
 			e.preventDefault();
-			var content = $('#formContent').contents().html();
-			var address = $('#postAddress').val();
-			var eventId = $('#eventId').val();
+			var content = $('#form-content').contents().html();
+			var address = $('#post-address').val();
+			var eventId = $('#event-id').val();
 			$.ajax({
 				type : "POST",
 				url : address,

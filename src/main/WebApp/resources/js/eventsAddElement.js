@@ -1,25 +1,12 @@
-// 		$('.addElement').on(
-// 				'click',
-// 				function() {
-// 					$divNewElement = $(this).parent('div').parent('div').find(
-// 							'.elementWrapper');
-// 					$new = $divNewElement.toHtmlString();
-// 					$(this).parent('div').parent('div').before($new);
-// 				});
-
-// 		jQuery.fn.toHtmlString = function() {
-// 			return $('<div></div>').html($(this).clone()).html();
-// 		};
-
 function addElement(programsSize, lectorsSize, sponsorsSize) {
 	var programIndex = programsSize;
 	var lectorIndex = lectorsSize;
 	var sponsorIndex = sponsorsSize;
 
-	$("#addProgram")
+	$("#add-program")
 			.click(
 					function() {
-						var inputSection = "<div class='schedule elementWrapper'>"
+						var inputSection = "<div class='schedule element-wrapper'>"
 								+ "<div class='form-group col-md-6'>"
 								+ "<label for='eventsPrograms["
 								+ programIndex
@@ -52,15 +39,14 @@ function addElement(programsSize, lectorsSize, sponsorsSize) {
 								+ programIndex
 								+ "].information' class='col-md-12 form-control' rows='5'></textarea>"
 								+ "</div> </div>";
-						$("#addProgramRow").before(inputSection);
+						$("#add-program-row").before(inputSection);
 						programIndex++;
 					});
-	
 
-	$("#addLector")
+	$("#add-lector")
 			.click(
 					function() {
-						var inputSection = "<div class='lector elementWrapper'>"
+						var inputSection = "<div class='lector element-wrapper'>"
 								+ "<div class='form-group col-md-6'>"
 								+ "<label for='lectors["
 								+ lectorIndex
@@ -102,13 +88,13 @@ function addElement(programsSize, lectorsSize, sponsorsSize) {
 								+ "].information' class='col-md-12 form-control' rows='5'></textarea>"
 								+ "</div> </div>";
 
-						$("#addLectorRow").before(inputSection);
+						$("#add-lector-row").before(inputSection);
 						lectorIndex++;
 					});
 
-	$("#addSponsor").click(
+	$("#add-sponsor").click(
 			function() {
-				var inputSection = "<div class='sponsor elementWrapper'>"
+				var inputSection = "<div class='sponsor element-wrapper'>"
 						+ "<div class='form-group col-md-8'>"
 						+ "<label for='sponsors[" + sponsorIndex
 						+ "].name' class='control-label'>Пълно име</label>"
@@ -120,7 +106,7 @@ function addElement(programsSize, lectorsSize, sponsorsSize) {
 						+ "<input name='sponsors[" + sponsorIndex
 						+ "].pictureFile' type='file' class='form-control' />"
 						+ "</div> </div>";
-				$("#addSponsorRow").before(inputSection);
+				$("#add-sponsor-row").before(inputSection);
 				sponsorIndex++;
 			});
 };

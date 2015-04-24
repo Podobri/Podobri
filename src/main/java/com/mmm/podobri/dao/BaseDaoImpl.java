@@ -11,7 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 public abstract class BaseDaoImpl<T extends Serializable> implements BaseDao<T>
 {
-    private Class<T> clazz;
+    private final Class<T> clazz;
 
     @Autowired
     private SessionFactory sessionFactory;
@@ -19,10 +19,9 @@ public abstract class BaseDaoImpl<T extends Serializable> implements BaseDao<T>
     @Autowired
     private DaoUtils daoUtils;
 
-
-    public void setClazz(final Class<T> clazzToSet)
+    public BaseDaoImpl(Class<T> model)
     {
-        clazz = clazzToSet;
+        clazz = model;
     }
 
 
