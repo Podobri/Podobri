@@ -39,7 +39,7 @@
                 <div class="container">
                   <div class="row">
                     <div class="embed-responsive embed-responsive-16by9 col-md-12">
-                      <iframe class="embed-responsive-item" src="//www.youtube.com/embed/1UUYjd2rjsE"></iframe>
+                      <iframe class="embed-responsive-item" src="//www.youtube.com/embed/1UUYjd2rjsE"  frameborder="0" allowfullscreen></iframe>
                     </div>
                   </div>
                 </div>

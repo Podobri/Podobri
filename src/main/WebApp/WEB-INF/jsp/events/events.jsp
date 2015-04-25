@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@taglib uri="http://www.springframework.org/tags" prefix="spring"%>
-<%@ taglib uri="http://www.springframework.org/security/tags" prefix="security"%>
-<%@ taglib uri="http://java.sun.com/jstl/core_rt" prefix="c"%>
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<%@taglib uri="http://www.springframework.org/security/tags" prefix="security"%>
+<%@taglib uri="http://java.sun.com/jstl/core_rt" prefix="c"%>
+<%@taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <c:url var="imgURL" value="/resources/images/" />
 <c:url var="images" value="/images/" />
 <c:url var="thumb128" value="/images/thumbnail128x128/" />

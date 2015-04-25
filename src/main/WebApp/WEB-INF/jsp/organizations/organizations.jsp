@@ -58,7 +58,7 @@
                             <form:label path="activities" cssClass="control-label">
                               <spring:message code="activityArea" />
                             </form:label>
-                            <form:select id="activities-company" path="activities" cssClass="form-control">
+                            <form:select id="activities" path="activities" multiple="true" cssClass="form-control">
                               <form:options items="${activitiesList}" itemValue="id" itemLabel="type" />
                             </form:select>
                           </div>
@@ -145,16 +145,17 @@
   </div>
   <!-- End container -->
   <script>
+	$(document).ready(function() {
 			function toggleChevron(e) {
-				$('#activities-company').next('div').css('width', "85%");
+				$('#activities').next('div').css('width', "85%");
 				$('#filter-chevron').toggleClass(
 						'glyphicon-chevron-down glyphicon-chevron-up');
 			}
 			$('#accordion').on('hidden.bs.collapse', toggleChevron);
 			$('#accordion').on('shown.bs.collapse', toggleChevron);
-			$('#activities-company').chosen();
+			$('#activities').chosen();
 
-			$(document).ready(function() {
+
 				$('#list').click(function(event) {
 					$('#organizations .item').addClass('list-group-item');
 				});

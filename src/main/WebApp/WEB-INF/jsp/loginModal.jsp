@@ -34,7 +34,7 @@
                     <input type="password" class="form-control" name="j_password" placeholder="password" required="required">
                   </div>
                   <div id="forgetten-password">
-                    <b> <a data-toggle="modal" data-validate="required,alphaNumeric,min(4),max(40)"
+                    <b> <a data-toggle="modal"
                       data-target="#forgotten-password" href=""><spring:message code="forgottenPassword" /></a></b>
                   </div>
                 </div>

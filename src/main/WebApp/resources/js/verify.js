@@ -2275,7 +2275,7 @@ $(function() {
   }).verify();
 });
 
-log("plugin added.");
+//log("plugin added.");
 
 
 (function($) {
@@ -2301,7 +2301,7 @@ log("plugin added.");
       regex: /^https?:\/\/[\-A-Za-z0-9+&@#\/%?=~_|!:,.;]*[\-A-Za-z0-9+&@#\/%=~_|]/,
       message: "Invalid URL"
     },
-    alphanumeric: {
+    alphaNumeric: {
       regex: /^[0-9A-Za-z]+$/,
       message: "Use digits and letters only"
     },

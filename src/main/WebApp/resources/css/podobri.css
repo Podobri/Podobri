@@ -1696,5 +1696,33 @@ textarea {
 {
     width: 100%!important;
 }
+.chosen-choices{
+  padding: 2px 0!important;
+  margin: 1px!important;
+  border-radius: 0px!important;
+  width: 80%!important;
+  color: #000!important;
+}
+.chosen-drop {
+	width:80%!important;
+}
+.chosen-choices li.search-field input[type=text] {
+	color:#555!important;
+	text-indent:10px;
+}
+::-webkit-input-placeholder { /* WebKit browsers */
+    color:    #555;
+}
+:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+   color:    #555;
+   opacity:  1;
+}
+::-moz-placeholder { /* Mozilla Firefox 19+ */
+   color:    #555;
+   opacity:  1;
+}
+:-ms-input-placeholder { /* Internet Explorer 10+ */
+   color:    #555;
+}
 /* .inative { display: none;} */
 /* .active { display: block; } */
