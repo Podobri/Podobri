@@ -1,7 +1,7 @@
 /*
  * UsersController.java
  *
- * created at 12.01.2015 ã. by Mariyan
+ * created at 12.01.2015 ï¿½. by Mariyan
  */
 package com.mmm.podobri.controller;
 
@@ -22,11 +22,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.mmm.podobri.bo.EventViewWrapper;
 import com.mmm.podobri.bo.Filter;
 import com.mmm.podobri.bo.OrganizationsFilter;
 import com.mmm.podobri.controller.databinding.ActivityEditor;
-import com.mmm.podobri.model.Event;
 import com.mmm.podobri.model.Organization;
 import com.mmm.podobri.service.OrganizationService;
 

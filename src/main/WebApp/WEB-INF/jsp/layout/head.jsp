@@ -1,4 +1,3 @@
-<!DOCTYPE html>
 <%@ taglib uri="http://java.sun.com/jstl/core_rt" prefix="c"%>
 <c:url var="resURL" value="/resources" />
 <head>
