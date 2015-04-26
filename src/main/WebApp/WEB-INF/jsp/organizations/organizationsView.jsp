@@ -11,16 +11,16 @@
 <body>
   <div class="container">
     <jsp:include page="../layout/menu.jsp" />
-    <div id="content">
+    <div id="content" class="offsettop20">
       <div id="organization-profile" class="col-md-10">
         <div class="row">
           <c:set value="background-image: url(${imgURL}Overlay.png)" var="picture" />
-          <div id="organization-profile-picture-container" style="${not empty picture ? picture : '' }">
-            <div class="col-md-12">
-              <div id="organization-profile-logo" class="col-md-2">
-                <img alt="" src="${imgURL}/thumb128.png">
+          <div id="organization-profile-picture-container" class="col-md-12" style="${not empty picture ? picture : '' }">
+            <div class="col-md-5 offsettop20">
+              <div id="organization-profile-logo" class="col-md-12">
+                <img alt="" src="${imgURL}organization-profile-logo.png">
               </div>
-              <div id="members-follows" class="col-md-12">
+              <div id="members-follows" class="col-md-12 offsettop20">
                 <div id="members" class="col-md-6">
                   <a href="${pageContext.request.contextPath}/events/apply">
                     <button type="button" class="btn btn-primary btn-lg">
@@ -31,7 +31,7 @@
                   </a>
                 </div>
                 <div id="follow-us" class="col-md-6">
-                  <a href="${pageContext.request.contextPath}/events/apply">
+                  <a href="${pageContext.request.contextPath}/events/apply" class="pull-right">
                     <button type="button" class="btn btn-primary btn-lg">
                       <div class="col-md-6">
                         <span id="apply-as-member-ok" class="glyphicon glyphicon-ok-sign"></span>
@@ -53,16 +53,18 @@
                 </a>
                 <hr />
               </div>
-              <div id="organization-profile-info" class="col-md-12">
-                <h4>
-                  <span>${organization.name}</span>
-                </h4>
-                <h5>
-                  <span> ${organization.user.userInfo.country.country}, ${organization.user.userInfo.city.city},
-                    ${organization.address}</span>
-                </h5>
-              </div>
             </div>
+            <div id="organization-profile-info" class="col-md-12">
+            	<div class="col-md-12">
+	               <h1>
+	                 <span>${organization.name}</span>
+	               </h1>
+	               <h3>
+	                 <span> ${organization.user.userInfo.country.country}, ${organization.user.userInfo.city.city},
+	                   ${organization.address}</span>
+	               </h3>
+                </div>
+          	</div>
           </div>
         </div>
         <div class="row">

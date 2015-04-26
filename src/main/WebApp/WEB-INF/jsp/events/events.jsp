@@ -139,8 +139,8 @@
         </c:if>
         <div class="row">
           <div class="btn-group col-md-3 col-md-offset-9">
-            <a href="#" id="list" class="btn btn-default btn-sm"><span class="glyphicon glyphicon-th-list"> </span> <spring:message
-                code="listView" /></a> <a href="#" id="grid" class="btn btn-default btn-sm"><span class="glyphicon glyphicon-th"></span>
+            <a href="#" id="list" class="pull-right btn btn-default btn-sm"><span class="glyphicon glyphicon-th-list"> </span> <spring:message
+                code="listView" /></a> <a href="#" id="grid" class="pull-right btn btn-default btn-sm"><span class="glyphicon glyphicon-th"></span>
               <spring:message code="gridView" /></a>
           </div>
         </div>

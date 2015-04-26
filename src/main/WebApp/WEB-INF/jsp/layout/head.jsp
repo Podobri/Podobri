@@ -3,6 +3,9 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Podobri</title>
+<script>
+var lang = "${param.lang}" || "bg"
+</script>
 <script src="${resURL}/js/jquery-1.11.1.min.js"></script>
 <script src="${resURL}/js/jquery-ui.js"></script>
 <script src="${resURL}/js/bootstrap.min.js"></script>
