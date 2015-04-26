@@ -1761,8 +1761,7 @@ textarea {
 :-ms-input-placeholder { /* Internet Explorer 10+ */
    color:    #555;
 }
-/* .inative { display: none;} */
-/* .active { display: block; } */
+
 
 .offsettop20 {margin-top:20px;}
 .offsetbottom20 {margin-bottom:20px;}

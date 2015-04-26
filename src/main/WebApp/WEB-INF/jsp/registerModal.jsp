@@ -94,7 +94,7 @@
                 <legend>
                   <spring:message code="registration" />
                 </legend>
-                <div class="register-company-inputs">
+                <div class="register-company-inputs-first">
                   <div class="form-group col-md-6">
                     <spring:message code="organizationName" var="organizationNamePlaceholder" />
                     <input id="username" name="username" placeholder="${organizationNamePlaceholder }"
@@ -177,8 +177,8 @@
 	makeAjaxCall('countries-organization', 'getCitiesByCountry', 'change',
 			"cities-organization", "city");
 
-	$('#register-individual').on('click', function() {
-		var ri = $('.register-user-inputs');
+	$('#register-user').on('click', function() {
+		var ri = $('.register-user-inputs-first');
 		var ri2 = $('.register-user-inputs-second');
 		if (ri2.hasClass('hide')) {
 			ri.addClass('hide');
@@ -188,7 +188,7 @@
 	});
 
 	$('#register-company').on('click', function() {
-		var ri = $('.register-company-inputs');
+		var ri = $('.register-company-inputs-first');
 		var ri2 = $('.register-company-inputs-second');
 		if (ri2.hasClass('hide')) {
 			ri.addClass('hide');
