@@ -31,7 +31,7 @@
                 <legend>
                   <spring:message code="registration" />
                 </legend>
-                <div class="register-user-inputs">
+                <div class="register-user-inputs-first">
                   <!-- Text input-->
                   <div class="form-group col-md-6">
                     <spring:message code="username" var="usernamePlaceholder" />
@@ -177,7 +177,7 @@
 	makeAjaxCall('countries-organization', 'getCitiesByCountry', 'change',
 			"cities-organization", "city");
 
-	$('#register-user').on('click', function() {
+	$('#register-individual').on('click', function() {
 		var ri = $('.register-user-inputs-first');
 		var ri2 = $('.register-user-inputs-second');
 		if (ri2.hasClass('hide')) {
