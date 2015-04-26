@@ -5,10 +5,11 @@
 <%@taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 <%@ taglib uri="http://java.sun.com/jstl/core_rt" prefix="c"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
-<c:url var="imgURL" value="resources/images/" />
+<c:url var="imgURL" value="/resources/images/" />
 <c:url var="images" value="/images/" />
 <c:url var="thumb128" value="/images/thumbnail128x128/" />
 <c:url var="thumb450" value="/images/thumbnail400x25/" />
+<%@page session="true"%>
 <html>
 <jsp:include page="layout/head.jsp" />
 <body>
@@ -41,7 +42,7 @@
 									<div class="col-md-6">
 										<form:select id="opportunityId" path="opportunityId" cssClass="form-control">
 											<form:option id="opportunityNone" value="-1">---<spring:message code="quickSearchType" />---</form:option>
-											<form:options items="${opportunitiesList}" itemValue="id" itemLabel="opportunity" />
+<%-- 											<form:options items="${opportunitiesList}" itemValue="id" itemLabel="opportunity" /> --%>
 										</form:select>
 									</div>
 									<div class="col-md-6">
@@ -160,8 +161,8 @@
 	</div>
 	<!-- end main container -->
 	<script>
-		// 	makeAjaxCall('opportunityCategoryId', 'getOpportunitiesByCategory',
-		// 			'change', "opportunityId", "opportunity");
+			makeAjaxCall('opportunityCategoryId', 'getOpportunitiesByCategory',
+					'change', "opportunityId", "opportunity");
 	</script>
 </body>
 </html>

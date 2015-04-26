@@ -102,21 +102,21 @@ public class DaoUtils
     @SuppressWarnings("unchecked")
     public List<City> findAllCities()
     {
-        return getCurrentSession().createQuery("from " + City.class.getName()).list();
+        return getCurrentSession().createQuery("from " + City.class.getName() + " order by city").list();
     }
 
 
     @SuppressWarnings("unchecked")
     public List<City> findAllCitiesByCountryId(byte id)
     {
-        return getCurrentSession().createQuery("from " + City.class.getName() + " where country.id=?").setParameter(0, id).list();
+        return getCurrentSession().createQuery("from " + City.class.getName() + " where country.id=? order by city").setParameter(0, id).list();
     }
 
 
     @SuppressWarnings("unchecked")
     public List<City> findAllCitiesByCountryName(String name)
     {
-        return getCurrentSession().createQuery("from " + City.class.getName() + " where country.country=?")
+        return getCurrentSession().createQuery("from " + City.class.getName() + " where country.country=? order by city")
                                   .setParameter(0, name)
                                   .list();
     }

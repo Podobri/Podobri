@@ -1,7 +1,7 @@
 /*
  * BaseDao.java
  *
- * created at 14.01.2015 ã. by Mariyan
+ * created at 14.01.2015 ï¿½. by Mariyan
  */
 package com.mmm.podobri.dao;
 

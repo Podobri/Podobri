@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@taglib uri="http://www.springframework.org/tags" prefix="spring"%>
+<%@taglib uri="http://www.springframework.org/security/tags" prefix="security"%>
 <%@ taglib uri="http://java.sun.com/jstl/core_rt" prefix="c"%>
 <c:url var="images" value="/images/" />
 <c:url var="thumb128" value="/images/thumbnail128x128/" />
@@ -95,7 +96,9 @@
               </p>
               <p>
                 <label><spring:message code="eventAdditionalInfo" />:</label><span> ${event.event.additionalInfo } </span> <br />
+                <security:authorize access="hasRole('ROLE_ADMINISTRATOR')">
                 <label><spring:message code="eventParticipants" />:</label><span> ${event.eventParticipantsSize } </span> <br />
+                </security:authorize>
                 <label><spring:message code="website" />:</label><span> <a href="${event.event.website}">${event.event.website }</a>
                 </span> <br /> <label><spring:message code="facebook" />:</label><span> <a href="${event.event.facebook}">${event.event.facebook }</a></span>
                 <br /> <label><spring:message code="eventGainingOrganizers" /> </label><span>

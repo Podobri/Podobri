@@ -105,10 +105,10 @@
                 <c:forEach var="organization" items="${organizations}">
                   <div id="organization-item-${organization.userId}" class="item col-md-4">
                     <div class="thumbnail">
-                      <a href="${pageContext.request.contextPath}/viewOrganization/${organization.userId}"><img
+                      <a href="${pageContext.request.contextPath}/view/${organization.userId}"><img
                         class="group list-group-image" src="${imgURL}thumb450.gif" alt="" /></a>
                       <div class="caption">
-                        <a href="${pageContext.request.contextPath}/viewOrganization/${organization.userId}">
+                        <a href="${pageContext.request.contextPath}/view/${organization.userId}">
                           <h4 class="group inner list-group-item-heading">${organization.name}</h4>
                         </a>
                         <p class="group inner list-group-item-text">${organization.user.userInfo.description}</p>

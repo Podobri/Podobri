@@ -74,7 +74,7 @@ public class OrganizationsController
     }
 
 
-    @RequestMapping(value = "/viewOrganization/{id}", method = RequestMethod.GET)
+    @RequestMapping(value = "/view/{id}", method = RequestMethod.GET)
     public ModelAndView viewOrganization(@PathVariable Integer id)
     {
         final ModelAndView model = new ModelAndView("organizations/organizationsView");

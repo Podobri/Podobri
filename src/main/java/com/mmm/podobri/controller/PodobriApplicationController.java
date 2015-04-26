@@ -36,14 +36,14 @@ import com.mmm.podobri.service.UserService;
 @Controller
 public class PodobriApplicationController
 {
-    public final static List<OpportunityCategory> categoriesList = new ArrayList<OpportunityCategory>();
-    public final static List<Opportunity> opportunitiesList = new ArrayList<Opportunity>();
-    public final static List<Activity> activitiesList = new ArrayList<Activity>();
-    public final static List<EventCostType> costTypesList = new ArrayList<EventCostType>();
-    public final static List<Education> educations = new ArrayList<Education>();
-    public final static List<Country> countries = new ArrayList<Country>();
-    public final static List<City> cities = new ArrayList<City>();
-    public final static List<OrganizationsType> organizationTypes = new ArrayList<OrganizationsType>();
+    public List<OpportunityCategory> categoriesList;
+    public List<Opportunity> opportunitiesList;
+    public List<Activity> activitiesList;
+    public List<EventCostType> costTypesList;
+    public List<Education> educations;
+    public List<Country> countries;
+    public List<City> cities;
+    public List<OrganizationsType> organizationTypes;
 
     @Autowired
     UserService userService;
@@ -63,14 +63,14 @@ public class PodobriApplicationController
                 if (eventService != null)
                 {
                     final DaoUtils daoUtils = eventService.getDaoUtils();
-                    categoriesList.addAll(daoUtils.getAllOpportunityCategories());
-                    opportunitiesList.addAll(daoUtils.getAllOpportunities());
-                    activitiesList.addAll(daoUtils.getAllActivities());
-                    costTypesList.addAll(daoUtils.getAllEventCostTypes());
-                    educations.addAll(daoUtils.getAllEducations());
-                    countries.addAll(daoUtils.getAllCountries());
-                    cities.addAll(daoUtils.getAllCities());
-                    organizationTypes.addAll(daoUtils.getAllOrganizationTypes());
+                    categoriesList = new ArrayList<OpportunityCategory>(daoUtils.getAllOpportunityCategories());
+                    opportunitiesList = new ArrayList<Opportunity>(daoUtils.getAllOpportunities());
+                    activitiesList = new ArrayList<Activity>(daoUtils.getAllActivities());
+                    costTypesList = new ArrayList<EventCostType>(daoUtils.getAllEventCostTypes());
+                    educations = new ArrayList<Education>(daoUtils.getAllEducations());
+                    countries = new ArrayList<Country>(daoUtils.getAllCountries());
+                    cities = new ArrayList<City>(daoUtils.getAllCities());
+                    organizationTypes = new ArrayList<OrganizationsType>(daoUtils.getAllOrganizationTypes());
                 }
                 return null;
             }

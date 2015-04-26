@@ -22,21 +22,21 @@
 	<import resource="applicationContext-security.xml" />
 	<import resource="applicationContext-dao.xml" />
 
-	<bean id="pdfViewResolver" class="org.springframework.web.servlet.view.XmlViewResolver">
-		<property name="order" value="1" />
-		<property name="location" value="/WEB-INF/views/views.xml" />    
-	</bean>
+<!-- 	<bean id="pdfViewResolver" class="org.springframework.web.servlet.view.XmlViewResolver"> -->
+<!-- 		<property name="order" value="1" /> -->
+<!-- 		<property name="location" value="/WEB-INF/views/views.xml" />     -->
+<!-- 	</bean> -->
 	
-	<bean id="jspViewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-		<property name="viewClass" value="org.springframework.web.servlet.view.JstlView" />
-		<property name="order" value="2" />
-		<property name="prefix">
-			<value>/WEB-INF/jsp/</value>
-		</property>
-		<property name="suffix">
-			<value>.jsp</value>
-		</property>
-	</bean>
+<!-- 	<bean id="jspViewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver"> -->
+<!-- 		<property name="viewClass" value="org.springframework.web.servlet.view.JstlView" /> -->
+<!-- 		<property name="order" value="2" /> -->
+<!-- 		<property name="prefix"> -->
+<!-- 			<value>/WEB-INF/jsp/</value> -->
+<!-- 		</property> -->
+<!-- 		<property name="suffix"> -->
+<!-- 			<value>.jsp</value> -->
+<!-- 		</property> -->
+<!-- 	</bean> -->
 
 	<bean id="messageSource" class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
 		<property name="basename" value="classpath:messages" />
