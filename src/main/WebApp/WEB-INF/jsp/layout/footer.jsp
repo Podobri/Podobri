@@ -16,36 +16,7 @@
   </div>
   <div class="row">
     <div id="footer-contacts" class="col-md-12">
-      <div class="col-md-3 ">
-        <h4>
-          <spring:message code="footerAboutTitle" />
-        </h4>
-        <p>
-          Създадена през 2014 организацията, Създадена през 2014 организацията. Създадена през 2014 организацията, Създадена през
-          2014 организацията, Създадена през 2014 организацията. Създадена през 2014 организацията, Създадена през 2014
-          организацията, Създадена през 2014 организацията. <a href="#">Read more</a>
-        </p>
-      </div>
-      <div class="col-md-3 ">
-        <h4>
-          <spring:message code="footerNewsTitle" />
-        </h4>
-        <p>
-          <spring:message code="footerNewsSubTitle" />
-        </p>
-        <form name="subscibe-email" action="Subscribe">
-          <div class="input-group">
-            <input id="email-for-subscribe" type="text" class="form-control" placeholder="email"> <span
-              class="input-group-btn">
-              <button class="btn btn-warning" type="button">
-                <span class="glyphicon glyphicon-ok"></span>
-                <spring:message code="footerSubscribeBtn" />
-              </button>
-            </span>
-          </div>
-        </form>
-      </div>
-      <div class="col-md-2">
+      <div class="col-md-4 pull-left">
         <div class="col-md-12">
           <h4 class="align-center">
             <spring:message code="titlePodobri" />
@@ -69,7 +40,26 @@
             </h5></li>
         </ul>
       </div>
-      <div class="col-md-4">
+      <div class="col-md-4 ">
+        <h4>
+          <spring:message code="footerNewsTitle" />
+        </h4>
+        <p>
+          <spring:message code="footerNewsSubTitle" />
+        </p>
+        <form name="subscibe-email" action="Subscribe">
+          <div class="input-group">
+            <input id="email-for-subscribe" type="text" class="form-control" placeholder="email"> <span
+              class="input-group-btn">
+              <button class="btn btn-warning" type="button">
+                <span class="glyphicon glyphicon-ok"></span>
+                <spring:message code="footerSubscribeBtn" />
+              </button>
+            </span>
+          </div>
+        </form>
+      </div>
+      <div class="col-md-4 pull-right">
         <h4>
           <spring:message code="footerContactUsTitle" />
         </h4>

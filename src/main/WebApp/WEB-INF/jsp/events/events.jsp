@@ -255,18 +255,21 @@
                             <%-- 														<img alt="" src="${imgURL}thumblines/skype_32.png" /> --%>
                           </p>
                         </div>
-                        <security:authorize access="hasRole('ROLE_INDIVIDUAL')">
+                        <security:authorize access="hasAnyRole('ROLE_INDIVIDUAL', 'ROLE_ORGANIZATION')">
                           <div id="event-view-full-description" class="col-md-12">
                             <p>
                               <a href="${pageContext.request.contextPath}/events/viewEvent/${event.event.id}">
                                 <button type="button" class="btn btn-primary btn-lg btn-block">
                                   <spring:message code="eventFullDescriptionBtn" />
                                 </button>
-                              </a> <a href="${pageContext.request.contextPath}/events/apply/${event.event.id}">
+                              </a>
+                              <security:authorize access="hasRole('ROLE_INDIVIDUAL')"> 
+                              <a href="${pageContext.request.contextPath}/events/apply/${event.event.id}">
                                 <button type="button" class="btn btn-warning btn-lg btn-block">
                                   <spring:message code="eventApplyBtn" />
                                 </button>
                               </a>
+                              </security:authorize>
                             </p>
                           </div>
                         </security:authorize>
