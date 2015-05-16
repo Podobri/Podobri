@@ -95,3 +95,64 @@
 	</div>
 	<jsp:include page="../loginModal.jsp" />
 </header>
+<div id="settings_menu">
+	<label for="settings_bg">Background</label>
+	<input type="color" name="settings_bg" id="settings_bg" value="#edf6f6"/>
+	
+	<lable for="settings_view">View type 1,2,3</lable>
+	<input type="radio" name="settings_type" value="1" id="settings_type_1" class="setting-type"/><label for="settings_type_1"> Type 1</label>
+	<input type="radio" name="settings_type" value="2" id="settings_type_2" class="setting-type"/><label for="settings_type_2"> Type 2</label>
+	<input type="radio" name="settings_type" value="3" id="settings_type_3" class="setting-type"/><label for="settings_type_3"> Type 3</label>
+	
+	<label for="settings_footer_bg">Footer BG</label>
+	<input type="color" name="settings_footer_bg" id="settings_footer_bg" value="#82b1ea"/>
+	
+	<label for="settings_fs">font-size</label>
+	<input type="number" name="settings_fs" id="settings_fs" value="14" max="32" min="8"/>
+	
+	<label for="settings_font">Font family</label>
+	<input type="text" name="settings_font" id="settings_font" value="Arial" />
+	
+	<label for="settings_color">Text color</label>
+	<input type="color" name="settings_color" id="settings_color" value="#fff" />
+</div>
+<script>
+$('#settings_menu').on('mouseover',function(){
+	$(this).css('width','100px');
+});
+$('#settings_menu').on('mouseout',function(){
+	$(this).css('width','30px');
+})
+// background
+$('#settings_bg').on('change',function(){
+	$('body').css('background-color',$(this).val());
+})
+// footer background
+$('#settings_footer_bg').on('change',function(){
+	$('#footer-contacts').css('background',$(this).val());
+})
+// Font size
+$('#settings_fs').on('change',function(){
+	if($(this).val() <8 || $(this).val() > 32)
+		$(this).val() = 14;
+	$('body').css('font-size',$(this).val()+'px');
+})
+// text color
+$('#settings_color').on('change',function(){
+	$('body').css('color',$(this).val());
+})
+// text color
+$('.setting-type').on('change',function(){
+	var a = 100;
+	switch($(this).val()){
+		case '1' : break;
+		case '2' : a = 90; break;
+		case '3' : a = 80; break;
+	};
+	$('.container').css('width',a+'%');
+})
+$('#settings_font').on('keyup',function(){
+	$('.container').css('font-family',$(this).val());
+});
+
+</script>

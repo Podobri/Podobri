@@ -3,7 +3,7 @@
 
 body {
 	background: #e5e5e5;
-	color: #999;
+	color: #fff;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -572,9 +572,10 @@ a:hover, a:focus {
 }
 
 .navbar-default .navbar-nav>li>a {
-	padding: 20px 15px;
+	padding: 16px 0px;
+	margin: 0 15px;
 	font-size: 16px;
-	line-height: 14px;
+	line-height: 22px;
 	color: #fff;
 }
 
@@ -589,7 +590,7 @@ a:hover, a:focus {
 	.navbar-default .navbar-nav>li:hover>a:focus, .navbar-default .navbar-nav>li:focus>a:focus
 	{
 	color: #fff;
-	border-bottom: 5px solid #49709e;
+	border-bottom: 5px solid #fff; //#49709e
 }
 
 .icon-lg {
@@ -1761,9 +1762,44 @@ textarea {
 :-ms-input-placeholder { /* Internet Explorer 10+ */
    color:    #555;
 }
+.quick-search-find {padding: 14px;}
+.quick-search-find span {
+  vertical-align: middle;
+  padding: 9px;
+  background: #449d44;
+  border: 1px solid #fff;
+  font-size: 35px;
+  cursor: pointer;
+}
 
-
+.quick-search-find input {
+	  height: 57px!important;
+	  width: 73%;
+	  padding: 0px;
+}
 .offsettop20 {margin-top:20px;}
 .offsetbottom20 {margin-bottom:20px;}
 .offsettop10 {margin-top:10px;}
 .offsetbottom10 {margin-bottom:10px;}
+#settings_menu {
+	display: block;
+	z-index: 20000;
+	position:fixed;
+	right:0px;
+	top:10%;
+	width:30px;
+	height:80%;
+	background: rgba(180,180,180,.8);
+}
+#settings_menu input {
+	width:100%;
+	color: black;
+	display: block;
+}
+#settings_menu input[type='radio'] {
+	width:35%;
+	display: inline-block;
+}
+#settings_menu input:hover {
+	cursor: pointer;
+}

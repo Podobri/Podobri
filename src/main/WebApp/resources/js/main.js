@@ -108,4 +108,8 @@ jQuery( document ).ready(function($) {
 		}
 	});
 	
+	$('.quick-search-find').find('span').on('click', function(){
+		$(this).parents('form').submit();
+	})
+	
 });

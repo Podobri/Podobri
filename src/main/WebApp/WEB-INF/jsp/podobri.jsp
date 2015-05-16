@@ -63,6 +63,7 @@
 									</div>
 								</div>
 								<div class="quick-search-find col-md-3">
+									<span class="glyphicon glyphicon-search"></span>
 									<input type="submit" class="form-control btn btn-success" value="<spring:message code="quickSearchSearch" />" />
 								</div>
 							</form:form>
