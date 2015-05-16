@@ -1,14 +1,12 @@
 /*
  * ActivitiesEditor.java
  *
- * created at 21.01.2015 ã. by Mariyan
+ * created at 21.01.2015 ï¿½. by Mariyan
  */
 package com.mmm.podobri.controller.databinding;
 
 
-import java.util.ArrayList;
 import java.util.Collection;
-import java.util.List;
 
 import org.springframework.beans.propertyeditors.CustomCollectionEditor;
 

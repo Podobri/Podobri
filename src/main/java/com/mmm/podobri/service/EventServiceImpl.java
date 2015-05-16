@@ -1,7 +1,7 @@
 /*
  * EventServiceImpl.java
  *
- * created at 21.01.2015 ã. by Mariyan
+ * created at 21.01.2015 ï¿½. by Mariyan
  */
 package com.mmm.podobri.service;
 
