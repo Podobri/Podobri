@@ -85,8 +85,8 @@
 							<%-- 								</c:forEach> --%>
 						</div>
 
-						<a class="prev" href="#main-slider" data-slide="prev"> <i class="icon-angle-left"></i></a> <a class="next"
-							href="#main-slider" data-slide="next"> <i class="icon-angle-right"></i></a>
+						<a class="prev" href="#main-slider" data-slide="prev"> <i class="glyphicon glyphicon-chevron-left"></i></a> <a class="next"
+							href="#main-slider" data-slide="next"> <i class="glyphicon glyphicon-chevron-right"></i></a>
 					</div>
 					<!-- END slide -->
 				</div>
@@ -103,7 +103,7 @@
 									</c:forEach>
 								</ol>
 								<!-- Wrapper for slides -->
-								<div class="carousel-inner" role="listbox">
+								<div class="carousel-inner" role="listbox" width="387"> <!--  Have to be removed -->
 									<c:forEach var="closestEventGroup" items="${closestEventsGroup}" varStatus="status">
 										<div class="item ${status.first ? 'active' : '' }">
 											<div class="row">
@@ -157,7 +157,9 @@
 				<jsp:include page="mainCalendar.jsp" />
 			</div>
 		</div>
+		
 		<jsp:include page="layout/footer.jsp" />
+
 	</div>
 	<!-- end main container -->
 	<script>

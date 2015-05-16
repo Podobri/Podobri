@@ -1,10 +1,41 @@
-jQuery(function($) {
 
-	$(function() {
-		$('#main-slider.carousel').carousel({
-			interval : 10000,
-			pause : false
+function makeAjaxCall(selector, path, event, targetSelector, textKey) {
+	$('#' + selector).on(event, function() {
+		var optionId = $(this).val();
+		$.ajax({
+			type : "GET",
+			url : 'ajax/'+path + '/'+optionId,
+			success : function(data) {
+				makeOptionList(data, targetSelector, textKey);
+			},
+			error : function(e) {
+				console.log('Error in ajax call')
+			}
+		}).done(function(data) {
+			console.log('Ajax call finished');
+		})
+	});
+};
+
+function makeOptionList(data, selector, textKey) {
+	if (!data) {
+		data = [ {
+			"id" : -1,
+			textKey : "Няма намерени резултати"
+		} ];
+	}
+	if (data) {
+		$('#' + selector).html('');
+		$.each(data, function(index, item) {
+			$('#' + selector).append(
+					$('<option></option>').text(item[textKey]).val(item.id));
 		});
+	}
+}
+jQuery( document ).ready(function($) {
+	$('#main-slider.carousel').carousel({
+		interval : 10000,
+		pause : false
 	});
 
 	// Ajax contact
@@ -17,14 +48,6 @@ jQuery(function($) {
 		return false;
 	});
 
-	// smooth scroll
-	/*
-	 * 
-	 * $('.navbar-nav > li').click(function(event) { event.preventDefault(); var
-	 * target = $(this).find('>a').prop('hash'); $('html, body').animate({
-	 * scrollTop: $(target).offset().top }, 500); });
-	 */
-	// scrollspy
 	$('[data-spy="scroll"]').each(function() {
 		var $spy = $(this).scrollspy('refresh')
 	})
@@ -35,26 +58,23 @@ jQuery(function($) {
 	});
 
 	// Isotope
-	$(window).load(function() {
-		$portfolio = $('.portfolio-items');
-		$portfolio.isotope({
-			itemSelector : 'li',
-			layoutMode : 'fitRows'
-		});
-		$portfolio_selectors = $('.portfolio-filter >li>a');
-		$portfolio_selectors.on('click', function() {
-			$portfolio_selectors.removeClass('active');
-			$(this).addClass('active');
-			var selector = $(this).attr('data-filter');
-			$portfolio.isotope({
-				filter : selector
-			});
-			return false;
-		});
+	$portfolio = $('.portfolio-items');
+	$portfolio.isotope({
+		itemSelector : 'li',
+		layoutMode : 'fitRows'
 	});
-});
-
-$(document).ready(function() {
+	$portfolio_selectors = $('.portfolio-filter >li>a');
+	$portfolio_selectors.on('click', function() {
+		$portfolio_selectors.removeClass('active');
+		$(this).addClass('active');
+		var selector = $(this).attr('data-filter');
+		$portfolio.isotope({
+			filter : selector
+		});
+		return false;
+	});
+	
+	// FlexiSel
 	$("#flexisel").flexisel({
 		visibleItems : 5,
 		animationSpeed : 1000,
@@ -77,63 +97,15 @@ $(document).ready(function() {
 			}
 		}
 	});
-});
 
-$(document).ready(
-		function() {
-			$('#register-titles').find('div').click(
-					function() {
-						if (!$(this).hasClass('active')) {
-							$(this).parent().find('div').toggleClass(
-									'active inactive');
-							$('.register-user-inputs, .register-company-inputs')
-									.toggleClass('hide');
 
-						}
-					});
-			
-//			$('#activitiesCompany').next('div').css('width', "100%");
-		});
-
-// $(document).ready(function setTagsManager(id) {
-// var container = id + 'container';
-// $('#' + id).tagsManager({
-// tagsContainer : '#' + container,
-// hiddenTagListName : '#' + id,
-// tagClass : 'tm-tag-info',
-// preventSubmitOnEnter : true
-// });
-// });
-function makeAjaxCall(selector, path, event, targetSelector, textKey) {
-	$('#' + selector).on(event, function() {
-		var optionId = $(this).val();
-		$.ajax({
-			type : "GET",
-			url : 'ajax/'+path + '/'+optionId,
-			success : function(response) {
-				console.log('Success');
-			},
-			error : function(e) {
-				alert('Error: ' + e);
-			}
-		}).done(function(data) {
-			makeOptionList(data, targetSelector, textKey);
-		})
+	$('#register-titles').find('div').click(function() {
+		if (!$(this).hasClass('active')) {
+			$(this).parent().find('div').toggleClass(
+					'active inactive');
+			$('.register-user-inputs, .register-company-inputs')
+					.toggleClass('hide');
+		}
 	});
-}
-
-function makeOptionList(data, selector, textKey) {
-	if (!data) {
-		data = [ {
-			"id" : -1,
-			textKey : "Няма намерени резултати"
-		} ];
-	}
-	if (data) {
-		$('#' + selector).html('');
-		$.each(data, function(index, item) {
-			$('#' + selector).append(
-					$('<option></option>').text(item[textKey]).val(item.id));
-		});
-	}
-}
+	
+});
