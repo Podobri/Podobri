@@ -104,7 +104,7 @@
                               <form:label path="startDate" cssClass="control-label">
                                 <spring:message code="startDate" />
                               </form:label>
-                              <form:input id="start-date" path="startDate" type="date"
+                              <form:input id="start-date" path="startDate" type="text"
                                 cssClass="form-control date datepicker margin-top-none" placeholder="23/9/2013" />
                             </div>
                           </div>
@@ -112,7 +112,7 @@
                             <form:label path="deadline" cssClass="control-label">
                               <spring:message code="deadlineApplying" />
                             </form:label>
-                            <form:input id="deadline" path="deadline" type="date"
+                            <form:input id="deadline" path="deadline" type="text"
                               cssClass="form-control date datepicker margin-top-none" placeholder="23/9/2013" />
                           </div>
                           <div class="form-group col-md-4">

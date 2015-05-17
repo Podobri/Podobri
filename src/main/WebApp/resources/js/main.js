@@ -110,6 +110,25 @@ jQuery( document ).ready(function($) {
 	
 	$('.quick-search-find').find('span').on('click', function(){
 		$(this).parents('form').submit();
-	})
+	});
 	
+	$('.datepicker').datetimepicker({
+		 timepicker:false,
+		 format:'d/m/Y'
+	});
+	
+	$('.datetimepicker').datetimepicker({
+		defaultDate: new Date(),
+	});
+	
+	
+    $('.datatable').DataTable(
+	{
+		"aoColumnDefs" : [ {
+			'bSortable' : false,
+			'aTargets' : [ -1 ]
+		} ],
+		"aLengthMenu" : [ [ 5, 10, 25, 50, -1 ],
+                  		  [ 5, 10, 25, 50, "All" ] ]
+	});
 });

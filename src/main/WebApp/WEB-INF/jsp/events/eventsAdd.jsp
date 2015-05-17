@@ -156,22 +156,22 @@
 											<form:label path="dateFrom" cssClass="control-label">
 												<spring:message code="eventStartDate" />
 											</form:label>
-											<form:input id="start-date" path="dateFrom" type="datetime-local"
-												cssClass="form-control date datepicker margin-top-none" placeholder="23/9/2013" />
+											<form:input id="start-date" path="dateFrom" type="text"
+												cssClass="form-control date datetimepicker margin-top-none"/>
 										</div>
 										<div class="form-group col-md-4">
 											<form:label path="dateTo" cssClass="control-label">
 												<spring:message code="eventEndDate" />
 											</form:label>
-											<form:input id="date-to" path="dateTo" type="datetime-local"
-												cssClass="form-control date datepicker margin-top-none" placeholder="23/9/2013" />
+											<form:input id="date-to" path="dateTo" type="text"
+												cssClass="form-control date datetimepicker margin-top-none" />
 										</div>
 										<div class="form-group col-md-4">
 											<form:label path="deadline" cssClass="control-label">
 												<spring:message code="eventDeadline" />
 											</form:label>
-											<form:input id="deadline" path="deadline" type="datetime-local"
-												cssClass="form-control date datepicker margin-top-none" placeholder="23/9/2013" />
+											<form:input id="deadline" path="deadline" type="text"
+												cssClass="form-control date datetimepicker margin-top-none" />
 										</div>
 									</div>
 								</div>
@@ -188,7 +188,7 @@
 												<form:label path="maxParticipants" cssClass="control-label">
 													<spring:message code="eventParticipants" />
 												</form:label>
-												<form:input id="max-participants" path="maxParticipants" type="text" placeholer="type number"
+												<form:input id="max-participants" path="maxParticipants" type="number" placeholer="type number"
 													cssClass="form-control" data-validate="number,rangeVal(0,500)" />
 											</div>
 											<div class="form-group">

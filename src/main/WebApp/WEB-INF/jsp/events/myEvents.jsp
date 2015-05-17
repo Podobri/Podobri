@@ -29,7 +29,7 @@
             <div class="row">
               <div id="my-events-content" class="tab-content col-md-12">
                 <div id="my-events-incoming" class="tab-pane fade in active">
-                  <table class="my-events-table table table-striped table-bordered">
+                  <table class="my-events-table table table-striped datatable">
                     <thead>
                       <tr>
                         <th><spring:message code="eventTitle" /></th>
@@ -53,22 +53,22 @@
                             <td>${event.country }</td>
                             <td>${event.city }</td>
                             <td>
-                              <div class="col-md-6">
+                              <div class="col-md-5">
                                 <a href="${pageContext.request.contextPath}/events/viewEvent/${event.event.id}">
                                   <button type="button" class="btn btn-info">
-                                    <span class="glyphicon glyphicon-search"><spring:message code="viewBtn" /></span>
+                                    <span class="glyphicon glyphicon-search"></span><spring:message code="viewBtn" />
                                   </button>
                                 </a>
                               </div>
-                              <div class="btn-group actions col-md-6">
+                              <div class="btn-group actions col-md-5">
                                 <button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown">
-                                  <span class="glyphicons glyphicons-cogwheel"><spring:message code="actionBtn" /></span>
+                                  <span class="glyphicon glyphicon-chevron-up"></span><spring:message code="actionBtn" />
                                 </button>
                                 <ul class="dropdown-menu checkbox-persist pull-right text-left" role="menu">
                                   <li><a href="${pageContext.request.contextPath}/events/editEvent/${event.event.id}"><i
                                       class="fa fa-pencil"></i> <spring:message code="editBtn" /> </a></li>
                                   <li><a data-toggle="modal" data-target="#confirm-delete-${event.event.id}" href="#"> <i
-                                      class="glyphicon glyphicon-remove"></i> <spring:message code="deleteBtn" />
+                                      class="glyphicon glyphicon-remove"></i><spring:message code="deleteBtn" />
                                   </a></li>
                                   <li><a data-toggle="modal" data-target="#event-participant-modal-${event.event.id}" href=""><i
                                       class="fa fa-home"></i> <spring:message code="eventParticipantsBtn" /> </a></li>
@@ -89,7 +89,7 @@
                   </table>
                 </div>
                 <div id="my-events-past" class="tab-pane fade">
-                  <table class="my-events-table table table-striped table-bordered">
+                  <table class="my-events-table table table-striped datatable">
                     <thead>
                       <tr>
                         <th><spring:message code="eventTitle" /></th>
@@ -112,16 +112,16 @@
                             <td>${event.country }</td>
                             <td>${event.city }</td>
                             <td>
-                              <div class="col-md-6">
+                              <div class="col-md-5">
                                 <a href="${pageContext.request.contextPath}/events/viewEvent/${event.event.id}">
                                   <button type="button" class="btn btn-info">
-                                    <span class="glyphicon glyphicon-search"><spring:message code="viewBtn" /></span>
+                                    <span class="glyphicon glyphicon-search"></span><spring:message code="viewBtn" />
                                   </button>
                                 </a>
                               </div>
-                              <div class="btn-group actions col-md-6">
+                              <div class="btn-group actions col-md-5">
                                 <button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown">
-                                  <span class="glyphicons glyphicons-cogwheel"><spring:message code="actionBtn" /></span>
+                                  <span class="glyphicon glyphicon-chevron-up"></span><spring:message code="actionBtn" />
                                 </button>
                                 <ul class="dropdown-menu checkbox-persist pull-right text-left" role="menu">
                                   <li><a href="${pageContext.request.contextPath}/events/editEvent/${event.event.id}"><i
@@ -148,7 +148,7 @@
                   </table>
                 </div>
                 <div id="my-events-all" class="tab-pane fade">
-                  <table class="my-events-table table table-striped table-bordered">
+                  <table class="my-events-table table table-striped datatable">
                     <thead>
                       <tr>
                         <th><spring:message code="eventTitle" /></th>
@@ -170,16 +170,16 @@
                           <td>${event.country }</td>
                           <td>${event.city }</td>
                           <td>
-                            <div class="col-md-6">
+                            <div class="col-md-5">
                               <a href="${pageContext.request.contextPath}/events/viewEvent/${event.event.id}">
                                 <button type="button" class="btn btn-info">
-                                  <span class="glyphicon glyphicon-search"><spring:message code="viewBtn" /></span>
+                                  <span class="glyphicon glyphicon-search"></span><spring:message code="viewBtn" />
                                 </button>
                               </a>
                             </div>
-                            <div class="btn-group actions col-md-6">
+                            <div class="btn-group actions col-md-5">
                               <button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown">
-                                <span class="glyphicons glyphicons-cogwheel"><spring:message code="actionBtn" /></span>
+                                <span class="glyphicon glyphicon-chevron-up"></span><spring:message code="actionBtn" />
                               </button>
                               <ul class="dropdown-menu checkbox-persist pull-right text-left" role="menu">
                                 <li><a href="${pageContext.request.contextPath}/events/editEvent/${event.event.id}"><i
@@ -219,7 +219,7 @@
                     <form action="${pageContext.request.contextPath}/events/updateParticipants" method="POST">
                       <div class="modal-body col-md-12">
                         <table id="event-participant-table-${event.event.id}"
-                          class="event-participant-table table table-striped table-bordered">
+                          class="event-participant-table table table-striped datatable">
                           <thead>
                             <tr>
                               <th><spring:message code="name" /></th>
@@ -241,7 +241,7 @@
                                       <a target="_blank"
                                         href="${pageContext.request.contextPath}/users/viewUser/${participant.individual.userId}">
                                         <button type="button" class="btn btn-info">
-                                          <span class="glyphicon glyphicon-search"><spring:message code="viewBtn" /></span>
+                                          <span class="glyphicon glyphicon-search"></span><spring:message code="viewBtn" />
                                         </button>
                                       </a>
                                     </div>
@@ -448,34 +448,6 @@
 			function switchStatus(e, status) {
 				$(e).parents('td').find('.status').val(status);
 			}
-			$(document).ready(
-
-					$('input[type=radio]').on('change', function() {
-						var optionId = $(this).val();
-						console.log(optionId);
-					}),
-
-					function() {
-						$('.my-events-table').DataTable(
-								{
-									"aoColumnDefs" : [ {
-										'bSortable' : false,
-										'aTargets' : [ -1 ]
-									} ],
-									"aLengthMenu" : [ [ 5, 10, 25, 50, -1 ],
-											[ 5, 10, 25, 50, "All" ] ]
-								});
-
-						$('.event-participant-table').DataTable(
-								{
-									"aoColumnDefs" : [ {
-										'bSortable' : false,
-										'aTargets' : [ -1 ]
-									} ],
-									"aLengthMenu" : [ [ 5, 10, 25, 50, -1 ],
-											[ 5, 10, 25, 50, "All" ] ]
-								});
-					});
 		</script>
 </body>
 </html>
